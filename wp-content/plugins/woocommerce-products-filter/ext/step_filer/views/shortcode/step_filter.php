@@ -19,16 +19,16 @@ $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
 ?>
 
 
-<div class="woof_step <?php esc_attr_e($classes) ?>" data-filter_type="<?php esc_attr_e($filter_type) ?>"  data-autosubmit="<?php esc_attr_e($autosubmit) ?>" data-hide="<?php esc_attr_e($autosubmit) ?>">
+<div class="woof_step <?php echo esc_attr($classes) ?>" data-filter_type="<?php echo esc_attr($filter_type) ?>"  data-autosubmit="<?php echo esc_attr($autosubmit) ?>" data-hide="<?php echo esc_attr($autosubmit) ?>">
     <?php
-    echo do_shortcode($shortcode_woof);
+    echo do_shortcode(esc_attr($shortcode_woof));
     ?>
     <div class="woof_step_next_back_btn">
-        <button  class="button woof_step_filter_prev"><?php esc_html_e($prev_btn_txt) ?></button>&nbsp;<?php if ($woof_reset_btn_txt != 'none'): ?><button  class="button woof_reset_search_form" data-link="<?php echo esc_url($woof_link) ?>"><?php esc_html_e($woof_reset_btn_txt) ?></button><?php endif; ?>       
+        <button  class="button woof_step_filter_prev"><?php esc_html_e($prev_btn_txt) ?></button>&nbsp;<?php if ($woof_reset_btn_txt != 'none'): ?><button  class="button woof_reset_search_form" data-link="<?php echo esc_url_raw($woof_link) ?>"><?php esc_html_e($woof_reset_btn_txt) ?></button><?php endif; ?>       
         <button class="button woof_step_filter_next"><?php esc_html_e($next_btn_txt) ?></button>
     </div>
     <?php if ($images): ?>
-        <input class="woof_step_filter_images" type="hidden" value=<?php echo base64_encode(json_encode($images)) ?> data-selector="<?php esc_attr_e($selector) ?>" data-behavior="<?php esc_attr_e($img_behavior) ?>" >
+        <input class="woof_step_filter_images" type="hidden" value=<?php echo base64_encode(json_encode($images)) ?> data-selector="<?php echo esc_attr($selector) ?>" data-behavior="<?php echo esc_attr($img_behavior) ?>" >
     <?php endif; ?>
 </div>
 

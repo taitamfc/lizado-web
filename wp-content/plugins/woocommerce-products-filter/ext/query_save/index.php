@@ -74,8 +74,8 @@ final class WOOF_EXT_QUERY_SAVE extends WOOF_EXT {
 
     //settings page hook
     public function woof_print_html_type_options() {
-        
-        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
+
+        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )
@@ -98,13 +98,13 @@ final class WOOF_EXT_QUERY_SAVE extends WOOF_EXT {
         }
 
 
-        $key = uniqid('woofms_'); // Create   key for this subscr
+        $key = uniqid('woofms_'); // Create key for this subscriber
         $data['key'] = $key;
 
         $data['user_id'] = $sanit_user_id;
-        $data['link'] = esc_textarea($_POST['link']);
+        $data['link'] = esc_url_raw($_POST['link']);
         if (!isset($_POST['get_var'])) {
-            $_POST['get_var'] = array();
+            $_POST['get_var'] = [];
         }
         $data['get'] = $this->woof_get_html_terms($this->sanitaz_array_r($_POST['get_var']));
         $saved_q = get_user_meta($data['user_id'], $this->user_meta_key, true);
@@ -245,7 +245,7 @@ final class WOOF_EXT_QUERY_SAVE extends WOOF_EXT {
         $data = shortcode_atts(array(
             'in_filter' => 0
                 ), $args);
-        
+
         if (file_exists($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'shortcodes' . DIRECTORY_SEPARATOR . 'woof_save_query.php')) {
             return woof()->render_html($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'shortcodes' . DIRECTORY_SEPARATOR . 'woof_save_query.php', $data);
         }
@@ -271,20 +271,20 @@ final class WOOF_EXT_QUERY_SAVE extends WOOF_EXT {
             $id = $product->get_id();
             if ($id) {
                 ?>
-                <div class="woof_query_save_notice_product woof_query_save_notice_product_<?php esc_attr_e($id) ?>" data-id="<?php esc_attr_e($id) ?>" ></div>
+                <div class="woof_query_save_notice_product woof_query_save_notice_product_<?php echo esc_attr($id) ?>" data-id="<?php echo esc_attr($id) ?>" ></div>
                 <?php
             }
         }
     }
 
     public function check_query() {
-        
+
         if (!isset($_POST['product_ids'])) {
             die();
         }
         $type = "woof";
         if (isset($_POST['type'])) {
-            $type =  sanitize_textarea_field($_POST['type']);
+            $type = sanitize_textarea_field($_POST['type']);
         }
         $user_id = get_current_user_id();
         if (!$user_id) {
@@ -308,7 +308,9 @@ final class WOOF_EXT_QUERY_SAVE extends WOOF_EXT {
                     continue;
                 }
                 $link = parse_url(html_entity_decode($item['link']), PHP_URL_QUERY);
-                parse_str(WOOF_HELPER::sanitize_array($link), $_GET); //$_GET data init
+                $query_array = WOOF_HELPER::safe_parse_str($link);
+                $_GET = array_merge($query_array, wc_clean($_GET));
+
                 woof()->woof_products_ids_prediction(array('post__in' => $id));
                 if (is_array(WOOF_REQUEST::get('woof_wp_query_ids')) AND in_array($id, WOOF_REQUEST::get('woof_wp_query_ids'))) {
                     $data['match'] = true;

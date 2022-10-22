@@ -494,7 +494,7 @@ function woof_hide_info_popup() {
 
 jQuery(document).ready(function () {
     if (woof_ext_custom) {
-        woof_init_ext_uploader(woof_abspath, woof_ext_path, woof_ext_url);
+        //woof_init_ext_uploader(woof_abspath, woof_ext_path, woof_ext_url);
     }
     if (woof_show_notes) {
         jQuery(function () {

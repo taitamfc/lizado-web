@@ -55,7 +55,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_url_request][enable]" class="chosen_select">
                                     <?php foreach ($enable_url as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($enable == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($enable == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -89,7 +89,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_url_request][page_index]" class="chosen_select">
                                     <?php foreach ($page_index as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($index == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($index == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -126,11 +126,11 @@ if (!defined('ABSPATH'))
                                 ?>
 
                                 <div>
-                                    <select class='woof_seo_current_lang <?php esc_attr_e($add_class) ?>'>
+                                    <select class='woof_seo_current_lang <?php echo esc_attr($add_class) ?>'>
                                         <?php
                                         foreach ($langs as $lang) {
                                             ?>
-                                            <option values='<?php esc_attr_e($lang) ?>'><?php esc_html_e($lang) ?></option>
+                                            <option values='<?php echo esc_attr($lang) ?>'><?php esc_html_e($lang) ?></option>
                                         <?php }
                                         ?>
                                     </select>

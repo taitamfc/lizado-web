@@ -17,7 +17,7 @@ class WOOF_URL_PARSER {
 
     public function get_filter_prefix() {
         if (empty($this->filter_prefix)) {
-            
+
             $this->filter_prefix = woof()->get_swoof_search_slug();
         }
 
@@ -51,7 +51,11 @@ class WOOF_URL_PARSER {
         global $wp_rewrite;
         $post_data = $this->get_post();
         $get_data = $this->get_get();
-        $self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : '';
+
+        $self = '';
+        if (isset($_SERVER['PHP_SELF'])) {
+            $self = WOOF_HELPER::get_server_var('PHP_SELF');
+        }
 
         $WP->query_vars = [];
         $post_type_query_vars = [];
@@ -59,13 +63,16 @@ class WOOF_URL_PARSER {
         if (is_array($extra_query_vars)) {
             $WP->extra_query_vars = & $extra_query_vars;
         } elseif (!empty($extra_query_vars)) {
-            parse_str($extra_query_vars, $WP->extra_query_vars);
+            $WP->extra_query_vars = WOOF_HELPER::safe_parse_str($extra_query_vars);
         }
         //Source wp-includes/class-wp.php
         $rewrite_rules = $wp_rewrite->wp_rewrite_rules();
 
         if (!empty($rewrite_rules)) {
-            $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+            $path_info = '';
+            if (isset($_SERVER['PATH_INFO'])) {
+                $path_info = WOOF_HELPER::get_server_var('PATH_INFO');
+            }
             $error = '404';
             $WP->did_permalink = true;
 
@@ -102,11 +109,10 @@ class WOOF_URL_PARSER {
                     $WP->matched_rule = '$';
                     $query_var = $rewrite_rules['$'];
                     $matches = array('');
-				} else {
-				    $query_var = '';
-                    $matches = array('');					
-				}
-
+                } else {
+                    $query_var = '';
+                    $matches = array('');
+                }
             } else {
 
                 foreach ((array) $rewrite_rules as $match => $query_var) {
@@ -147,7 +153,7 @@ class WOOF_URL_PARSER {
 
                 $WP->matched_query = $query_var;
                 // Filter out non-public query vars
-                parse_str($query_var, $perma_query_vars);
+                $perma_query_vars = WOOF_HELPER::safe_parse_str($query_var);
                 // If we're processing a 404 request, clear the error var since we found something.
                 if ('404' == $error) {
                     unset($error, $get_data['error']);
@@ -248,15 +254,15 @@ class WOOF_URL_PARSER {
 
         $WP->query_vars = apply_filters('request', $WP->query_vars);
 
-		global $wp_version;
+        global $wp_version;
 
-		if ( version_compare($wp_version,'6.0') >= 0) {
-			$WP->query_posts();
-			$WP->handle_404();
-			$WP->register_globals();
-		} else {
-			do_action_ref_array('parse_request', array(&$WP));			
-		} 
+        if (version_compare($wp_version, '6.0') >= 0) {
+            $WP->query_posts();
+            $WP->handle_404();
+            $WP->register_globals();
+        } else {
+            do_action_ref_array('parse_request', array(&$WP));
+        }
 
 
         return false;
@@ -325,7 +331,7 @@ class WOOF_URL_PARSER {
     }
 
     public function get_all_items() {
-        
+
         $settings = woof()->settings;
         $items_order = array();
         $all_items = array();
@@ -369,7 +375,7 @@ class WOOF_URL_PARSER {
                     $all_items['sku'] = 'woof_sku';
                     break;
                 case 'by_text':
-				case 'by_text_2':	
+                case 'by_text_2':
                     unset($all_items[$f_key]);
                     $all_items['name'] = 'woof_text';
                     break;
@@ -401,7 +407,6 @@ class WOOF_URL_PARSER {
 
         $filter_data[$this->get_filter_prefix()] = 1;
 
-        
         $settings = woof()->settings;
         $taxonomies = woof()->get_taxonomies();
         $taxonomies_keys = array_keys($taxonomies);
@@ -455,7 +460,7 @@ class WOOF_URL_PARSER {
     public function get_request_uri() {
         $uri = false;
         if (isset($_SERVER['REQUEST_URI'])) {
-            $uri = $_SERVER['REQUEST_URI'];
+            $uri = WOOF_HELPER::get_server_var('REQUEST_URI');
         }
 
         return apply_filters('woof_override_seo_request_uri', $uri);
@@ -470,7 +475,7 @@ class WOOF_URL_PARSER {
     }
 
     public function add_request($data) {
-        
+
 
         if (!is_array($data)) {
             $data = array();
@@ -483,10 +488,10 @@ class WOOF_URL_PARSER {
         $data = array_merge($data, $request);
 
         if (isset($data['min_price'])) {
-            $_GET['min_price'] = $data['min_price'];
+            $_GET['min_price'] = floatval($data['min_price']);
         }
         if (isset($data['max_price'])) {
-            $_GET['max_price'] = $data['max_price'];
+            $_GET['max_price'] = floatval($data['max_price']);
         }
 
         return $data;

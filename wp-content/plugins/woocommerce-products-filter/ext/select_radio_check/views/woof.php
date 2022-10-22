@@ -13,13 +13,13 @@ $select_radio_check_height = (int) $this->settings['select_radio_check_height'][
 
     <dt>
         <a href="javascript: void(0);" class="woof_select_radio_check_opener">
-            <span class="woof_hida woof_hida_<?php esc_attr_e($tax_slug) ?>" data-title="<?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)) ?></span>    
+            <span class="woof_hida woof_hida_<?php echo esc_attr($tax_slug) ?>" data-title="<?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)) ?></span>    
             <p class="woof_multiSel"></p>  
         </a>
     </dt>
 
     <dd>
-        <div class="woof_mutliSelect woof_no_close_childs" data-height="<?php esc_attr_e($select_radio_check_height) ?>">
+        <div class="woof_mutliSelect woof_no_close_childs" data-height="<?php echo esc_attr($select_radio_check_height) ?>">
             <?php
             $args = array();
             $args['taxonomy_info'] = $taxonomies_info[$tax_slug];
@@ -37,9 +37,9 @@ $select_radio_check_height = (int) $this->settings['select_radio_check_height'][
             $args['hide_dynamic_empty_pos'] = (intval(WOOF_VERSION) === 1) ? 0 : get_option('woof_hide_dynamic_empty_pos', 0);
 
             if ($select_radio_check_type && !woof()->show_notes) {
-                echo $this->render_html(apply_filters('woof_html_types_view_checkbox', WOOF_PATH . 'views/html_types/checkbox.php'), $args);
+                $this->render_html_e(apply_filters('woof_html_types_view_checkbox', WOOF_PATH . 'views/html_types/checkbox.php'), $args);
             } else {
-                echo $this->render_html(apply_filters('woof_html_types_view_radio', WOOF_PATH . 'views/html_types/radio.php'), $args);
+                $this->render_html_e(apply_filters('woof_html_types_view_radio', WOOF_PATH . 'views/html_types/radio.php'), $args);
             }
             ?>            
         </div>

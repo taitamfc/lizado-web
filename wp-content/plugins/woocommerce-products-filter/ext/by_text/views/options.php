@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+<li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
     <?php
     $show = 0;
@@ -20,13 +20,13 @@ if (!defined('ABSPATH'))
     <span class="icon-question help_tip" data-tip="<?php esc_html_e('Searching by text in the: title, content, excerpt and their combinations. Also SKU option allows making search in the same text-input', 'woocommerce-products-filter') ?>"></span>
 
     <div class="select-wrap">
-        <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+        <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
             <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
             <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
         </select>
     </div>
 
-    <a href="#" data-key="<?php esc_attr_e($key) ?>" data-name="<?php esc_html_e("Search by text", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+    <a href="#" data-key="<?php echo esc_attr($key) ?>" data-name="<?php esc_html_e("Search by text", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
 
     <?php
     $ext_name = $key;
@@ -97,24 +97,24 @@ if (!defined('ABSPATH'))
         $woof_settings[$key]['template'] = '';
     }
     ?>
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][max_open_height]" value="<?php echo intval($woof_settings[$key]['max_open_height']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][taxonomy_compatibility]" value="<?php echo intval($woof_settings[$key]['taxonomy_compatibility']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][autocomplete]" value="<?php echo intval($woof_settings[$key]['autocomplete']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][custom_fields]" value="<?php esc_html_e($woof_settings[$key]['custom_fields']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][use_cache]" value="<?php echo intval($woof_settings[$key]['use_cache']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][view_text_length]" value="<?php echo intval($woof_settings[$key]['view_text_length']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][max_posts]" value="<?php echo intval($woof_settings[$key]['max_posts']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][min_symbols]" value="<?php echo intval($woof_settings[$key]['min_symbols']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][title]" value="<?php esc_html_e($woof_settings[$key]['title']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][placeholder]" value="<?php esc_html_e($woof_settings[$key]['placeholder']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][behavior]" value="<?php esc_html_e($woof_settings[$key]['behavior']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][search_by_full_word]" value="<?php echo intval($woof_settings[$key]['search_by_full_word']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][search_desc_variant]" value="<?php echo intval($woof_settings[$key]['search_desc_variant']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][how_to_open_links]" value="<?php echo intval($woof_settings[$key]['how_to_open_links']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][image]" value="<?php echo esc_url($woof_settings[$key]['image']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][sku_compatibility]" value="<?php echo intval($woof_settings[$key]['sku_compatibility']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][notes_for_customer]" value="<?php echo wp_kses_post(wp_unslash($woof_settings[$key]['notes_for_customer'])); ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][template]" value="<?php echo stripcslashes(esc_html($woof_settings[$key]['template'])); ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][max_open_height]" value="<?php echo intval($woof_settings[$key]['max_open_height']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][taxonomy_compatibility]" value="<?php echo intval($woof_settings[$key]['taxonomy_compatibility']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][autocomplete]" value="<?php echo intval($woof_settings[$key]['autocomplete']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][custom_fields]" value="<?php echo esc_html($woof_settings[$key]['custom_fields']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][use_cache]" value="<?php echo intval($woof_settings[$key]['use_cache']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][view_text_length]" value="<?php echo intval($woof_settings[$key]['view_text_length']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][max_posts]" value="<?php echo intval($woof_settings[$key]['max_posts']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][min_symbols]" value="<?php echo intval($woof_settings[$key]['min_symbols']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][title]" value="<?php echo esc_html($woof_settings[$key]['title']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][placeholder]" value="<?php echo esc_html($woof_settings[$key]['placeholder']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][behavior]" value="<?php echo esc_html($woof_settings[$key]['behavior']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][search_by_full_word]" value="<?php echo intval($woof_settings[$key]['search_by_full_word']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][search_desc_variant]" value="<?php echo intval($woof_settings[$key]['search_desc_variant']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][how_to_open_links]" value="<?php echo intval($woof_settings[$key]['how_to_open_links']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][image]" value="<?php echo esc_url($woof_settings[$key]['image']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][sku_compatibility]" value="<?php echo intval($woof_settings[$key]['sku_compatibility']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][notes_for_customer]" value="<?php echo wp_kses_post(wp_unslash($woof_settings[$key]['notes_for_customer'])); ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][template]" value="<?php echo stripcslashes(esc_html($woof_settings[$key]['template'])); ?>" />
 
     <div id="woof-modal-content-by_text" style="display: none;">
 
@@ -171,7 +171,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="behavior">
                         <?php foreach ($behavior as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key); ?>"><?php esc_html_e($value); ?></option>
+                            <option value="<?php echo esc_attr($key); ?>"><?php esc_html_e($value); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -197,7 +197,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="search_by_full_word">
                         <?php foreach ($autocomplete as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key); ?>"><?php esc_html_e($value); ?></option>
+                            <option value="<?php echo esc_attr($key); ?>"><?php esc_html_e($value); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -225,7 +225,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="autocomplete">
                         <?php foreach ($autocomplete as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -252,7 +252,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="how_to_open_links">
                         <?php foreach ($how_to_open_links as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -278,7 +278,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="taxonomy_compatibility">
                         <?php foreach ($taxonomies as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -305,7 +305,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="sku_compatibility">
                         <?php foreach ($sku_compatibility as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -343,7 +343,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="search_desc_variant">
                         <?php foreach ($desc_var as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -370,7 +370,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="use_cache">
                         <?php foreach ($use_cache as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -435,9 +435,9 @@ if (!defined('ABSPATH'))
                     </br>
                     <i>
                         <?php
-                        echo get_stylesheet_directory() . DIRECTORY_SEPARATOR . "woof" . DIRECTORY_SEPARATOR . "ext" .
+                        echo esc_html(get_stylesheet_directory() . DIRECTORY_SEPARATOR . "woof" . DIRECTORY_SEPARATOR . "ext" .
                         DIRECTORY_SEPARATOR . esc_html($ext_name) . DIRECTORY_SEPARATOR .
-                        "views" . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR;
+                        "views" . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR);
                         ?>
                     </i>
                 </span>

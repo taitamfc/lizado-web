@@ -1,8 +1,6 @@
 <?php
 if (!defined('ABSPATH'))
     die('No direct access allowed');
-
-
 ?>
 
 <section id="tabs-meta-filter">
@@ -22,7 +20,7 @@ if (!defined('ABSPATH'))
                         <?php if (woof()->show_notes) : ?>
                             <br>
                             <div class="woof__alert woof__alert-info2 woof_tomato">
-                                <?php _e('In FREE version it is possible to operate by 2 meta fields only!', 'woocommerce-products-filter') ?>
+                                <?php esc_html_e('In FREE version it is possible to operate by 2 meta fields only!', 'woocommerce-products-filter') ?>
                             </div>
                         <?php endif; ?>
 
@@ -114,15 +112,15 @@ if (!defined('ABSPATH'))
                         <span class="icon-arrow-combo help_tip2 woof_drag_and_drope" data-tip2="<?php esc_html_e("drag and drope", 'woocommerce-products-filter'); ?>"></span>
 
                         <div class="woof_options_item">
-                            <input type="text" name="woof_settings[meta_filter][<?php esc_attr_e($m['meta_key']) ?>][meta_key]" value="<?php esc_attr_e($m['meta_key']) ?>" readonly="" class="woof_column_li_option" />
+                            <input type="text" name="woof_settings[meta_filter][<?php echo esc_attr($m['meta_key']) ?>][meta_key]" value="<?php echo esc_attr($m['meta_key']) ?>" readonly="" class="woof_column_li_option" />
                         </div>
                         <div class="woof_options_item">
-                            <input type="text" name="woof_settings[meta_filter][<?php esc_attr_e($m['meta_key']) ?>][title]" placeholder="<?php esc_html_e('enter title', 'woocommerce-products-filter') ?>" value="<?php esc_html_e($m['title']) ?>" class="woof_column_li_option woof_fix2" />
+                            <input type="text" name="woof_settings[meta_filter][<?php echo esc_attr($m['meta_key']) ?>][title]" placeholder="<?php esc_html_e('enter title', 'woocommerce-products-filter') ?>" value="<?php echo esc_html($m['title']) ?>" class="woof_column_li_option woof_fix2" />
 
                         </div>
                         <div class="woof_options_item">
                             <div class="select-wrap">
-                                <select name="woof_settings[meta_filter][<?php esc_attr_e($m['meta_key']) ?>][search_view]" class="woof_meta_view_selector woof_width_99p">
+                                <select name="woof_settings[meta_filter][<?php echo esc_attr($m['meta_key']) ?>][search_view]" class="woof_meta_view_selector woof_width_99p">
                                     <?php
                                     foreach ($meta_types as $key => $type):
                                         if (!is_array($type['hide_if'])) {
@@ -132,7 +130,7 @@ if (!defined('ABSPATH'))
                                             $m['search_view'] = 'textinput';
                                         }
                                         ?> 
-                                        <option  <?php selected($m['search_view'], $key) ?> value="<?php esc_html_e($key) ?>" data-show-options="<?php esc_attr_e(($type['show_options']) ? 'yes' : 'no') ?>" data-hideif="<?php esc_html_e(implode(',', $type['hide_if'])) ?>" <?php echo sanitize_textarea_field(in_array($m['type'], $type['hide_if']) ? "style='display:none;'" : "") ?>  >
+                                        <option  <?php selected($m['search_view'], $key) ?> value="<?php echo esc_html($key) ?>" data-show-options="<?php echo esc_attr(($type['show_options']) ? 'yes' : 'no') ?>" data-hideif="<?php echo esc_html(implode(',', $type['hide_if'])) ?>" <?php if (in_array($m['type'], $type['hide_if'])): ?>style="display:none;"<?php endif; ?>>
                                             <?php esc_html_e($type['title']) ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -147,7 +145,7 @@ if (!defined('ABSPATH'))
                         ?>
                         <div class="woof_options_item_options" <?php if (!$show_options): ?> style="display:none;" <?php endif; ?> >
                             <div class="textarea-wrap">
-                                <textarea name="woof_settings[meta_filter][<?php esc_attr_e($m['meta_key']) ?>][options]" class="woof_column_li_option" ><?php esc_html_e(isset($m['options']) ? $m['options'] : "") ?></textarea>
+                                <textarea name="woof_settings[meta_filter][<?php echo esc_attr($m['meta_key']) ?>][options]" class="woof_column_li_option" ><?php echo esc_html(isset($m['options']) ? $m['options'] : "") ?></textarea>
                             </div>
                             <div class="woof-meta-description">
                                 <p><i><?php esc_html_e('Use comma as in example: 1,2,3,4,5. If you want structure like title->value use next syntax example: France^1,Germany^2,USA^3. Countries are titles here.', 'woocommerce-products-filter') ?></i></p>
@@ -155,7 +153,7 @@ if (!defined('ABSPATH'))
                         </div>
                         <div class="woof_options_item">
                             <div class="select-wrap" <?php if (in_array($m['search_view'], array('popupeditor', 'switcher'))): ?>style="display: none;"<?php endif; ?>>
-                                <select name="woof_settings[meta_filter][<?php esc_attr_e($m['meta_key']) ?>][type]" class="woof_meta_type_selector">
+                                <select name="woof_settings[meta_filter][<?php echo esc_attr($m['meta_key']) ?>][type]" class="woof_meta_type_selector">
                                     <option <?php selected($m['type'], 'NUMERIC') ?> value="NUMERIC"><?php esc_html_e('number', 'woocommerce-products-filter') ?></option>
                                     <option <?php selected($m['type'], 'string') ?> value="string"><?php esc_html_e('string', 'woocommerce-products-filter') ?></option>
                                     <option <?php selected($m['type'], 'DATE') ?> value="DATE"><?php esc_html_e('date', 'woocommerce-products-filter') ?></option>

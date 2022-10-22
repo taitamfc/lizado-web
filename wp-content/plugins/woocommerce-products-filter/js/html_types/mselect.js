@@ -2,10 +2,14 @@
 function woof_init_mselects() {
 
     if (woof_select_type == 'chosen') {
-	jQuery("select.woof_mselect").chosen();
+        jQuery('select.woof_mselect').chosen();
     } else if (woof_select_type == 'selectwoo') {
-	jQuery("select.woof_mselect").selectWoo();
-    }    
+        try {
+            jQuery('select.woof_mselect').selectWoo();
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     jQuery('.woof_mselect').change(function (a) {
         var slug = jQuery(this).val();
@@ -27,13 +31,13 @@ function woof_init_mselects() {
         return true;
     });
     var containers = jQuery('.woof_hide_empty_container_ms');
-    jQuery.each(containers, function(i, item){
-	var selector= jQuery(item).val();
-	if(selector){
-	    jQuery(selector).hide();
-	}
-	
-    });    
+    jQuery.each(containers, function (i, item) {
+        var selector = jQuery(item).val();
+        if (selector) {
+            jQuery(selector).hide();
+        }
+
+    });
 }
 
 function woof_mselect_direct_search(name, slug) {

@@ -3,10 +3,10 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][text_conditional]" value="<?php esc_html_e(isset($settings[$key]['text_conditional']) ? $settings[$key]['text_conditional'] : 'LIKE') ?>" /> 
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][text_autocomplate]" value="<?php echo intval(isset($settings[$key]['text_autocomplate']) ? $settings[$key]['text_autocomplate'] : 0) ?>" /> 
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][text_conditional]" value="<?php echo esc_html(isset($settings[$key]['text_conditional'])? $settings[$key]['text_conditional']:'LIKE') ?>" /> 
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][text_autocomplate]" value="<?php echo intval(isset($settings[$key]['text_autocomplate'])? $settings[$key]['text_autocomplate']:0) ?>" /> 
 
-<div id="woof-modal-content-<?php esc_attr_e($key) ?>" style="display: none;">
+<div id="woof-modal-content-<?php echo esc_attr($key) ?>" style="display: none;">
 
     <div class="woof-form-element-container">
 
@@ -25,8 +25,8 @@ if (!defined('ABSPATH'))
 
             <div class="select-wrap">
                 <select class="woof_popup_option" data-option="text_conditional">
-                    <?php foreach ($text_conditional as $id => $value) : ?>
-                        <option value="<?php esc_attr_e($id) ?>"><?php esc_html_e($value) ?></option>
+                    <?php foreach ($text_conditional  as $id => $value) : ?>
+                        <option value="<?php echo esc_attr($id) ?>"><?php esc_html_e($value) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

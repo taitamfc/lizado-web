@@ -52,22 +52,22 @@ class WOOF_META_FILTER_DATEPICKER extends WOOF_META_FILTER_TYPE {
         $data['meta_settings'] = $data['meta_options'] = (isset($this->woof_settings[$this->meta_key])) ? $this->woof_settings[$this->meta_key] : "";
         if (isset($this->woof_settings[$this->meta_key]["show"]) AND $this->woof_settings[$this->meta_key]["show"]) {
             if (file_exists($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php')) {
-                echo $this->render_html($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php', $data);
+                $this->render_html_e($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php', $data);
             } else {
-                echo $this->render_html($this->get_meta_filter_path() . '/views/woof.php', $data);
+                $this->render_html_e($this->get_meta_filter_path() . '/views/woof.php', $data);
             }
         }
     }
 
     protected function draw_additional_options() {
-        $data = array();
-        $data['key'] = $this->meta_key;
-        $data['settings'] = $this->woof_settings;
-        return $this->render_html($this->get_meta_filter_path() . '/views/additional_options.php', $data);
+        $this->render_html_e($this->get_meta_filter_path() . '/views/additional_options.php', [
+            'key' => $this->meta_key,
+            'settings' => $this->woof_settings
+        ]);
     }
 
     protected function check_current_request() {
-        
+
         $request = woof()->get_request_data();
         if (isset($request[$this->type . "_" . $this->meta_key]) AND $request[$this->type . "_" . $this->meta_key]) {
             return $request[$this->type . "_" . $this->meta_key];
@@ -138,7 +138,7 @@ class WOOF_META_FILTER_DATEPICKER extends WOOF_META_FILTER_TYPE {
     }
 
     public static function get_option_name($value, $key = NULL) {
-        
+
         $value_txt = "";
 
         $arr_val = explode("-", $value, 2);

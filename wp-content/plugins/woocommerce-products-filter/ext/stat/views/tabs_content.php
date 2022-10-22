@@ -149,7 +149,7 @@ if (!defined('ABSPATH'))
                                                 continue;
                                             }
                                             ?>
-                                            <option value="<?php esc_attr_e($key); ?>"><?php esc_html_e($value); ?></option>
+                                            <option value="<?php echo esc_attr($key); ?>"><?php esc_html_e($value); ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -238,7 +238,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_stat][is_enabled]" class="chosen_select">
                                     <?php foreach ($stat_activated_mode as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($is_enabled == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($is_enabled == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -283,16 +283,16 @@ if (!defined('ABSPATH'))
                     <div class="woof-control-container">
                         <div class="woof-control">
                             <label class="woof_fix6"><?php esc_html_e('Host', 'woocommerce-products-filter') ?></label>:
-                            <input type="text" name="woof_settings[woof_stat][server_options][host]" value="<?php esc_html_e($server_options['host']) ?>" /><br />
+                            <input type="text" name="woof_settings[woof_stat][server_options][host]" value="<?php echo esc_html($server_options['host']) ?>" /><br />
                             <br />
                             <label class="woof_fix6"><?php esc_html_e('User', 'woocommerce-products-filter') ?></label>:
-                            <input type="text" name="woof_settings[woof_stat][server_options][host_user]" value="<?php esc_html_e($server_options['host_user']) ?>" /><br />
+                            <input type="text" name="woof_settings[woof_stat][server_options][host_user]" value="<?php echo esc_html($server_options['host_user']) ?>" /><br />
                             <br />
                             <label class="woof_fix6"><?php esc_html_e('DB Name', 'woocommerce-products-filter') ?></label>:
-                            <input type="text" name="woof_settings[woof_stat][server_options][host_db_name]" value="<?php esc_html_e($server_options['host_db_name']) ?>" /><br />
+                            <input type="text" name="woof_settings[woof_stat][server_options][host_db_name]" value="<?php echo esc_html($server_options['host_db_name']) ?>" /><br />
                             <br />
                             <label class="woof_fix6"><?php esc_html_e('Password', 'woocommerce-products-filter') ?></label>:
-                            <input type="text" name="woof_settings[woof_stat][server_options][host_pass]" value="<?php esc_html_e($server_options['host_pass']) ?>" /><br />
+                            <input type="text" name="woof_settings[woof_stat][server_options][host_pass]" value="<?php echo esc_html($server_options['host_pass']) ?>" /><br />
                             <span id="woof_stat_connection"  class="button"><?php esc_html_e('Check DB connection', 'woocommerce-products-filter') ?></span>
 
                         </div>
@@ -354,7 +354,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select multiple="" name="woof_settings[woof_stat][items_for_stat][]" class="chosen_select">
                                     <?php foreach ($all_items as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key); ?>" <?php if (in_array($key, $items_for_stat)): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value); ?></option>
+                                        <option value="<?php echo esc_attr($key); ?>" <?php selected(in_array($key, $items_for_stat)) ?>><?php esc_html_e($value); ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -439,11 +439,11 @@ if (!defined('ABSPATH'))
                     ?>
                     <div class="woof-control-container">
                         <div class="woof-control">
-                            <input type="text" name="woof_settings[woof_stat][cache_folder]" value="<?php esc_html_e($cache_folder) ?>" />
+                            <input type="text" name="woof_settings[woof_stat][cache_folder]" value="<?php echo esc_html($cache_folder) ?>" />
                         </div>
                         <div class="woof-description">
                             <p class="description">
-                                <?php echo WP_CONTENT_DIR . '/' . $cache_folder ?>/<br />
+                                <?php echo esc_html(WP_CONTENT_DIR . '/' . $cache_folder) ?>/<br />
                                 <?php esc_html_e('Select cron which you want to use for the statistic assembling. Better use WordPress cron, but on the server create external cron and set there period of site visiting.', 'woocommerce-products-filter') ?></p>
                         </div>
                     </div>
@@ -473,7 +473,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_stat][cron_system]" class="chosen_select woof_cron_system">
                                     <?php foreach ($cron_systems as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($cron_system == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($cron_system == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -489,7 +489,7 @@ if (!defined('ABSPATH'))
                 </div><!--/ .woof-control-section-->
 
 
-                <div class="woof-control-section woof_external_cron_option" style="display: <?php esc_attr_e($cron_system == 1 ? 'block' : 'none') ?>;">
+                <div class="woof-control-section woof_external_cron_option" style="display: <?php echo esc_attr($cron_system == 1 ? 'block' : 'none') ?>;">
 
                     <h4><?php esc_html_e('Secret key for external cron', 'woocommerce-products-filter') ?></h4>
                     <?php
@@ -500,7 +500,7 @@ if (!defined('ABSPATH'))
                     ?>
                     <div class="woof-control-container">
                         <div class="woof-control">
-                            <input type="text" name="woof_settings[woof_stat][cron_secret_key]" value="<?php esc_html_e($cron_secret_key) ?>" />
+                            <input type="text" name="woof_settings[woof_stat][cron_secret_key]" value="<?php echo esc_html($cron_secret_key) ?>" />
                         </div>
                         <div class="woof-description">
                             <p class="description"><?php esc_html_e('Enter any random text in the field and use it in the external cron with link like: http://mysite.com/?woof_stat_collection=__YOUR_SECRET_KEY_HERE__', 'woocommerce-products-filter') ?></p>
@@ -510,7 +510,7 @@ if (!defined('ABSPATH'))
                 </div><!--/ .woof-control-section-->
 
 
-                <div class="woof-control-section woof_wp_cron_option" style="display: <?php esc_attr_e($cron_system == 0 ? 'block' : 'none') ?>;">
+                <div class="woof-control-section woof_wp_cron_option" style="display: <?php echo esc_attr($cron_system == 0 ? 'block' : 'none') ?>;">
 
                     <h4><?php esc_html_e('WordPress Cron period', 'woocommerce-products-filter') ?></h4>
 
@@ -537,7 +537,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_stat][wp_cron_period]" class="chosen_select">
                                     <?php foreach ($wp_cron_periods as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($wp_cron_period == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($wp_cron_period == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -610,9 +610,9 @@ if (!defined('ABSPATH'))
                 if ($wpdb->query($sql) === false) {
                     ?>
                     <p class="description"><?php esc_html_e("WOOF cannot create database table for statistic! Make sure that your mysql user has the CREATE privilege! Do it manually using your host panel&amp;phpmyadmin!", 'woocommerce-products-filter') ?></p>
-                    <code><?php echo sanitize_textarea_field($sql) ?></code>
+                    <code><?php echo esc_html($sql) ?></code>
                     <?php
-                    echo $wpdb->last_error;
+                    esc_html_e($wpdb->last_error);
                 }
 
                 //***
@@ -632,9 +632,9 @@ if (!defined('ABSPATH'))
                 if ($wpdb->query($sql) === false) {
                     ?>
                     <p class="description"><?php esc_html_e("WOOF cannot create database table for statistic! Make sure that your mysql user has the CREATE privilege! Do it manually using your host panel&amp;phpmyadmin!", 'woocommerce-products-filter') ?></p>
-                    <code><?php echo sanitize_textarea_field($sql) ?></code>
+                    <code><?php echo esc_html($sql) ?></code>
                     <?php
-                    echo $wpdb->last_error;
+                    esc_html_e($wpdb->last_error);
                 }
                 ?>
 

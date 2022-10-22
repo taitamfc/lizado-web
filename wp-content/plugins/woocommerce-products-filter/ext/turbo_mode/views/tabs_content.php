@@ -58,7 +58,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_turbo_mode][enable]" class="chosen_select">
                                     <?php foreach ($enable_turbo as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($enable == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($enable == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -91,7 +91,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_turbo_mode][cron_system]" class="chosen_select woof_cron_system">
                                     <?php foreach ($cron_systems as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($cron_system == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($cron_system == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -106,7 +106,7 @@ if (!defined('ABSPATH'))
                     </div>
                 </div><!--/ .woof-control-section-->
 
-                <div class="woof-control-section woof_external_cron_option" style="display: <?php esc_attr_e($cron_system == 1 ? 'block' : 'none') ?>;">
+                <div class="woof-control-section woof_external_cron_option" style="display: <?php echo esc_attr($cron_system == 1 ? 'block' : 'none') ?>;">
 
                     <h4><?php esc_html_e('Secret key for external cron', 'woocommerce-products-filter') ?></h4>
                     <?php
@@ -117,7 +117,7 @@ if (!defined('ABSPATH'))
                     ?>
                     <div class="woof-control-container">
                         <div class="woof-control">
-                            <input type="text" name="woof_settings[woof_turbo_mode][cron_secret_key]" value="<?php esc_html_e($cron_secret_key) ?>" />
+                            <input type="text" name="woof_settings[woof_turbo_mode][cron_secret_key]" value="<?php echo esc_html($cron_secret_key) ?>" />
                         </div>
                         <div class="woof-description">
                             <p class="description"><?php esc_html_e('Enter any random text in the field and use it in the external cron with link like: http://mysite.com/?woof_stat_collection=__YOUR_SECRET_KEY_HERE__', 'woocommerce-products-filter') ?></p>
@@ -126,7 +126,7 @@ if (!defined('ABSPATH'))
 
                 </div><!--/ .woof-control-section-->
 
-                <div class="woof-control-section woof_wp_cron_option" style="display: <?php esc_attr_e($cron_system == 0 ? 'block' : 'none') ?>;">
+                <div class="woof-control-section woof_wp_cron_option" style="display: <?php echo esc_attr($cron_system == 0 ? 'block' : 'none') ?>;">
 
                     <h4><?php esc_html_e('WordPress Cron period', 'woocommerce-products-filter') ?></h4>
 
@@ -153,7 +153,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_turbo_mode][wp_cron_period]" class="chosen_select">
                                     <?php foreach ($wp_cron_periods as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($wp_cron_period == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($wp_cron_period == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -176,9 +176,9 @@ if (!defined('ABSPATH'))
                         <div class="woof-control">
                             <a id="woof_turbo_mode_update" class="button"><span class="icon-up"></span><?php esc_html_e('Update now!', 'woocommerce-products-filter') ?></a>
                             <input type="hidden" id="woof_turbo_mode_update_nonce"  value="<?php echo wp_create_nonce('woof-turbo-mode-nonce'); ?>">
-                            <span class="woof_turbo_mode_product_load"><img src="<?php echo WOOF_LINK ?>ext\turbo_mode\img\load.gif"></span>
+                            <span class="woof_turbo_mode_product_load"><img src="<?php echo esc_url(WOOF_LINK) ?>ext\turbo_mode\img\load.gif"></span>
                             <div class="woof_turbo_mode_product_succes">
-                                <img src="<?php echo WOOF_LINK ?>ext\turbo_mode\img\succes.png"> 
+                                <img src="<?php echo esc_url(WOOF_LINK) ?>ext\turbo_mode\img\succes.png"> 
                                 <p><?php esc_html_e('File updated!!!', 'woocommerce-products-filter') ?></p>
                             </div>
                             <span class="woof_turbo_mode_messange"></span>
@@ -215,7 +215,7 @@ if (!defined('ABSPATH'))
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_turbo_mode][storing]" class="chosen_select">
                                     <?php foreach ($storing as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($allow == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($allow == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

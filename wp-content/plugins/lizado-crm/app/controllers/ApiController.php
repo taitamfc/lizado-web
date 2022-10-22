@@ -374,6 +374,13 @@ class ApiController extends CRController {
       update_option('blogname',$data['site_title']);
       update_option('blogdescription',$data['tagline']);
       update_option('admin_email',$data['administration_email_address']);
+
+      $theme_options = get_option('theme_mods_flatsome-child');
+      $theme_options['html_scripts_header'] = $data['html_scripts_header'];
+      $theme_options['html_scripts_footer'] = $data['html_scripts_footer'];
+      $theme_options['html_scripts_after_body'] = $data['html_scripts_after_body'];
+      $theme_options['html_scripts_before_body'] = $data['html_scripts_before_body'];
+      update_option('theme_mods_flatsome-child',$theme_options);
       
       //update acf field
       $cron_fields = [

@@ -49,7 +49,7 @@ final class WOOF_EXT_BY_FEATURED extends WOOF_EXT {
     //settings page hook
     public function woof_print_html_type_options() {
         
-        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
+        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )

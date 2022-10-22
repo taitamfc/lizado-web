@@ -55,7 +55,7 @@ $woof_settings = woof()->settings;
                             <div class="select-wrap">
                                 <select name="woof_settings[woof_init_sections]" class="chosen_select slideout_value" data-name="woof_init_sections">
                                     <?php foreach ($init_sections as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['woof_init_sections'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['woof_init_sections'] == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -88,7 +88,7 @@ $woof_settings = woof()->settings;
                             <div class="select-wrap">
                                 <select name="woof_settings[sections_type]" class="chosen_select slideout_value" data-name="woof_sections_type">
                                     <?php foreach ($sections_behavior as $key => $value) : ?>
-                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['sections_type'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['sections_type'] == $key) ?>><?php esc_html_e($value) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

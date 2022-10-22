@@ -33,8 +33,8 @@
 
         <div class="woof_show_text_search_container">
             <img width="36" class="woof_show_text_search_loader" style="display: none;" src="<?php echo esc_url($loader_img) ?>" alt="loader" />
-            <a href="javascript:void(0);" data-uid="<?php esc_attr_e($unique_id) ?>" class="woof_text_search_go <?php esc_attr_e($unique_id) ?>"></a>
-            <input type="search" class="woof_show_text_search <?php esc_attr_e($unique_id) ?>" id="<?php esc_attr_e($unique_id) ?>" data-uid="<?php esc_attr_e($unique_id) ?>" data-auto_res_count="<?php echo intval((isset($auto_res_count) ? $auto_res_count : 0)) ?>" data-auto_search_by="<?php esc_html_e(isset($auto_search_by) ? $auto_search_by : "") ?>" placeholder="<?php esc_html_e(isset($placeholder) ? $placeholder : $p) ?>" name="woof_text" value="<?php esc_html_e($woof_text) ?>" />
+            <a href="javascript:void(0);" data-uid="<?php echo esc_attr($unique_id) ?>" class="woof_text_search_go <?php echo esc_attr($unique_id) ?>"></a>
+            <input type="search" class="woof_show_text_search <?php echo esc_attr($unique_id) ?>" id="<?php echo esc_attr($unique_id) ?>" data-uid="<?php echo esc_attr($unique_id) ?>" data-auto_res_count="<?php echo intval((isset($auto_res_count) ? $auto_res_count : 0)) ?>" data-auto_search_by="<?php echo esc_html(isset($auto_search_by) ? $auto_search_by : "") ?>" placeholder="<?php echo esc_html(isset($placeholder) ? $placeholder : $p) ?>" name="woof_text" value="<?php echo esc_html($woof_text) ?>" />
 
             <?php if (isset(woof()->settings['by_text_2']['notes_for_customer']) AND!empty(woof()->settings['by_text_2']['notes_for_customer'])): ?>
                 <span class="woof_text_notes_for_customer"><?php echo stripcslashes(wp_kses_post(wp_unslash(woof()->settings['by_text_2']['notes_for_customer']))); ?></span>

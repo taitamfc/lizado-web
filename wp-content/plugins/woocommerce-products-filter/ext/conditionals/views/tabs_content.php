@@ -80,7 +80,7 @@ if (!defined('ABSPATH'))
 
                                     sort($keys);
                                     $keys = implode(', ', $keys);
-                                    esc_html_e($keys);
+                                    echo esc_html($keys);
                                     ?>
                                 </p>
 

@@ -46,7 +46,7 @@ final class WOOF_EXT_STEP_FILTER extends WOOF_EXT {
 
     public function woof_print_applications_tabs_content() {
         $data = array();        
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function woof_step($args) {

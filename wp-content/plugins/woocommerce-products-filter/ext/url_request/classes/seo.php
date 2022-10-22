@@ -16,7 +16,7 @@ class WOOF_SEO {
         if (is_admin() && (!defined('DOING_AJAX') || !DOING_AJAX )) {
             return false;
         }
-        
+
         $this->rules = $rules;
         $this->curr_url = $url;
 
@@ -73,7 +73,7 @@ class WOOF_SEO {
     }
 
     public function is_search_going() {
-        
+
         $is_search = false;
         if (woof()->is_isset_in_request_data(woof()->get_swoof_search_slug())) {
             $is_search = true;
@@ -193,7 +193,7 @@ class WOOF_SEO {
     public function get_current_replace_vars() {
         if (!count($this->current_replace_vars)) {
             $replace_vars = array();
-            
+
             $request = woof()->get_request_data();
             $taxonomies = woof()->get_taxonomies();
             $settings = woof()->settings;
@@ -304,7 +304,7 @@ class WOOF_SEO {
         }
         $txt = apply_filters('woof_seo_text', $this->replace_vars($rule['text'], $this->get_current_replace_vars()));
         if (!empty($txt)) {
-            echo sprintf('<div class="woof_seo_text">%s</div>', wp_kses_post(wp_unslash($txt))) . "\r\n";
+            echo '<div class="woof_seo_text">' . wp_kses_post(wp_unslash($txt)) . "</div>\r\n";
         }
     }
 

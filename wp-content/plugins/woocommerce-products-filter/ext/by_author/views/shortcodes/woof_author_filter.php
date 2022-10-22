@@ -63,14 +63,14 @@
             case 'checkbox':
                 ?>
                 <?php $woof_author = explode(",", $woof_author); ?>
-                <<?php esc_attr_e(apply_filters('woof_title_tag', 'h4')); ?>><?php esc_html_e($p) ?></<?php esc_attr_e(apply_filters('woof_title_tag', 'h4')); ?>>
+                <<?php echo esc_attr(apply_filters('woof_title_tag', 'h4')); ?>><?php esc_html_e($p) ?></<?php echo esc_attr(apply_filters('woof_title_tag', 'h4')); ?>>
                 <div data-css-class="woof_checkbox_authors_container" class="woof_checkbox_authors_container woof_container">
                     <div class="woof_container_overlay_item"></div>
                     <div class="woof_container_inner">
                         <ul class='woof_authors '>
                             <?php foreach ($authors as $user): ?>
                                 <li>
-                                    <input type="checkbox" class="woof_checkbox_author" id="woof_checkbox_author_<?php esc_attr_e($user->data->ID) ?>" name="woof_author[]" value="<?php esc_attr_e($user->data->ID) ?>" <?php if (in_array($user->data->ID, $woof_author)) echo "checked"; ?> />&nbsp;&nbsp;<label for="woof_checkbox_author_<?php esc_attr_e($user->data->ID) ?>"><?php esc_html_e($user->data->display_name) ?></label>
+                                    <input type="checkbox" class="woof_checkbox_author" id="woof_checkbox_author_<?php echo esc_attr($user->data->ID) ?>" name="woof_author[]" value="<?php echo esc_attr($user->data->ID) ?>" <?php checked(in_array($user->data->ID, $woof_author)) ?> />&nbsp;&nbsp;<label for="woof_checkbox_author_<?php echo esc_attr($user->data->ID) ?>"><?php esc_html_e($user->data->display_name) ?></label>
                                     <?php
                                     if (in_array($user->data->ID, $woof_author)) {
                                         $authors_title[] = $user;
@@ -85,11 +85,11 @@
                 break;
             default :
                 ?>
-                <select name="woof_author" class="woof_select woof_show_author_search <?php esc_attr_e($unique_id) ?>" data-uid="<?php esc_attr_e($unique_id) ?>">
+                <select name="woof_author" class="woof_select woof_show_author_search <?php echo esc_attr($unique_id) ?>" data-uid="<?php echo esc_attr($unique_id) ?>">
                     <option value="0"><?php esc_html_e($p) ?></option>
                     <?php if (!empty($authors)): ?>
                         <?php foreach ($authors as $user): ?>
-                            <option <?php selected($woof_author, $user->data->ID); ?> value="<?php esc_html_e($user->data->ID) ?>"><?php esc_html_e($user->data->display_name) ?></option>
+                            <option <?php selected($woof_author, $user->data->ID); ?> value="<?php echo esc_html($user->data->ID) ?>"><?php esc_html_e($user->data->display_name) ?></option>
                             <?php
                             if ($user->data->ID == $woof_author) {
                                 $authors_title[] = $user;
@@ -104,7 +104,7 @@
         if (!empty($authors_title)) {
             foreach ($authors_title as $user) {
                 ?>
-                <input type="hidden" value="<?php echo esc_html__('Author:', 'woocommerce-products-filter'), $user->data->display_name; ?>" data-anchor="woof_n_woof_author_<?php esc_attr_e($user->data->ID) ?>" />
+                <input type="hidden" value="<?php esc_html_e('Author:', 'woocommerce-products-filter') ?><?php esc_html_e($user->data->display_name) ?>" data-anchor="woof_n_woof_author_<?php echo esc_attr($user->data->ID) ?>" />
                 <?php
             }
         }

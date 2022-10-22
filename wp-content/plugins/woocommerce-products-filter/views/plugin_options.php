@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="subsubsub_section <?php esc_attr_e($this->show_notes ? "woof_free" : "") ?>">
+<div class="subsubsub_section <?php echo esc_attr($this->show_notes ? "woof_free" : "") ?>">
 
     <div class="woof_fix12"></div>
 
@@ -21,7 +21,7 @@
 
         <div class="woof-header">
             <div>
-                <h3 class="woof_plugin_name"><?php esc_html_e('WOOF - WooCommerce Products Filter', 'woocommerce-products-filter') ?>&nbsp;<span class="woof__text-success">v.<?php echo WOOF_VERSION ?></span>&nbsp;<span id="woof-head"><svg><use xlink:href="#svg-woof"></use></svg></span></h3>
+                <h3 class="woof_plugin_name"><?php esc_html_e('WOOF - WooCommerce Products Filter', 'woocommerce-products-filter') ?>&nbsp;<span class="woof__text-success">v.<?php echo esc_attr(WOOF_VERSION) ?></span>&nbsp;<span id="woof-head"><svg><use xlink:href="#svg-woof"></use></svg></span></h3>
                 <i><?php printf(esc_html__('Actualized for WooCommerce v.%s.x', 'woocommerce-products-filter'), WOOCOMMERCE_VERSION) ?></i><br />
             </div>
             <div>
@@ -33,14 +33,13 @@
         </div>
 
         <input type="hidden" name="woof_settings" value="" />
-        <input type="hidden" name="woof_settings[items_order]" value="<?php esc_html_e(isset($woof_settings['items_order']) ? $woof_settings['items_order'] : '') ?>" />
+        <input type="hidden" name="woof_settings[items_order]" value="<?php echo esc_html(isset($woof_settings['items_order']) ? $woof_settings['items_order'] : '') ?>" />
         <input type="hidden" name="_wpnonce_woof" value="<?php echo wp_create_nonce('woof_save_option'); ?>">
         <?php if (version_compare(WOOCOMMERCE_VERSION, WOOF_MIN_WOOCOMMERCE_VERSION, '<')): ?>
 
             <div id="message" class="error fade"><p><strong><?php esc_html_e("ATTENTION! Your version of the woocommerce plugin is too obsolete. There is no warranty for working with WOOF!!", 'woocommerce-products-filter') ?></strong></p></div>
 
         <?php endif; ?>
-
 
         <div id="tabs" class="woof-tabs">
 
@@ -205,9 +204,9 @@
 
                                 <select name="woof_settings[icheck_skin]" class="chosen_select">
                                     <?php foreach ($skins as $key => $schemes) : ?>
-                                        <optgroup label="<?php esc_attr_e($key) ?>">
+                                        <optgroup label="<?php echo esc_attr($key) ?>">
                                             <?php foreach ($schemes as $scheme) : ?>
-                                                <option value="<?php esc_attr_e($scheme) ?>" <?php if ($skin == $scheme): ?>selected="selected"<?php endif; ?>><?php esc_attr_e($scheme) ?></option>
+                                                <option value="<?php echo esc_attr($scheme) ?>" <?php selected($skin == $scheme) ?>><?php echo esc_attr($scheme) ?></option>
                                             <?php endforeach; ?>
                                         </optgroup>
                                     <?php endforeach; ?>
@@ -248,7 +247,7 @@
 
                                 <select name="woof_settings[overlay_skin]" class="chosen_select">
                                     <?php foreach ($skins as $scheme => $title) : ?>
-                                        <option value="<?php esc_attr_e($scheme) ?>" <?php if ($skin == $scheme): ?>selected="selected"<?php endif; ?>><?php esc_html_e($title) ?></option>
+                                        <option value="<?php echo esc_attr($scheme) ?>" <?php selected($skin == $scheme) ?>><?php esc_html_e($title) ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -275,7 +274,7 @@
                         <div class="woof-control-container">
                             <div class="woof-control">
 
-                                <input type="text" name="woof_settings[overlay_skin_bg_img]" value="<?php esc_attr_e($overlay_skin_bg_img) ?>" />
+                                <input type="text" name="woof_settings[overlay_skin_bg_img]" value="<?php echo esc_attr($overlay_skin_bg_img) ?>" />
 
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a><br />
 
@@ -289,14 +288,14 @@
                                     ?>
 
                                     <h4><?php esc_html_e('Plainoverlay color', 'woocommerce-products-filter') ?></h4>
-                                    <input type="text" name="woof_settings[plainoverlay_color]" value="<?php esc_attr_e($plainoverlay_color) ?>" id="woof_color_picker_plainoverlay_color" class="woof-color-picker" />
+                                    <input type="text" name="woof_settings[plainoverlay_color]" value="<?php echo esc_attr($plainoverlay_color) ?>" id="woof_color_picker_plainoverlay_color" class="woof-color-picker" />
 
                                 </div>
 
                             </div>
                             <div class="woof-description">
                                 <p class="description">
-                                    <?php esc_html_e('Example', 'woocommerce-products-filter') ?>: <?php echo WOOF_LINK ?>img/overlay_bg.png
+                                    <?php esc_html_e('Example', 'woocommerce-products-filter') ?>: <?php echo esc_url(WOOF_LINK) ?>img/overlay_bg.png
                                 </p>
                             </div>
                         </div>
@@ -321,7 +320,7 @@
 
 
 
-                                <input type="text" name="woof_settings[default_overlay_skin_word]" value="<?php esc_attr_e($default_overlay_skin_word) ?>" />
+                                <input type="text" name="woof_settings[default_overlay_skin_word]" value="<?php echo esc_attr($default_overlay_skin_word) ?>" />
 
 
                             </div>
@@ -332,46 +331,6 @@
                             </div>
                         </div>
                     </div><!--/ .woof-control-section-->
-
-
-                    <!--/
-                                        <div class="woof-control-section">
-                    
-                                            <h4><?php esc_html_e('Use chosen', 'woocommerce-products-filter') ?></h4>
-                    
-                                            <div class="woof-control-container">
-                    
-                                                <div class="woof-control">
-                    
-                    <?php
-                    $chosen_selects = array(
-                        0 => esc_html__('No', 'woocommerce-products-filter'),
-                        1 => esc_html__('Yes', 'woocommerce-products-filter')
-                    );
-
-                    if (!isset($woof_settings['use_chosen'])) {
-                        $woof_settings['use_chosen'] = 1;
-                    }
-                    $chosen_select = $woof_settings['use_chosen'];
-                    ?>
-                    
-                                                    <div class="select-wrap">
-                                                        <select name="woof_settings[use_chosen]" class="chosen_select">
-                    <?php foreach ($chosen_selects as $key => $value) : ?>
-                                                                                <option value="<?php esc_attr_e($key) ?>" <?php if ($chosen_select == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
-                    <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                    
-                    
-                                                </div>
-                                                <div class="woof-description">
-                                                    <p class="description">
-                    <?php esc_html_e('Use chosen javascript library on the front of your site for drop-downs.', 'woocommerce-products-filter') ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div> -->
 
                     <div class="woof-control-section">
 
@@ -402,7 +361,7 @@
                                 <div class="select-wrap"> 
                                     <select name="woof_settings[select_design]" class="chosen_select">
                                         <?php foreach ($select_designs as $key => $value) : ?>
-                                            <option value="<?php esc_attr_e($key) ?>" <?php if ($select_design == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                            <option value="<?php echo esc_attr($key) ?>" <?php selected($select_design == $key) ?>><?php esc_html_e($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -441,7 +400,7 @@
                                 <div class="select-wrap">
                                     <select name="woof_settings[use_beauty_scroll]" class="chosen_select">
                                         <?php foreach ($use_beauty_scroll as $key => $value) : ?>
-                                            <option value="<?php esc_attr_e($key) ?>" <?php if ($use_scroll == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                            <option value="<?php echo esc_attr($key) ?>" <?php selected($use_scroll == $key) ?>><?php esc_html_e($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -496,7 +455,7 @@
                                 <div class="select-wrap">
                                     <select name="woof_settings[ion_slider_skin]" class="chosen_select">
                                         <?php foreach ($skins as $key => $value) : ?>
-                                            <option value="<?php esc_attr_e($key) ?>" <?php if ($skin == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                            <option value="<?php echo esc_attr($key) ?>" <?php selected($skin == $key) ?>><?php esc_html_e($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -534,7 +493,7 @@
                                 <div class="select-wrap">
                                     <select name="woof_settings[use_tooltip]" class="chosen_select">
                                         <?php foreach ($tooltip_selects as $key => $value) : ?>
-                                            <option value="<?php esc_attr_e($key) ?>" <?php if ($tooltip_select == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                            <option value="<?php echo esc_attr($key) ?>" <?php selected($tooltip_select == $key) ?>><?php esc_html_e($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -570,7 +529,7 @@
 
                                     <select name="woof_settings[woof_auto_hide_button]" class="chosen_select">
                                         <?php foreach ($woof_auto_hide_button as $v => $n) : ?>
-                                            <option value="<?php esc_attr_e($v) ?>" <?php if ($woof_auto_hide_button_val == $v): ?>selected="selected"<?php endif; ?>><?php esc_html_e($n) ?></option>
+                                            <option value="<?php echo esc_attr($v) ?>" <?php selected($woof_auto_hide_button_val == $v) ?>><?php esc_html_e($n) ?></option>
                                         <?php endforeach; ?>
                                     </select>
 
@@ -610,7 +569,7 @@
 
                                     <select name="woof_settings[woof_auto_filter_skins]" class="chosen_select">
                                         <?php foreach ($woof_auto_filter_skins as $v => $n) : ?>
-                                            <option value="<?php esc_attr_e($v) ?>" <?php if ($woof_auto_filter_skins_val == $v): ?>selected="selected"<?php endif; ?>><?php esc_html_e($n) ?></option>
+                                            <option value="<?php echo esc_attr($v) ?>" <?php selected($woof_auto_filter_skins_val == $v) ?>><?php esc_html_e($n) ?></option>
                                         <?php endforeach; ?>
                                     </select>
 
@@ -634,7 +593,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[woof_tooltip_img]" value="<?php esc_attr_e($woof_settings['woof_tooltip_img']) ?>" />
+                                <input type="text" name="woof_settings[woof_tooltip_img]" value="<?php echo esc_attr($woof_settings['woof_tooltip_img']) ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -660,7 +619,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[woof_auto_hide_button_img]" value="<?php esc_attr_e($woof_settings['woof_auto_hide_button_img']) ?>" />
+                                <input type="text" name="woof_settings[woof_auto_hide_button_img]" value="<?php echo esc_attr($woof_settings['woof_auto_hide_button_img']) ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -677,7 +636,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[woof_auto_hide_button_txt]" value="<?php esc_html_e($woof_settings['woof_auto_hide_button_txt']) ?>" />
+                                <input type="text" name="woof_settings[woof_auto_hide_button_txt]" value="<?php echo esc_html($woof_settings['woof_auto_hide_button_txt']) ?>" />
                             </div>
                             <div class="woof-description">
                                 <p class="description"><?php esc_html_e('Text which displayed instead filter while it is closed if selected.', 'woocommerce-products-filter') ?></p>
@@ -692,7 +651,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[woof_auto_subcats_plus_img]" value="<?php esc_attr_e(isset($woof_settings['woof_auto_subcats_plus_img']) ? $woof_settings['woof_auto_subcats_plus_img'] : '') ?>" />
+                                <input type="text" name="woof_settings[woof_auto_subcats_plus_img]" value="<?php echo esc_attr(isset($woof_settings['woof_auto_subcats_plus_img']) ? $woof_settings['woof_auto_subcats_plus_img'] : '') ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -704,7 +663,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[woof_auto_subcats_minus_img]" value="<?php esc_attr_e(isset($woof_settings['woof_auto_subcats_minus_img']) ? $woof_settings['woof_auto_subcats_minus_img'] : '') ?>" />
+                                <input type="text" name="woof_settings[woof_auto_subcats_minus_img]" value="<?php echo esc_attr(isset($woof_settings['woof_auto_subcats_minus_img']) ? $woof_settings['woof_auto_subcats_minus_img'] : '') ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -719,7 +678,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[image_mobile_behavior_open]" value="<?php esc_attr_e(isset($woof_settings['image_mobile_behavior_open']) ? $woof_settings['image_mobile_behavior_open'] : '') ?>" />
+                                <input type="text" name="woof_settings[image_mobile_behavior_open]" value="<?php echo esc_attr(isset($woof_settings['image_mobile_behavior_open']) ? $woof_settings['image_mobile_behavior_open'] : '') ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -735,7 +694,7 @@
                                     $woof_settings['text_mobile_behavior_open'] = esc_html__('Open filter', 'woocommerce-products-filter');
                                 }
                                 ?>
-                                <input type="text" name="woof_settings[text_mobile_behavior_open]" value="<?php esc_html_e($woof_settings['text_mobile_behavior_open']) ?>" />
+                                <input type="text" name="woof_settings[text_mobile_behavior_open]" value="<?php echo esc_html($woof_settings['text_mobile_behavior_open']) ?>" />
                             </div>
                             <div class="woof-description">
                                 <p class="description"><?php esc_html_e('Text for button when activated mobile mode. Set -1 to disable.', 'woocommerce-products-filter') ?></p>
@@ -747,7 +706,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[image_mobile_behavior_close]" value="<?php esc_attr_e(isset($woof_settings['image_mobile_behavior_close']) ? $woof_settings['image_mobile_behavior_close'] : '') ?>" />
+                                <input type="text" name="woof_settings[image_mobile_behavior_close]" value="<?php echo esc_attr(isset($woof_settings['image_mobile_behavior_close']) ? $woof_settings['image_mobile_behavior_close'] : '') ?>" />
                                 <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                             </div>
                             <div class="woof-description">
@@ -763,7 +722,7 @@
                                     $woof_settings['text_mobile_behavior_close'] = esc_html__('Close filter', 'woocommerce-products-filter');
                                 }
                                 ?>
-                                <input type="text" name="woof_settings[text_mobile_behavior_close]" value="<?php esc_attr_e($woof_settings['text_mobile_behavior_close']) ?>" />
+                                <input type="text" name="woof_settings[text_mobile_behavior_close]" value="<?php echo esc_attr($woof_settings['text_mobile_behavior_close']) ?>" />
                             </div>
                             <div class="woof-description">
                                 <p class="description"><?php esc_html_e('Text for close button when activated mobile mode. Set -1 to disable.', 'woocommerce-products-filter') ?></p>
@@ -796,7 +755,7 @@
                                 <div class="select-wrap">
                                     <select name="woof_settings[toggle_type]" class="chosen_select" id="toggle_type">
                                         <?php foreach ($toggle_types as $key => $value) : ?>
-                                            <option value="<?php esc_attr_e($key) ?>" <?php if ($toggle_type == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                            <option value="<?php echo esc_attr($key) ?>" <?php selected($toggle_type == $key) ?>><?php esc_html_e($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -821,7 +780,7 @@
                                         $woof_settings['toggle_opened_text'] = '';
                                     }
                                     ?>
-                                    <input type="text" name="woof_settings[toggle_opened_text]" value="<?php esc_html_e($woof_settings['toggle_opened_text']) ?>" />
+                                    <input type="text" name="woof_settings[toggle_opened_text]" value="<?php echo esc_html($woof_settings['toggle_opened_text']) ?>" />
                                 </div>
                                 <div class="woof-description">
                                     <p class="description"><?php esc_html_e('Toggle text for opened html-items block. Example: close. By default applied sign minus "-"', 'woocommerce-products-filter') ?></p>
@@ -837,7 +796,7 @@
                                         $woof_settings['toggle_closed_text'] = '';
                                     }
                                     ?>
-                                    <input type="text" name="woof_settings[toggle_closed_text]" value="<?php esc_html_e($woof_settings['toggle_closed_text']) ?>" />
+                                    <input type="text" name="woof_settings[toggle_closed_text]" value="<?php echo esc_html($woof_settings['toggle_closed_text']) ?>" />
                                 </div>
                                 <div class="woof-description">
                                     <p class="description"><?php esc_html_e('Toggle text for closed html-items block. Example: open. By default applied sign plus "+"', 'woocommerce-products-filter') ?></p>
@@ -857,7 +816,7 @@
                                         $woof_settings['toggle_opened_image'] = '';
                                     }
                                     ?>
-                                    <input type="text" name="woof_settings[toggle_opened_image]" value="<?php esc_attr_e(isset($woof_settings['toggle_opened_image']) ? $woof_settings['toggle_opened_image'] : '') ?>" />
+                                    <input type="text" name="woof_settings[toggle_opened_image]" value="<?php echo esc_attr(isset($woof_settings['toggle_opened_image']) ? $woof_settings['toggle_opened_image'] : '') ?>" />
                                     <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                                 </div>
                                 <div class="woof-description">
@@ -875,7 +834,7 @@
                                         $woof_settings['toggle_closed_image'] = '';
                                     }
                                     ?>
-                                    <input type="text" name="woof_settings[toggle_closed_image]" value="<?php esc_attr_e(isset($woof_settings['toggle_closed_image']) ? $woof_settings['toggle_closed_image'] : '') ?>" />
+                                    <input type="text" name="woof_settings[toggle_closed_image]" value="<?php echo esc_attr(isset($woof_settings['toggle_closed_image']) ? $woof_settings['toggle_closed_image'] : '') ?>" />
                                     <a href="#" class="woof-button woof_select_image"><?php esc_html_e('Select Image', 'woocommerce-products-filter') ?></a>
                                 </div>
                                 <div class="woof-description">
@@ -900,7 +859,7 @@
 
                         <div class="woof-control-container">
                             <div class="woof-control">
-                                <input type="text" name="woof_settings[custom_front_css]" value="<?php esc_attr_e($woof_settings['custom_front_css']) ?>" />
+                                <input type="text" name="woof_settings[custom_front_css]" value="<?php echo esc_attr($woof_settings['custom_front_css']) ?>" />
                             </div>
                             <div class="woof-description">
                                 <p class="description"><?php esc_html_e('For developers who want to rewrite front css of the plugin front side. You are need to know CSS for this!', 'woocommerce-products-filter') ?></p>
@@ -945,14 +904,14 @@
                                         <th scope="row"><label for="custom_css_code"><?php esc_html_e('Custom CSS code', 'woocommerce-products-filter') ?></label></th>
 
                                         <td>
-                                            <textarea class="wide woof_custom_css" id="custom_css_code" name="woof_settings[custom_css_code]"><?php echo esc_textarea(isset($this->settings['custom_css_code']) ? stripcslashes($this->settings['custom_css_code']) : '') ?></textarea>
+                                            <textarea class="wide woof_custom_css" id="custom_css_code" name="woof_settings[custom_css_code]"><?php if (isset($this->settings['custom_css_code'])): ?><?php echo esc_textarea(stripcslashes($this->settings['custom_css_code'])) ?><?php endif; ?></textarea>
                                             <p class="description"><?php esc_html_e("If you are need to customize something and you don't want to lose your changes after update", 'woocommerce-products-filter') ?></p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><label for="js_after_ajax_done"><?php esc_html_e('JavaScript code after AJAX is done', 'woocommerce-products-filter') ?></label></th>
                                         <td>
-                                            <textarea class="wide woof_custom_css" id="js_after_ajax_done" name="woof_settings[js_after_ajax_done]"><?php echo (isset($this->settings['js_after_ajax_done']) ? stripcslashes(esc_js(str_replace('"', "'", $this->settings['js_after_ajax_done']))) : '') ?></textarea>
+                                            <textarea class="wide woof_custom_css" id="js_after_ajax_done" name="woof_settings[js_after_ajax_done]"><?php if (isset($this->settings['js_after_ajax_done'])): ?><?php echo stripcslashes(esc_js(str_replace('"', "'", $this->settings['js_after_ajax_done']))) ?><?php endif; ?></textarea>
                                             <p class="description"><?php esc_html_e('Use it when you are need additional action after AJAX redraw your products in shop page or in page with shortcode! For use when you need additional functionality after AJAX redraw of your products on the shop page or on pages with shortcodes.', 'woocommerce-products-filter') ?></p>
                                         </td>
                                     </tr>
@@ -979,7 +938,7 @@
                                                         <div class="select-wrap">
                                                             <select name="woof_settings[init_only_on_reverse]">
                                                                 <?php foreach ($init_only_on_r as $key => $value) : ?>
-                                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['init_only_on_reverse'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['init_only_on_reverse'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </div>
@@ -1013,7 +972,7 @@
                                                          es:Locations^Ubicaciones
                                                          es:Size^Tamaño
                                                          de:Locations^Lage
-                                                         de:Size^Größe" src="<?php echo WOOF_LINK ?>/img/help.png" height="16" width="16" />
+                                                         de:Size^Größe" src="<?php echo esc_url(WOOF_LINK) ?>/img/help.png" height="16" width="16" />
                                                 </label></th>
                                             <td>
 
@@ -1056,7 +1015,7 @@
                                             }
                                             ?>
 
-                                            <input placeholder="swoof" type="text" name="woof_settings[swoof_search_slug]" value="<?php esc_attr_e($woof_settings['swoof_search_slug']) ?>" id="swoof_search_slug" />
+                                            <input placeholder="swoof" type="text" name="woof_settings[swoof_search_slug]" value="<?php echo esc_attr($woof_settings['swoof_search_slug']) ?>" id="swoof_search_slug" />
 
                                         </div>
                                         <div class="woof-description">
@@ -1109,7 +1068,7 @@
 
                                             <select name="woof_settings[optimize_js_files]">
                                                 <?php foreach ($optimize_js_files as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['optimize_js_files'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['optimize_js_files'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1162,7 +1121,7 @@
 
                                             <select name="woof_settings[show_images_by_attr_show]">
                                                 <?php foreach ($show_images_by_attr as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['show_images_by_attr_show'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['show_images_by_attr_show'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1176,10 +1135,10 @@
                                                 $woof_settings['show_images_by_attr'] = array();
                                             }
                                             ?>
-                                            <div class="select-wrap chosen_select" <?php echo sanitize_textarea_field(!$woof_settings['show_images_by_attr_show'] ? "style='display:none;'" : "") ?> >
+                                            <div class="select-wrap chosen_select" <?php if (!$woof_settings['show_images_by_attr_show']) : ?> style='display:none;' <?php endif; ?> >
                                                 <select  class="chosen_select" multiple name="woof_settings[show_images_by_attr][]">
                                                     <?php foreach ($attributes as $attr) : ?>
-                                                        <option value="pa_<?php esc_attr_e($attr->attribute_name) ?>" <?php if (in_array('pa_' . $attr->attribute_name, $woof_settings['show_images_by_attr'])): ?>selected="selected"<?php endif; ?>><?php esc_html_e($attr->attribute_label) ?></option>
+                                                        <option value="pa_<?php echo esc_attr($attr->attribute_name) ?>" <?php selected(in_array('pa_' . $attr->attribute_name, $woof_settings['show_images_by_attr'])) ?>><?php esc_html_e($attr->attribute_label) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -1221,7 +1180,7 @@
 
                                             <select name="woof_settings[hide_terms_count_txt]">
                                                 <?php foreach ($hide_terms_count_txt as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['hide_terms_count_txt'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['hide_terms_count_txt'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1256,7 +1215,7 @@
 
                                             <select name="woof_settings[listen_catalog_visibility]">
                                                 <?php foreach ($listen_catalog_visibility as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['listen_catalog_visibility'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['listen_catalog_visibility'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1265,7 +1224,7 @@
                                         <div class="woof-description">
                                             <p class="description">
                                                 <?php esc_html_e("Listen catalog visibility - options in each product backend page in 'Publish' sidebar widget.", 'woocommerce-products-filter') ?><br />
-                                                <a href="<?php echo WOOF_LINK ?>img/plugin_options/listen_catalog_visibility.png" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/listen_catalog_visibility.png" width="150" alt="" /></a>
+                                                <a href="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/listen_catalog_visibility.png" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/listen_catalog_visibility.png" width="150" alt="" /></a>
                                             </p>
                                         </div>
                                     </div>
@@ -1295,7 +1254,7 @@
 
                                             <select name="woof_settings[disable_swoof_influence]">
                                                 <?php foreach ($disable_swoof_influence as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['disable_swoof_influence'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['disable_swoof_influence'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1331,7 +1290,7 @@
 
                                                 <select name="woof_settings[cache_count_data]">
                                                     <?php foreach ($cache_count_data as $key => $value) : ?>
-                                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['cache_count_data'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['cache_count_data'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
 
@@ -1361,7 +1320,7 @@
 
                                                     <select name="woof_settings[cache_count_data_auto_clean]">
                                                         <?php foreach ($periods as $key => $txt): ?>
-                                                            <option <?php selected($clean_period, $key) ?> value="<?php esc_attr_e($key) ?>"><?php esc_html_e($txt) ?></option>
+                                                            <option <?php selected($clean_period, $key) ?> value="<?php echo esc_attr($key) ?>"><?php esc_html_e($txt) ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
 
@@ -1393,10 +1352,10 @@
                                                 if ($wpdb->query($sql) === false) {
                                                     ?>
                                                     <p class="description"><?php esc_html_e("WOOF cannot create the database table! Make sure that your mysql user has the CREATE privilege! Do it manually using your host panel&phpmyadmin!", 'woocommerce-products-filter') ?></p>
-                                                    <code><?php echo sanitize_textarea_field($sql) ?></code>
+                                                    <code><?php echo esc_html($sql) ?></code>
                                                     <input type="hidden" name="woof_settings[cache_count_data]" value="0" />
                                                     <?php
-                                                    echo $wpdb->last_error;
+                                                    esc_html_e($wpdb->last_error);
                                                 }
                                                 ?>
 
@@ -1430,7 +1389,7 @@
 
                                                 <select name="woof_settings[cache_terms]">
                                                     <?php foreach ($cache_terms as $key => $value) : ?>
-                                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['cache_terms'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['cache_terms'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
 
@@ -1460,7 +1419,7 @@
                                                     <div class="select-wrap">
                                                         <select name="woof_settings[cache_terms_auto_clean]">
                                                             <?php foreach ($periods as $key => $txt): ?>
-                                                                <option <?php selected($clean_period, $key) ?> value="<?php esc_attr_e($key) ?>"><?php esc_html_e($txt) ?></option>
+                                                                <option <?php selected($clean_period, $key) ?> value="<?php echo esc_attr($key) ?>"><?php esc_html_e($txt) ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -1497,7 +1456,7 @@
 
                                                 <select name="woof_settings[price_transient]">
                                                     <?php foreach ($price_transient as $key => $value) : ?>
-                                                        <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['price_transient'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                        <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['price_transient'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
 
@@ -1539,7 +1498,7 @@
 
                                             <select id="show_woof_edit_view" name="woof_settings[show_woof_edit_view]">
                                                 <?php foreach ($show_woof_edit_view as $key => $value) : ?>
-                                                    <option value="<?php esc_attr_e($key) ?>" <?php if ($woof_settings['show_woof_edit_view'] == $key): ?>selected="selected"<?php endif; ?>><?php esc_html_e($value) ?></option>
+                                                    <option value="<?php echo esc_attr($key) ?>" <?php selected($woof_settings['show_woof_edit_view'] == $key) ?>><?php esc_html_e($value) ?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
@@ -1564,7 +1523,7 @@
                                             }
                                             ?>
 
-                                            <input type="text" name="woof_settings[custom_extensions_path]" value="<?php esc_html_e($woof_settings['custom_extensions_path']) ?>" id="custom_extensions_path" placeholder="Example: my_woof_extensions" />
+                                            <input type="text" name="woof_settings[custom_extensions_path]" value="<?php echo esc_html($woof_settings['custom_extensions_path']) ?>" id="custom_extensions_path" placeholder="Example: my_woof_extensions" />
                                         </div>
                                         <div class="woof-description">
                                             <p class="description"><?php printf(__('Custom extensions folder path relative to: %s', 'woocommerce-products-filter'), WP_CONTENT_DIR . DIRECTORY_SEPARATOR) ?></p>
@@ -1585,7 +1544,7 @@
                                             }
                                             ?>
 
-                                            <input type="text" name="woof_settings[result_count_redraw]" value="<?php esc_html_e($woof_settings['result_count_redraw']) ?>"  />
+                                            <input type="text" name="woof_settings[result_count_redraw]" value="<?php echo esc_html($woof_settings['result_count_redraw']) ?>"  />
                                         </div>
                                         <div class="woof-description">
                                             <p class="description"><?php esc_html_e('Css class of result-count container. Is needed for ajax compatibility with wp themes. If you do not understand, leave it blank.', 'woocommerce-products-filter') ?></p>
@@ -1606,7 +1565,7 @@
                                             }
                                             ?>
 
-                                            <input type="text" name="woof_settings[order_dropdown_redraw]" value="<?php esc_html_e($woof_settings['order_dropdown_redraw']) ?>"  />
+                                            <input type="text" name="woof_settings[order_dropdown_redraw]" value="<?php echo esc_html($woof_settings['order_dropdown_redraw']) ?>"  />
                                         </div>
                                         <div class="woof-description">
                                             <p class="description"><?php esc_html_e('Css class of ordering dropdown container. Is needed for ajax compatibility with wp themes. If you do not understand, leave it blank.', 'woocommerce-products-filter') ?></p>
@@ -1626,7 +1585,7 @@
                                             }
                                             ?>
 
-                                            <input type="text" name="woof_settings[per_page_redraw]" value="<?php esc_html_e($woof_settings['per_page_redraw']) ?>"  />
+                                            <input type="text" name="woof_settings[per_page_redraw]" value="<?php echo esc_html($woof_settings['per_page_redraw']) ?>"  />
                                         </div>
                                         <div class="woof-description">
                                             <p class="description"><?php esc_html_e('Css class of per page dropdown container. Is needed for ajax compatibility with wp themes. If you do not understand, leave it blank.', 'woocommerce-products-filter') ?></p>
@@ -1780,7 +1739,7 @@
                                                 $checked = WOOF_EXT::is_ext_activated($dir);
                                                 $idx = WOOF_EXT::get_ext_idx_new($dir);
                                                 ?>
-                                                <li class="woof_ext_li <?php esc_attr_e($checked ? 'is_enabled' : 'is_disabled'); ?>">
+                                                <li class="woof_ext_li <?php echo esc_attr($checked ? 'is_enabled' : 'is_disabled'); ?>">
                                                     <?php
                                                     $info = array();
                                                     if (file_exists($dir . DIRECTORY_SEPARATOR . 'info.dat')) {
@@ -1788,8 +1747,8 @@
                                                     }
                                                     ?>
                                                     <div class="woof_ext-cell">
-                                                        <label for="<?php esc_attr_e($idx) ?>">
-                                                            <input type="checkbox" id="<?php esc_attr_e($idx) ?>" <?php if (isset($info['status']) AND $info['status'] == 'premium' AND $this->show_notes): ?>disabled="disabled"<?php endif; ?> <?php if ($checked): ?>checked=""<?php endif; ?> value="<?php esc_attr_e($idx) ?>" name="woof_settings[activated_extensions][]" />
+                                                        <label for="<?php echo esc_attr($idx) ?>">
+                                                            <input type="checkbox" id="<?php echo esc_attr($idx) ?>" <?php if (isset($info['status']) AND $info['status'] == 'premium' AND $this->show_notes): ?>disabled="disabled"<?php endif; ?> <?php if ($checked): ?>checked=""<?php endif; ?> value="<?php echo esc_attr($idx) ?>" name="woof_settings[activated_extensions][]" />
                                                             <?php
                                                             echo '<h5>' . esc_html($info['title']) . '</h5>';
                                                             if (isset($info['link'])) {
@@ -1812,8 +1771,8 @@
                                                                     echo '<p class="description">' . wp_kses_post(wp_unslash($info['description'])) . '</p>';
                                                                 }
                                                             } else {
-                                                                esc_html_e($dir);
-                                                                _e('You should write extension info in info.dat file!', 'woocommerce-products-filter');
+                                                                echo esc_html($dir);
+                                                                esc_html_e('You should write extension info in info.dat file!', 'woocommerce-products-filter');
                                                             }
                                                         } else {
                                                             printf(__('Looks like its not the WOOF extension here %s!', 'woocommerce-products-filter'), $dir);
@@ -1822,7 +1781,7 @@
                                                     </div>
 
                                                     <div class="woof_ext-cell">
-                                                        <a href="javascript:void(0)" class="woof_ext_remove" data-idx="<?php esc_attr_e($idx) ?>" title="<?php _e('remove extension', 'woocommerce-products-filter') ?>">
+                                                        <a href="javascript:void(0)" class="woof_ext_remove" data-idx="<?php echo esc_attr($idx) ?>" title="<?php esc_html_e('remove extension', 'woocommerce-products-filter') ?>">
                                                             <span class="icon-plus-circle"></span>
                                                         </a>
                                                     </div>
@@ -1854,7 +1813,7 @@
                                                 $checked = WOOF_EXT::is_ext_activated($dir);
                                                 $idx = WOOF_EXT::get_ext_idx_new($dir);
                                                 ?>
-                                                <li class="woof_ext_li <?php esc_attr_e($checked ? 'is_enabled' : 'is_disabled'); ?>">
+                                                <li class="woof_ext_li <?php echo esc_attr($checked ? 'is_enabled' : 'is_disabled'); ?>">
                                                     <?php
                                                     $info = array();
                                                     if (file_exists($dir . DIRECTORY_SEPARATOR . 'info.dat')) {
@@ -1867,8 +1826,8 @@
                                                             $info = WOOF_HELPER::parse_ext_data($dir . DIRECTORY_SEPARATOR . 'info.dat');
                                                             if (!empty($info) AND is_array($info)) {
                                                                 ?>
-                                                                <label for="<?php esc_attr_e($idx) ?>">
-                                                                    <input type="checkbox" id="<?php esc_attr_e($idx) ?>" <?php if (isset($info['status']) AND $info['status'] == 'premium'): ?>disabled="disabled"<?php endif; ?> <?php if ($checked): ?>checked=""<?php endif; ?> value="<?php esc_attr_e($idx) ?>" name="woof_settings[activated_extensions][]" />
+                                                                <label for="<?php echo esc_attr($idx) ?>">
+                                                                    <input type="checkbox" id="<?php echo esc_attr($idx) ?>" <?php if (isset($info['status']) AND $info['status'] == 'premium'): ?>disabled="disabled"<?php endif; ?> <?php if ($checked): ?>checked=""<?php endif; ?> value="<?php echo esc_attr($idx) ?>" name="woof_settings[activated_extensions][]" />
                                                                     <?php
                                                                     echo '<h5>' . esc_html($info['title']) . '</h5>';
                                                                     if (isset($info['link'])) {
@@ -1889,11 +1848,11 @@
                                                                 }
                                                                 echo '</p>';
                                                             } else {
-                                                                esc_html_e($dir);
-                                                                _e('You should write extension info in info.dat file!', 'woocommerce-products-filter');
+                                                                echo esc_html($dir);
+                                                                esc_html_e('You should write extension info in info.dat file!', 'woocommerce-products-filter');
                                                             }
                                                         } else {
-                                                            esc_html_e($dir);
+                                                            echo esc_html($dir);
                                                         }
                                                         ?>
                                                     </div>
@@ -1949,7 +1908,7 @@
                                                                 $name = $obj->folder_name;
                                                             }
                                                             ?>
-                                                            <a href="#tabs-<?php echo sanitize_title($obj->folder_name) ?>" title="<?php printf(esc_html__("%s", 'woocommerce-products-filter'), $name) ?>">
+                                                            <a href="#tabs-<?php echo esc_attr($obj->folder_name) ?>" title="<?php printf(esc_html__("%s", 'woocommerce-products-filter'), $name) ?>">
                                                                 <span><?php printf(esc_html__("%s", 'woocommerce-products-filter'), $name) ?></span>
                                                             </a>
                                                         </li>
@@ -2012,7 +1971,7 @@
 
                                 <div class="woof-card woof-transition woof-text-center woof-rounded">
                                     <div class="woof-card-body">
-                                        <a href="https://pluginus.net/support/forum/woof-woocommerce-products-filter/" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/support.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
+                                        <a href="https://pluginus.net/support/forum/woof-woocommerce-products-filter/" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/support.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
                                         <h5 class="woof-h5"><a href="https://pluginus.net/support/forum/woof-woocommerce-products-filter/" class="woof-text-dark" target="_blank"><?php esc_html_e("Tickets", 'woocommerce-products-filter') ?></a></h5>
                                         <p><?php esc_html_e("If you have questions about plugin functionality or found bug write us please", 'woocommerce-products-filter') ?></p>
                                     </div>
@@ -2024,7 +1983,7 @@
 
                                 <div class="woof-card woof-transition woof-text-center woof-rounded">
                                     <div class="woof-card-body">
-                                        <h5 class="woof-h5"><a href="https://products-filter.com/faq" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/faq.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
+                                        <h5 class="woof-h5"><a href="https://products-filter.com/faq" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/faq.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
                                             <h5 class="woof-h5"><a href="https://products-filter.com/faq" class="woof-text-dark" target="_blank"><?php esc_html_e("FAQ", 'woocommerce-products-filter') ?></a></h5>
                                             <p><?php esc_html_e("If you have questions check please already prepared answers", 'woocommerce-products-filter') ?></p>
                                     </div>
@@ -2036,7 +1995,7 @@
 
                                 <div class="woof-card woof-transition woof-text-center woof-rounded">
                                     <div class="woof-card-body">
-                                        <a href="https://products-filter.com/codex" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/codex.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
+                                        <a href="https://products-filter.com/codex" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/codex.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
                                         <h5 class="woof-h5"><a href="https://products-filter.com/codex" class="woof-text-dark" target="_blank"><?php esc_html_e("Codex", 'woocommerce-products-filter') ?></a></h5>
                                         <p><?php esc_html_e("For developers WOOF has power bunch of functionality", 'woocommerce-products-filter') ?></p>
                                     </div>
@@ -2048,7 +2007,7 @@
 
                                 <div class="woof-card woof-transition woof-text-center woof-rounded">
                                     <div class="woof-card-body">
-                                        <a href="https://products-filter.com/video/" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/video.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
+                                        <a href="https://products-filter.com/video/" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/video.svg" class="woof-avatar woof-avatar-small woof-mb-3" alt=""></a>
                                         <h5 class="woof-h5"><a href="https://products-filter.com/video/" class="woof-text-dark" target="_blank"><?php esc_html_e("Video", 'woocommerce-products-filter') ?></a></h5>
                                         <p><?php esc_html_e("For the beginners there is videos are prepared", 'woocommerce-products-filter') ?></p>
                                     </div>
@@ -2195,10 +2154,10 @@
                         </div>
 
                         <ul class="woof__features-gallery woof__col-6">
-                            <li><a target="_blank" href="https://pluginus.net/affiliate/woocommerce-products-filter"><img class="woof-rounded" width="300" src="<?php echo WOOF_LINK ?>/img/plugin_options/banners/woof.png"></a></li>
-                            <li><a target="_blank" href="https://pluginus.net/affiliate/woocommerce-bulk-editor"><img class="woof-rounded" width="300" src="<?php echo WOOF_LINK ?>img/plugin_options/banners/bear.png"></a></li>
-                            <li><a target="_blank" href="https://codecanyon.pluginus.net/item/woot-woocommerce-products-tables/27928580"><img class="woof-rounded" width="300" src="<?php echo WOOF_LINK ?>img/plugin_options/banners/woot.png"></a></li>
-                            <li><a target="_blank" href="https://codecanyon.pluginus.net/item/wordpress-posts-bulk-editor-professional/24376112" title="WPBE - WordPress Posts Bulk Editor Professional"><img class="woof-rounded" src="<?php echo WOOF_LINK ?>img/plugin_options/banners/wpbe.png" alt="WPBE - WordPress Posts Bulk Editor Professional" width="300"></a></li>
+                            <li><a target="_blank" href="https://pluginus.net/affiliate/woocommerce-products-filter"><img class="woof-rounded" width="300" src="<?php echo esc_url(WOOF_LINK) ?>/img/plugin_options/banners/woof.png"></a></li>
+                            <li><a target="_blank" href="https://pluginus.net/affiliate/woocommerce-bulk-editor"><img class="woof-rounded" width="300" src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/bear.png"></a></li>
+                            <li><a target="_blank" href="https://codecanyon.pluginus.net/item/woot-woocommerce-products-tables/27928580"><img class="woof-rounded" width="300" src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/woot.png"></a></li>
+                            <li><a target="_blank" href="https://codecanyon.pluginus.net/item/wordpress-posts-bulk-editor-professional/24376112" title="WPBE - WordPress Posts Bulk Editor Professional"><img class="woof-rounded" src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/wpbe.png" alt="WPBE - WordPress Posts Bulk Editor Professional" width="300"></a></li>
                         </ul>
 
                     </div>
@@ -2444,7 +2403,7 @@
                         switch ($option['type']) {
                             case 'select':
                                 ?>
-                                <div class="woof_option_container woof_option_<?php esc_attr_e($obj->html_type) ?>">
+                                <div class="woof_option_container woof_option_<?php echo esc_attr($obj->html_type) ?>">
 
                                     <div class="woof-form-element-container">
 
@@ -2456,9 +2415,9 @@
                                         <div class="woof-form-element">
 
                                             <div class="select-wrap">
-                                                <select class="woof_popup_option" data-option="<?php esc_attr_e($key) ?>">
+                                                <select class="woof_popup_option" data-option="<?php echo esc_attr($key) ?>">
                                                     <?php foreach ($option['options'] as $val => $title): ?>
-                                                        <option value="<?php esc_attr_e($val) ?>"><?php esc_html_e($title) ?></option>
+                                                        <option value="<?php echo esc_attr($val) ?>"><?php esc_html_e($title) ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -2473,7 +2432,7 @@
 
                             case 'text':
                                 ?>
-                                <div class="woof_option_container woof_option_<?php esc_attr_e($obj->html_type) ?>">
+                                <div class="woof_option_container woof_option_<?php echo esc_attr($obj->html_type) ?>">
 
                                     <div class="woof-form-element-container">
 
@@ -2483,7 +2442,7 @@
                                         </div>
 
                                         <div class="woof-form-element">
-                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php esc_attr_e($key) ?>" placeholder="<?php esc_html_e(isset($option['placeholder']) ? $option['placeholder'] : '') ?>" value="" />
+                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php echo esc_attr($key) ?>" placeholder="<?php echo esc_html(isset($option['placeholder']) ? $option['placeholder'] : '') ?>" value="" />
                                         </div>
 
                                     </div>
@@ -2494,7 +2453,7 @@
 
                             case 'image':
                                 ?>
-                                <div class="woof_option_container woof_option_<?php esc_attr_e($obj->html_type) ?>">
+                                <div class="woof_option_container woof_option_<?php echo esc_attr($obj->html_type) ?>">
 
                                     <div class="woof-form-element-container">
 
@@ -2504,7 +2463,7 @@
                                         </div>
 
                                         <div class="woof-form-element">
-                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php esc_attr_e($key) ?>" placeholder="<?php esc_html_e($option['placeholder']) ?>" value="" />
+                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php echo esc_attr($key) ?>" placeholder="<?php echo esc_html($option['placeholder']) ?>" value="" />
                                             <a href="#" class="button woof_select_image"><?php esc_html_e('select image', 'woocommerce-products-filter') ?></a>
                                         </div>
 
@@ -2532,7 +2491,7 @@
                 <tbody>
                     <tr>
                         <td class="woof_valign_top">
-                            <img alt="ext cover" src="<?php echo WOOF_LINK ?>img/woof_ext_cover.png" width="85">
+                            <img alt="ext cover" src="<?php echo esc_url(WOOF_LINK) ?>img/woof_ext_cover.png" width="85">
                         </td>
                         <td><div class="woof_width_5px"></div></td>
                         <td class="woof_fix16">
@@ -2571,7 +2530,7 @@
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="show_button">
                         <?php foreach ($show_button as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -2722,7 +2681,7 @@
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="price_slider_skin">
                         <?php foreach ($skins as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -2777,22 +2736,22 @@
                 <tr>
                     <td>
                         <h3 class="woof_tomato"><?php esc_html_e("WOOF FULL VERSION", 'woocommerce-products-filter') ?>:</h3>
-                        <a href="https://pluginus.net/affiliate/woocommerce-currency-switcher" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/banners/woof.png" alt="<?php esc_html_e("full version of the plugin", 'woocommerce-products-filter'); ?>"></a>
+                        <a href="https://pluginus.net/affiliate/woocommerce-products-filter" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/woof.png" alt="<?php esc_html_e("full version of the plugin", 'woocommerce-products-filter'); ?>"></a>
                     </td>
 
                     <td>
                         <h3><?php esc_html_e("WooCommerce Bulk Editor", 'woocommerce-products-filter') ?>:</h3>
-                        <a href="https://pluginus.net/affiliate/woocommerce-bulk-editor" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/banners/bear.png" alt="<?php esc_html_e("WOOBE", 'woocommerce-products-filter'); ?>" /></a>
+                        <a href="https://pluginus.net/affiliate/woocommerce-bulk-editor" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/bear.png" alt="<?php esc_html_e("WOOBE", 'woocommerce-products-filter'); ?>" /></a>
                     </td>
 
                     <td>
                         <h3><?php esc_html_e("WooCommerce Currency Swither", 'woocommerce-products-filter') ?>:</h3>
-                        <a href="https://pluginus.net/affiliate/woocommerce-currency-switcher" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/banners/woocs.png" alt="<?php esc_html_e("WOOCS", 'woocommerce-products-filter'); ?>" /></a>
+                        <a href="https://pluginus.net/affiliate/woocommerce-currency-switcher" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/woocs.png" alt="<?php esc_html_e("WOOCS", 'woocommerce-products-filter'); ?>" /></a>
                     </td>
 
                     <td>
                         <h3><?php esc_html_e("WooCommerce Products Tables", 'woocommerce-products-filter') ?>:</h3>
-                        <a href="https://codecanyon.pluginus.net/item/woot-woocommerce-products-tables/27928580" target="_blank"><img src="<?php echo WOOF_LINK ?>img/plugin_options/banners/woot.png" alt="<?php esc_html_e("WOOT", 'woocommerce-products-filter'); ?>" /></a>
+                        <a href="https://codecanyon.pluginus.net/item/woot-woocommerce-products-tables/27928580" target="_blank"><img src="<?php echo esc_url(WOOF_LINK) ?>img/plugin_options/banners/woot.png" alt="<?php esc_html_e("WOOT", 'woocommerce-products-filter'); ?>" /></a>
                     </td>
 
                 </tr>
@@ -2807,13 +2766,13 @@
 
 function woof_print_tax($key, $tax, $woof_settings) {
     ?>
-    <li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+    <li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
         <span class="icon-arrow-combo help_tip woof_drag_and_drope" data-tip="<?php esc_html_e("drag and drope", 'woocommerce-products-filter'); ?>"></span>
 
         <div class="select-wrap">
-            <select name="woof_settings[tax_type][<?php esc_attr_e($key) ?>]" class="woof_select_tax_type">
+            <select name="woof_settings[tax_type][<?php echo esc_attr($key) ?>]" class="woof_select_tax_type">
                 <?php foreach (woof()->html_types as $type => $type_text) : ?>
-                    <option value="<?php esc_html_e($type) ?>" <?php if (isset($woof_settings['tax_type'][$key])) echo selected($woof_settings['tax_type'][$key], $type) ?>><?php esc_html_e($type_text) ?></option>
+                    <option value="<?php echo esc_html($type) ?>" <?php if (isset($woof_settings['tax_type'][$key])) selected($woof_settings['tax_type'][$key], $type) ?>><?php esc_html_e($type_text) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -2832,14 +2791,20 @@ function woof_print_tax($key, $tax, $woof_settings) {
         }
         ?>
 
-        <input type="text" class="woof_excluded_terms" name="woof_settings[excluded_terms][<?php esc_attr_e($key) ?>]" placeholder="<?php esc_html_e('excluded terms ids', 'woocommerce-products-filter') ?>" value="<?php esc_html_e($excluded_terms) ?>" />
-        <?php $rev_id = uniqid('re-') ?>
-        <input <?php echo sanitize_textarea_field(((isset(woof()->settings['excluded_terms_reverse']) ? is_array(woof()->settings['excluded_terms_reverse']) : FALSE) ? in_array($key, (array) array_keys(woof()->settings['excluded_terms_reverse'])) : false) ? 'checked="checked"' : '') ?> type="checkbox" name="woof_settings[excluded_terms_reverse][<?php esc_attr_e($key) ?>]" id="<?php esc_attr_e($rev_id) ?>" value="1" />
-        <label class="woof_fix17" for="<?php esc_attr_e($rev_id) ?>"><?php esc_html_e('Reverse', 'woocommerce-products-filter') ?></label>
+        <input type="text" class="woof_excluded_terms" name="woof_settings[excluded_terms][<?php echo esc_attr($key) ?>]" placeholder="<?php esc_html_e('excluded terms ids', 'woocommerce-products-filter') ?>" value="<?php echo esc_html($excluded_terms) ?>" />
+        <?php
+        $rev_id = uniqid('re-');
+        $rev_checked = false;
+        if (isset(woof()->settings['excluded_terms_reverse']) && is_array(woof()->settings['excluded_terms_reverse']) && in_array($key, (array) array_keys(woof()->settings['excluded_terms_reverse']))) {
+            $rev_checked = true;
+        }
+        ?>
+        <input <?php checked($rev_checked) ?> type="checkbox" name="woof_settings[excluded_terms_reverse][<?php echo esc_attr($key) ?>]" id="<?php echo esc_attr($rev_id) ?>" value="1" />
+        <label class="woof_fix17" for="<?php echo esc_attr($rev_id) ?>"><?php esc_html_e('Reverse', 'woocommerce-products-filter') ?></label>
 
 
         <span class="icon-question help_tip" data-tip="<?php esc_html_e('If you want to exclude some current taxonomies terms from the search form! Use Reverse if you want include only instead of exclude! Example: 11,23,77', 'woocommerce-products-filter') ?>"></span>
-        <a href="#" data-taxonomy="<?php esc_attr_e($key) ?>" data-taxonomy-name="<?php esc_html_e($tax->labels->name) ?>" class="woof-button js_woof_add_options help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+        <a href="#" data-taxonomy="<?php echo esc_attr($key) ?>" data-taxonomy-name="<?php echo esc_html($tax->labels->name) ?>" class="woof-button js_woof_add_options help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
 
 
 
@@ -2850,14 +2815,14 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $max_height = $woof_settings['tax_block_height'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[tax_block_height][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($max_height) ?>" />
+            <input type="text" name="woof_settings[tax_block_height][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($max_height) ?>" />
             <?php
             $show_title_label = 0;
             if (isset($woof_settings['show_title_label'][$key])) {
                 $show_title_label = $woof_settings['show_title_label'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[show_title_label][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($show_title_label) ?>" />
+            <input type="text" name="woof_settings[show_title_label][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($show_title_label) ?>" />
 
 
             <?php
@@ -2866,7 +2831,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $show_toggle_button = $woof_settings['show_toggle_button'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[show_toggle_button][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_attr_e($show_toggle_button) ?>" />
+            <input type="text" name="woof_settings[show_toggle_button][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_attr($show_toggle_button) ?>" />
 
 
             <?php
@@ -2875,7 +2840,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $tooltip_text = stripcslashes($woof_settings['tooltip_text'][$key]);
             }
             ?>
-            <input type="text" name="woof_settings[tooltip_text][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($tooltip_text) ?>" />
+            <input type="text" name="woof_settings[tooltip_text][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($tooltip_text) ?>" />
 
             <?php
             $dispay_in_row = 0;
@@ -2883,7 +2848,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $dispay_in_row = $woof_settings['dispay_in_row'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[dispay_in_row][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($dispay_in_row) ?>" />
+            <input type="text" name="woof_settings[dispay_in_row][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($dispay_in_row) ?>" />
 
 
             <?php
@@ -2892,7 +2857,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $orderby = $woof_settings['orderby'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[orderby][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($orderby) ?>" />
+            <input type="text" name="woof_settings[orderby][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($orderby) ?>" />
 
             <?php
             $order = 'ASC';
@@ -2900,7 +2865,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $order = $woof_settings['order'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[order][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($order) ?>" />
+            <input type="text" name="woof_settings[order][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($order) ?>" />
             <?php
             $comparison_logic = 'OR';
             $logic_restriction = array('checkbox', 'mselect', 'label', 'color', 'image', 'slider', 'select_hierarchy');
@@ -2915,7 +2880,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $comparison_logic = 'OR';
             }
             ?>
-            <input type="text" name="woof_settings[comparison_logic][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($comparison_logic) ?>" />
+            <input type="text" name="woof_settings[comparison_logic][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($comparison_logic) ?>" />
 
             <?php
             $custom_tax_label = '';
@@ -2923,7 +2888,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $custom_tax_label = stripcslashes($woof_settings['custom_tax_label'][$key]);
             }
             ?>
-            <input type="text" name="woof_settings[custom_tax_label][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php esc_html_e($custom_tax_label) ?>" />
+            <input type="text" name="woof_settings[custom_tax_label][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo esc_html($custom_tax_label) ?>" />
 
 
             <?php
@@ -2932,7 +2897,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                 $not_toggled_terms_count = $woof_settings['not_toggled_terms_count'][$key];
             }
             ?>
-            <input type="text" name="woof_settings[not_toggled_terms_count][<?php esc_attr_e($key) ?>]" placeholder="" value="<?php echo intval($not_toggled_terms_count) ?>" />
+            <input type="text" name="woof_settings[not_toggled_terms_count][<?php echo esc_attr($key) ?>]" placeholder="" value="<?php echo intval($not_toggled_terms_count) ?>" />
 
 
             <!------------- options for extensions ------------------------>
@@ -2946,7 +2911,7 @@ function woof_print_tax($key, $tax, $woof_settings) {
                                 $option_val = $woof_settings[$option_key][$key];
                             }
                             ?>
-                            <input type="text" name="woof_settings[<?php esc_attr_e($option_key) ?>][<?php esc_attr_e($key) ?>]" value="<?php esc_html_e($option_val) ?>" />
+                            <input type="text" name="woof_settings[<?php echo esc_attr($option_key) ?>][<?php echo esc_attr($key) ?>]" value="<?php echo esc_html($option_val) ?>" />
                             <?php
                         }
                     }
@@ -2959,10 +2924,15 @@ function woof_print_tax($key, $tax, $woof_settings) {
 
         </div>
 
+        <?php
+        $tax_checked = false;
+        if (isset(woof()->settings['tax']) && is_array(woof()->settings['tax']) && in_array($key, (array) array_keys(woof()->settings['tax']))) {
+            $tax_checked = true;
+        }
+        ?>
 
-
-        <input <?php echo sanitize_textarea_field(((isset(woof()->settings['tax']) ? is_array(woof()->settings['tax']) : FALSE) ? in_array($key, (array) array_keys(woof()->settings['tax'])) : false) ? 'checked="checked"' : '') ?> type="checkbox" name="woof_settings[tax][<?php esc_attr_e($key) ?>]" id="tax_<?php esc_attr_e(md5($key)) ?>" value="1" />
-        <label for="tax_<?php esc_attr_e(md5($key)) ?>"><b><?php esc_html_e($tax->labels->name) ?></b></label>
+        <input <?php checked($tax_checked) ?> type="checkbox" name="woof_settings[tax][<?php echo esc_attr($key) ?>]" id="tax_<?php echo esc_attr(md5($key)) ?>" value="1" />
+        <label for="tax_<?php echo esc_attr(md5($key)) ?>"><b><?php esc_html_e($tax->labels->name) ?></b></label>
         <?php
         if (isset($woof_settings['tax_type'][$key])) {
             do_action('woof_print_tax_additional_options_' . $woof_settings['tax_type'][$key], $key);
@@ -2987,7 +2957,7 @@ function woof_print_item_by_key($key, $woof_settings) {
                 break;
             }
             ?>
-            <li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+            <li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
                 <?php
                 $show = 0;
@@ -3005,7 +2975,7 @@ function woof_print_item_by_key($key, $woof_settings) {
 
 
                 <div class="select-wrap">
-                    <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+                    <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
                         <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
                         <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('As woo range-slider', 'woocommerce-products-filter') ?></option>
                         <option value="2" <?php selected($show, 2) ?>><?php esc_html_e('As drop-down', 'woocommerce-products-filter') ?></option>
@@ -3015,7 +2985,7 @@ function woof_print_item_by_key($key, $woof_settings) {
                     </select>
                 </div>
 
-                <a href="#" data-key="<?php esc_attr_e($key) ?>" data-name="<?php esc_html_e("Search by Price", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+                <a href="#" data-key="<?php echo esc_attr($key) ?>" data-name="<?php esc_html_e("Search by Price", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
 
                 <?php
                 if (!isset($woof_settings[$key]['show_button'])) {
@@ -3055,16 +3025,16 @@ function woof_print_item_by_key($key, $woof_settings) {
                     $woof_settings[$key]['price_slider_skin'] = 0;
                 }
                 ?>
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][tooltip_text]" placeholder="" value="<?php echo stripcslashes(esc_html($woof_settings[$key]['tooltip_text'])) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_button]" value="<?php echo intval($woof_settings[$key]['show_button']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][title_text]" value="<?php esc_html_e($woof_settings[$key]['title_text']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_toggle_button]" value="<?php esc_html_e($woof_settings[$key]['show_toggle_button']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][ranges]" value="<?php esc_html_e($woof_settings[$key]['ranges']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][first_option_text]" value="<?php esc_html_e($woof_settings[$key]['first_option_text']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][ion_slider_step]" value="<?php echo intval($woof_settings[$key]['ion_slider_step']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][price_tax]" value="<?php esc_html_e($woof_settings[$key]['price_tax']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_text_input]" value="<?php echo intval($woof_settings[$key]['show_text_input']) ?>" />
-                <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][price_slider_skin]" value="<?php esc_html_e($woof_settings[$key]['price_slider_skin']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][tooltip_text]" placeholder="" value="<?php echo stripcslashes(esc_html($woof_settings[$key]['tooltip_text'])) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_button]" value="<?php echo intval($woof_settings[$key]['show_button']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][title_text]" value="<?php echo esc_html($woof_settings[$key]['title_text']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_toggle_button]" value="<?php echo esc_html($woof_settings[$key]['show_toggle_button']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][ranges]" value="<?php echo esc_html($woof_settings[$key]['ranges']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][first_option_text]" value="<?php echo esc_html($woof_settings[$key]['first_option_text']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][ion_slider_step]" value="<?php echo floatval($woof_settings[$key]['ion_slider_step']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][price_tax]" value="<?php echo esc_html($woof_settings[$key]['price_tax']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_text_input]" value="<?php echo intval($woof_settings[$key]['show_text_input']) ?>" />
+                <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][price_slider_skin]" value="<?php echo esc_html($woof_settings[$key]['price_slider_skin']) ?>" />
             </li>
             <?php
             break;

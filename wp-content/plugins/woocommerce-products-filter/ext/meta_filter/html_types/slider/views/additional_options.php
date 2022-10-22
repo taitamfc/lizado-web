@@ -3,17 +3,17 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_title_label]" value="<?php echo intval(isset($settings[$key]['show_title_label']) ? $settings[$key]['show_title_label'] : 1) ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_toggle_button]" value="<?php echo intval(isset($settings[$key]['show_toggle_button']) ? $settings[$key]['show_toggle_button'] : 0) ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][tooltip_text]" value="<?php echo wp_kses_post(wp_unslash(isset($settings[$key]['tooltip_text']) ? stripcslashes($settings[$key]['tooltip_text']) : "")) ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][step]" value="<?php echo intval(isset($settings[$key]['step']) ? $settings[$key]['step'] : 1) ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][range]" value="<?php esc_html_e(isset($settings[$key]['range']) ? $settings[$key]['range'] : "1-100") ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][prefix]" value="<?php esc_html_e(isset($settings[$key]['prefix']) ? $settings[$key]['prefix'] : "") ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][postfix]" value="<?php esc_html_e(isset($settings[$key]['postfix']) ? $settings[$key]['postfix'] : "") ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_inputs]" value="<?php echo intval(isset($settings[$key]['show_inputs']) ? $settings[$key]['show_inputs'] : 0) ?>" />
-<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][meta_slider_skin]" value="<?php esc_html_e(isset($settings[$key]['meta_slider_skin']) ? $settings[$key]['meta_slider_skin'] : 0) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_title_label]" value="<?php echo intval(isset($settings[$key]['show_title_label']) ? $settings[$key]['show_title_label'] : 1) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_toggle_button]" value="<?php echo intval(isset($settings[$key]['show_toggle_button']) ? $settings[$key]['show_toggle_button'] : 0) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][tooltip_text]" value="<?php echo wp_kses_post(wp_unslash(isset($settings[$key]['tooltip_text']) ? stripcslashes($settings[$key]['tooltip_text']) : "")) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][step]" value="<?php echo intval(isset($settings[$key]['step']) ? $settings[$key]['step'] : 1) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][range]" value="<?php echo esc_html(isset($settings[$key]['range']) ? $settings[$key]['range'] : "1-100") ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][prefix]" value="<?php echo esc_html(isset($settings[$key]['prefix']) ? $settings[$key]['prefix'] : "") ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][postfix]" value="<?php echo esc_html(isset($settings[$key]['postfix']) ? $settings[$key]['postfix'] : "") ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_inputs]" value="<?php echo intval(isset($settings[$key]['show_inputs']) ? $settings[$key]['show_inputs'] : 0) ?>" />
+<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][meta_slider_skin]" value="<?php echo esc_html(isset($settings[$key]['meta_slider_skin']) ? $settings[$key]['meta_slider_skin'] : 0) ?>" />
 
-<div id="woof-modal-content-<?php esc_attr_e($key) ?>" style="display: none;">
+<div id="woof-modal-content-<?php echo esc_attr($key) ?>" style="display: none;">
     <div class="woof-form-element-container">
         <div class="woof-name-description">
             <strong><?php esc_html_e('Show title label', 'woocommerce-products-filter') ?></strong>
@@ -31,7 +31,7 @@ if (!defined('ABSPATH'))
             <div class="select-wrap">
                 <select class="woof_popup_option" data-option="show_title_label">
                     <?php foreach ($show_title as $id => $value) : ?>
-                        <option value="<?php esc_attr_e($id) ?>"><?php esc_html_e($value) ?></option>
+                        <option value="<?php echo esc_attr($id) ?>"><?php esc_html_e($value) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -57,7 +57,7 @@ if (!defined('ABSPATH'))
             <div class="select-wrap">
                 <select class="woof_popup_option" data-option="show_toggle_button">
                     <?php foreach ($show_toogle as $id => $value) : ?>
-                        <option value="<?php esc_attr_e($id) ?>"><?php esc_html_e($value) ?></option>
+                        <option value="<?php echo esc_attr($id) ?>"><?php esc_html_e($value) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -142,7 +142,7 @@ if (!defined('ABSPATH'))
             <div class="select-wrap">
                 <select class="woof_popup_option" data-option="show_inputs">
                     <?php foreach ($show_inputs as $id => $value) : ?>
-                        <option value="<?php esc_attr_e($id) ?>"><?php esc_html_e($value) ?></option>
+                        <option value="<?php echo esc_attr($id) ?>"><?php esc_html_e($value) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -171,7 +171,7 @@ if (!defined('ABSPATH'))
             <div class="select-wrap">
                 <select class="woof_popup_option" data-option="meta_slider_skin">
                     <?php foreach ($skins as $key => $value) : ?>
-                        <option value="<?php esc_attr_e($id) ?>"><?php esc_html_e($value) ?></option>
+                        <option value="<?php echo esc_attr($id) ?>"><?php echo esc_html($value) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

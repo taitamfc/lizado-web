@@ -186,7 +186,7 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
         wp_enqueue_script('woof_google_charts', 'https://www.gstatic.com/charts/loader.js');
         wp_enqueue_script('jquery-ui-core');
         //***
-        
+
         $data = array();
         $data['stat_min_date'] = $this->get_stat_min_date_db();
         //***
@@ -260,7 +260,7 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
         $data['woof_settings'] = $this->woof_settings;
         $data['updated_table'] = $this->updated_table;
 
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function init_pdo() {
@@ -383,7 +383,7 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
             $calendar_from = mktime(0, 0, 0, date('n', $calendar_from), date('d', $calendar_from), date('y', $calendar_from));
             $calendar_to = intval(WOOF_REQUEST::get('calendar_to'));
             $calendar_to = mktime(23, 59, 59, date('n', $calendar_to), date('d', $calendar_to), date('y', $calendar_to));
-            
+
             $taxonomies = array();
             foreach (woof()->get_taxonomies() as $slug => $t) {
                 //missing taxonomies which are not selected in the stat options
@@ -592,7 +592,7 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
     //ajax
     public function woof_get_top_terms() {
         if (current_user_can('create_users')) {
-            
+
             $stat_data = WOOF_REQUEST::get('woof_stat_data');
             $taxonomies = array();
             foreach (woof()->get_taxonomies() as $slug => $t) {
@@ -739,7 +739,7 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
 
         //***
 
-        
+
         global $wpdb;
         static $done = false;
         $do = true;
@@ -1393,12 +1393,12 @@ final class WOOF_EXT_STAT extends WOOF_EXT {
     public function get_the_user_ip() {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 //*** check ip from share internet
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
+            $ip = wc_clean(WOOF_HELPER::get_server_var('HTTP_CLIENT_IP'));
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 //*** to check ip is pass from proxy
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            $ip = wc_clean(WOOF_HELPER::get_server_var('HTTP_X_FORWARDED_FOR'));
         } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = wc_clean(WOOF_HELPER::get_server_var('REMOTE_ADDR'));
         }
         return $ip;
     }

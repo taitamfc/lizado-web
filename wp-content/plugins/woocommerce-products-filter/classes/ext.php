@@ -61,12 +61,12 @@ abstract class WOOF_EXT {
     }
 
     public function print_html_type() {
-        echo woof()->render_html($this->get_html_type_view());
+        woof()->render_html_e($this->get_html_type_view());
     }
 
     public static function draw_options($options, $folder_name = '') {
         foreach ($options as $key => $value) {
-            echo woof()->render_html(WOOF_PATH . 'views' . DIRECTORY_SEPARATOR . 'ext_options.php', array(
+            woof()->render_html_e(WOOF_PATH . 'views' . DIRECTORY_SEPARATOR . 'ext_options.php', array(
                 'options' => $value,
                 'key' => $key,
                 'woof_settings' => woof()->settings

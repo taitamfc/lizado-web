@@ -57,10 +57,10 @@ $text_email = str_replace($text_str, $text_var, $text_email);
     </p></div>
 <?php if ($last_email) { ?>
     <div class="last_email"><?php esc_html_e('Attention! This is the last email. If you want to continue get such emails -> Go by next link and subscribe again', 'woocommerce-products-filter') ?>
-        - <a href="<?php esc_attr($subscr['link']) . "&orderby=date&order=DESC" ?>"><?php esc_html_e('Subscribe ', 'woocommerce-products-filter'); ?></a>
+        - <a href="<?php echo esc_attr($subscr['link']) . "&orderby=date&order=DESC" ?>"><?php esc_html_e('Subscribe ', 'woocommerce-products-filter'); ?></a>
     </div>
 <?php } ?>
-<div class="woof_subscr"><p><?php esc_html_e('If you want to Unsubscribe from this newsletter', 'woocommerce-products-filter') ?> - <a href="<?php echo esc_url($unsobscr_link) ?>"><?php esc_html_e('unsubscribe', 'woocommerce-products-filter') ?></a> </p></div>
+<div class="woof_subscr"><p><?php esc_html_e('If you want to Unsubscribe from this newsletter', 'woocommerce-products-filter') ?> - <a href="<?php echo esc_url_raw($unsobscr_link) ?>"><?php esc_html_e('unsubscribe', 'woocommerce-products-filter') ?></a> </p></div>
 <ul class="products woof_mail" >
     <?php
     if ($products->have_posts()) {
@@ -75,7 +75,7 @@ $text_email = str_replace($text_str, $text_var, $text_email);
         if ($i < count($products->posts)) {
             ?>
             <div style="margin-top: 20px" class="woof_more_text" >
-                <p style="text-align: center;font-size: 18px;" ><a style="padding: 4px;border: 2px solid #557DA1; text-decoration: none;" href="<?php echo esc_url($subscr['link'] . "&orderby=date&order=DESC") ?>"><?php esc_html_e('See more new products...', 'woocommerce-products-filter') ?></a></p>
+                <p style="text-align: center;font-size: 18px;" ><a style="padding: 4px;border: 2px solid #557DA1; text-decoration: none;" href="<?php echo esc_url_raw($subscr['link'] . "&orderby=date&order=DESC") ?>"><?php esc_html_e('See more new products...', 'woocommerce-products-filter') ?></a></p>
             </div> 
             <?php
         }
@@ -85,4 +85,4 @@ $text_email = str_replace($text_str, $text_var, $text_email);
     wp_reset_postdata();
     ?>
 </ul><!--/.products-->
-<div class="woof_subscr"><p><?php esc_html_e('If you want to Unsubscribe from this newsletter', 'woocommerce-products-filter') ?> - <a href="<?php echo esc_url($unsobscr_link) ?>"><?php esc_html_e('unsubscribe', 'woocommerce-products-filter') ?></a> </p></div>
+<div class="woof_subscr"><p><?php esc_html_e('If you want to Unsubscribe from this newsletter', 'woocommerce-products-filter') ?> - <a href="<?php echo esc_url_raw($unsobscr_link) ?>"><?php esc_html_e('unsubscribe', 'woocommerce-products-filter') ?></a> </p></div>

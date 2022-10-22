@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+<li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
     <?php
     $show = 0;
@@ -20,7 +20,7 @@ if (!defined('ABSPATH'))
     <span class="icon-question help_tip" data-tip="<?php esc_html_e('Show On sale only checkbox inside woof search form', 'woocommerce-products-filter') ?>"></span>
 
     <div class="select-wrap">
-        <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+        <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
             <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
             <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
         </select>

@@ -20,7 +20,7 @@ if (isset(woof()->settings['by_author']))
             $role = woof()->settings['by_author']['role'];
         }
 
-        echo do_shortcode('[woof_author_filter role="' . esc_attr($role) . '" placeholder="' . esc_attr($placeholder) . '"]');
+        echo do_shortcode('[woof_author_filter role="' . sanitize_text_field($role) . '" placeholder="' . sanitize_text_field($placeholder) . '"]');
     }
 }
 

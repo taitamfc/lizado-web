@@ -3,7 +3,7 @@
  * Plugin Name:       Autocomplete Google Address
  * Plugin URI:        https://www.nishelement.com/google-autocomplete-pro
  * Description:       This plugin will help you to add autocomplete google addres features by using google place api
- * Version:           1.9.2
+ * Version:           1.9.3
  * Requires at least: 5.0
  * Tested up to: 5.7
  * Author:            Md Nishath Khandakar
@@ -72,6 +72,6 @@ function autocomplet_set_google_autocompletegen(){
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'add_support_link_wpse_pro7' );
 
 function add_support_link_wpse_pro7( $links ) {
-   $links[] = '<a href="https://www.nishelement.com/google-autocomplete-pro">Go For Pro</a>';
+   $links[] = '<a href="https://www.nishath.com.bd/google-autocomplete-pro/">Go For Pro</a>';
    return $links;
 }
