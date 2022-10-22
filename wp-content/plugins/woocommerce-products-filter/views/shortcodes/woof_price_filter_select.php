@@ -24,8 +24,8 @@ $select_id = uniqid('woof_price_select');
 
 
 <div class="woof_price_filter_dropdown_container">
-	<label class="woof_wcga_label_hide"  for="<?php esc_attr_e($select_id)  ?>"><?php esc_html_e('Filter by price', 'woocommerce-products-filter') ?></label>
-    <select id="<?php esc_attr_e($select_id)  ?>" class="woof_price_filter_dropdown">
+	<label class="woof_wcga_label_hide"  for="<?php echo esc_attr($select_id)  ?>"><?php esc_html_e('Filter by price', 'woocommerce-products-filter') ?></label>
+    <select id="<?php echo esc_attr($select_id)  ?>" class="woof_price_filter_dropdown">
         <option value="-1"><?php esc_html_e($price_filter2_1opt_txt) ?></option>
 <?php if (!empty($price2_filter_data)): ?>
 
@@ -47,7 +47,7 @@ $select_id = uniqid('woof_price_select');
                 $opt_count++;
                 ?>
 
-                <option <?php if ($c == 0 AND $show_count): ?>disabled=""<?php endif; ?> <?php selected($price2_filter_data['selected'], $k); ?> value="<?php esc_attr_e($k) ?>"><?php echo wp_kses_post(wp_unslash($value)) ?> <?php esc_html_e($cs) ?></option>
+                <option <?php if ($c == 0 AND $show_count): ?>disabled=""<?php endif; ?> <?php selected($price2_filter_data['selected'], $k); ?> value="<?php echo esc_attr($k) ?>"><?php echo wp_kses_post(wp_unslash($value)) ?> <?php echo esc_html($cs) ?></option>
             <?php endforeach; ?>
 
         <?php else: ?>

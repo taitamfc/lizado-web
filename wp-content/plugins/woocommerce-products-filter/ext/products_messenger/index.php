@@ -121,20 +121,17 @@ final class WOOF_EXT_PRODS_MESSENGER extends WOOF_EXT {
 
 	} 
 	$data['text'] = esc_html__('You are unsubscribed from the future products newsletters.', 'woocommerce-products-filter');
-	echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'unsubscr_template.php', $data);
+	woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'unsubscr_template.php', $data);
 	die();
     }
 
     public function woof_external_cron_init() {
-
-	
-         
 	//check secret key  ( min  16 symbol )  
 	if (!isset($_GET['woof_pm_cron_key']) OR empty($_GET['woof_pm_cron_key']) OR strlen($_GET['woof_pm_cron_key']) < 16) {
 	    return false;
 	}
 
-	$sanitazed_key = WOOF_HELPER::escape($_GET['woof_pm_cron_key']);
+	$sanitazed_key = esc_attr(sanitize_key($_GET['woof_pm_cron_key']));
 	if ($sanitazed_key AND isset(woof()->settings['products_messenger']['use_external_cron']) AND woof()->settings['products_messenger']['use_external_cron'] === $sanitazed_key) {
 	    $this->woof_do_mesenger_action();
 	} else {
@@ -241,7 +238,7 @@ final class WOOF_EXT_PRODS_MESSENGER extends WOOF_EXT {
     //settings page hook
     public function woof_print_html_type_options() {
 	
-	echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
+	woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
 	    'key' => $this->html_type,
 	    "woof_settings" => get_option('woof_settings', array())
 		)
@@ -269,7 +266,7 @@ final class WOOF_EXT_PRODS_MESSENGER extends WOOF_EXT {
 	$data['secret_key'] = bin2hex(random_bytes(9)); //Key for check link from email
         
 	$data['user_id'] = $sanit_user_id;
-	$data['link'] = esc_textarea($_POST['link']);
+	$data['link'] = sanitize_text_field($_POST['link']);
 	$data['get'] =$this->woof_get_html_terms($this->sanitaz_array_r($_POST['get_var']));
 	$subscr = get_user_meta($data['user_id'], $this->user_meta_key, true);
         $data['request'] =$this->sanitazed_sql_query(base64_decode(woof()->storage->get_val("woof_pm_request_".$data['user_id'])));

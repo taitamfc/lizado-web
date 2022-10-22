@@ -25,7 +25,7 @@ class WOOF_Widget extends WP_Widget {
         }
 
         if (isset($args['before_widget'])) {
-            echo $args['before_widget'];
+            echo  wp_kses_post(wp_unslash($args['before_widget']));
         }
         ?>
         <div class="widget widget-woof">
@@ -33,12 +33,12 @@ class WOOF_Widget extends WP_Widget {
             if (!empty($instance['title'])) {
                 $instance['title'] = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
                 if (isset($args['before_title'])) {
-                    echo $args['before_title'];
+                    echo wp_kses_post(wp_unslash($args['before_title']));
                     esc_html_e($instance['title']);
-                    echo $args['after_title'];
+                    echo wp_kses_post(wp_unslash($args['after_title']));
                 } else {
                     ?>
-                    <<?php esc_attr_e(apply_filters('woof_widget_title_tag', 'h3')) ?> class="widget-title"><?php esc_html_e($instance['title']) ?></<?php esc_attr_e(apply_filters('woof_widget_title_tag', 'h3')) ?>>
+                    <<?php echo esc_attr(apply_filters('woof_widget_title_tag', 'h3')) ?> class="widget-title"><?php esc_html_e($instance['title']) ?></<?php echo esc_attr(apply_filters('woof_widget_title_tag', 'h3')) ?>>
                     <?php
                 }
             }
@@ -52,7 +52,7 @@ class WOOF_Widget extends WP_Widget {
 
             $redirect = '';
             if (isset($instance['redirect'])) {
-                $redirect = esc_url($instance['redirect']);
+                $redirect = sanitize_text_field($instance['redirect']);
             }
 
             //+++
@@ -76,7 +76,7 @@ class WOOF_Widget extends WP_Widget {
 
             $btn_position = 'b';
             if (isset($instance['btn_position'])) {
-                $btn_position = esc_html($instance['btn_position']);
+                $btn_position = sanitize_text_field($instance['btn_position']);
             }
             $autosubmit = -1;
             if (isset($instance['autosubmit'])) {
@@ -88,11 +88,11 @@ class WOOF_Widget extends WP_Widget {
             }
             ?>
 
-            <?php echo do_shortcode('[woof sid="widget" mobile_mode="' . $mobile_mode . '" autosubmit="' . $autosubmit . '" start_filtering_btn=' . $woof_start_filtering_btn . ' price_filter=' . $price_filter . ' redirect="' . $redirect . '" ajax_redraw="' . $ajax_redraw . '" btn_position="' . $btn_position . '" dynamic_recount="' . $dynamic_recount . '" ]'); ?>
+            <?php echo do_shortcode('[woof sid="widget" mobile_mode="' . esc_attr($mobile_mode) . '" autosubmit="' . esc_attr($autosubmit) . '" start_filtering_btn=' . esc_attr($woof_start_filtering_btn) . ' price_filter=' . esc_attr($price_filter) . ' redirect="' . esc_attr($redirect) . '" ajax_redraw="' . esc_attr($ajax_redraw) . '" btn_position="' . esc_attr($btn_position) . '" dynamic_recount="' . esc_attr($dynamic_recount) . '" ]'); ?>
         </div>
         <?php
         if (isset($args['after_widget'])) {
-            echo $args['after_widget'];
+            echo wp_kses_post(wp_unslash($args['after_widget']));
         }
     }
 
@@ -131,35 +131,35 @@ class WOOF_Widget extends WP_Widget {
         $args['widget'] = $this;
         ?>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('title')); ?>"><?php esc_html_e('Title', 'woocommerce-products-filter') ?>:</label>
-            <input class="widefat" type="text" id="<?php esc_attr_e($this->get_field_id('title')); ?>" name="<?php esc_attr_e($this->get_field_name('title')); ?>" value="<?php esc_attr_e($instance['title']) ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title', 'woocommerce-products-filter') ?>:</label>
+            <input class="widefat" type="text" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" value="<?php echo esc_attr($instance['title']) ?>" />
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('additional_text_before')); ?>"><?php esc_html_e('Additional text before', 'woocommerce-products-filter') ?>:</label>
-            <textarea class="widefat" type="text" id="<?php esc_attr_e($this->get_field_id('additional_text_before')); ?>" name="<?php esc_attr_e($this->get_field_name('additional_text_before')); ?>"><?php echo wp_kses_post($instance['additional_text_before']) ?></textarea>
+            <label for="<?php echo esc_attr($this->get_field_id('additional_text_before')); ?>"><?php esc_html_e('Additional text before', 'woocommerce-products-filter') ?>:</label>
+            <textarea class="widefat" type="text" id="<?php echo esc_attr($this->get_field_id('additional_text_before')); ?>" name="<?php echo esc_attr($this->get_field_name('additional_text_before')); ?>"><?php echo wp_kses_post($instance['additional_text_before']) ?></textarea>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('redirect')); ?>"><?php esc_html_e('Redirect to', 'woocommerce-products-filter') ?>:</label>
-            <input class="widefat" type="text" id="<?php esc_attr_e($this->get_field_id('redirect')); ?>" name="<?php esc_attr_e($this->get_field_name('redirect')); ?>" value="<?php esc_attr_e($instance['redirect']) ?>" /><br />
+            <label for="<?php echo esc_attr($this->get_field_id('redirect')); ?>"><?php esc_html_e('Redirect to', 'woocommerce-products-filter') ?>:</label>
+            <input class="widefat" type="text" id="<?php echo esc_attr($this->get_field_id('redirect')); ?>" name="<?php echo esc_attr($this->get_field_name('redirect')); ?>" value="<?php echo esc_attr($instance['redirect']) ?>" /><br />
             <i><?php esc_html_e('Redirect to any page - use it by your own logic. Leave it empty for default behavior.', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('woof_start_filtering_btn')); ?>"><?php esc_html_e('Hide search form by default and show one button instead', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('woof_start_filtering_btn')); ?>"><?php esc_html_e('Hide search form by default and show one button instead', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 0 => esc_html__('No', 'woocommerce-products-filter'),
                 1 => esc_html__('Yes', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('woof_start_filtering_btn')) ?>" name="<?php esc_attr_e($this->get_field_name('woof_start_filtering_btn')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('woof_start_filtering_btn')) ?>" name="<?php echo esc_attr($this->get_field_name('woof_start_filtering_btn')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['woof_start_filtering_btn'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['woof_start_filtering_btn'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('User on the site front will have to press button like "Show products filter form" to load search form by ajax and start filtering. Good feature when search form is quite big and page loading takes more time because of it!', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('dynamic_recount')); ?>"><?php esc_html_e('Dynamic recount', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('dynamic_recount')); ?>"><?php esc_html_e('Dynamic recount', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 -1 => esc_html__('Default', 'woocommerce-products-filter'),
@@ -167,15 +167,15 @@ class WOOF_Widget extends WP_Widget {
                 1 => esc_html__('Yes', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('dynamic_recount')) ?>" name="<?php esc_attr_e($this->get_field_name('dynamic_recount')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('dynamic_recount')) ?>" name="<?php echo esc_attr($this->get_field_name('dynamic_recount')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['dynamic_recount'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['dynamic_recount'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('Dynamic recount for current search form', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('autosubmit')); ?>"><?php esc_html_e('Autosubmit', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('autosubmit')); ?>"><?php esc_html_e('Autosubmit', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 -1 => esc_html__('Default', 'woocommerce-products-filter'),
@@ -183,15 +183,15 @@ class WOOF_Widget extends WP_Widget {
                 1 => esc_html__('Yes', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('autosubmit')) ?>" name="<?php esc_attr_e($this->get_field_name('autosubmit')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('autosubmit')) ?>" name="<?php echo esc_attr($this->get_field_name('autosubmit')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['autosubmit'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['autosubmit'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('Yes - filtering starts immediately if user changed any item in the search form. No - user can set search data and then should press Filter button', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('btn_position')); ?>"><?php esc_html_e('Submit button position', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('btn_position')); ?>"><?php esc_html_e('Submit button position', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 'b' => esc_html__('Bottom', 'woocommerce-products-filter'),
@@ -199,39 +199,39 @@ class WOOF_Widget extends WP_Widget {
                 'tb' => esc_html__('Top AND Bottom', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('btn_position')) ?>" name="<?php esc_attr_e($this->get_field_name('btn_position')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('btn_position')) ?>" name="<?php echo esc_attr($this->get_field_name('btn_position')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['btn_position'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['btn_position'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('The submit and reset buttons position in current search form', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('ajax_redraw')); ?>"><?php esc_html_e('Form AJAX redrawing', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('ajax_redraw')); ?>"><?php esc_html_e('Form AJAX redrawing', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 0 => esc_html__('No', 'woocommerce-products-filter'),
                 1 => esc_html__('Yes', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('ajax_redraw')) ?>" name="<?php esc_attr_e($this->get_field_name('ajax_redraw')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('ajax_redraw')) ?>" name="<?php echo esc_attr($this->get_field_name('ajax_redraw')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['ajax_redraw'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['ajax_redraw'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('Redraws search form by AJAX, and to start filtering "Filter" button should be pressed. Useful when uses hierarchical drop-down for example', 'woocommerce-products-filter') ?></i>
         </p>
         <p>
-            <label for="<?php esc_attr_e($this->get_field_id('mobile_mode')); ?>"><?php esc_html_e('Mobile mode', 'woocommerce-products-filter') ?>:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('mobile_mode')); ?>"><?php esc_html_e('Mobile mode', 'woocommerce-products-filter') ?>:</label>
             <?php
             $options = array(
                 0 => esc_html__('No', 'woocommerce-products-filter'),
                 1 => esc_html__('Yes', 'woocommerce-products-filter')
             );
             ?>
-            <select class="widefat" id="<?php esc_attr_e($this->get_field_id('mobile_mode')) ?>" name="<?php esc_attr_e($this->get_field_name('mobile_mode')) ?>">
+            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('mobile_mode')) ?>" name="<?php echo esc_attr($this->get_field_name('mobile_mode')) ?>">
                 <?php foreach ($options as $k => $val) : ?>
-                    <option <?php selected($instance['mobile_mode'], $k) ?> value="<?php esc_attr_e($k) ?>" class="level-0"><?php esc_html_e($val) ?></option>
+                    <option <?php selected($instance['mobile_mode'], $k) ?> value="<?php echo esc_attr($k) ?>" class="level-0"><?php echo esc_html($val) ?></option>
                 <?php endforeach; ?>
             </select>
             <i><?php esc_html_e('Hide the widget on a mobile device and a button appears to show the filter', 'woocommerce-products-filter') ?></i>

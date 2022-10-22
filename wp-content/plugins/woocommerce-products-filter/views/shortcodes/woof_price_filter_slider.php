@@ -17,8 +17,18 @@ $uniqid = uniqid();
 if (!isset($additional_taxes)) {
     $additional_taxes = "";
 }
-$preset_min = WOOF_HELPER::get_min_price($additional_taxes);
-$preset_max = WOOF_HELPER::get_max_price($additional_taxes);
+if ($range_min === null) {
+	$preset_min = WOOF_HELPER::get_min_price($additional_taxes);
+} else {
+	$preset_min = $range_min;
+}
+
+if ($range_max === null) {
+	$preset_max = WOOF_HELPER::get_max_price($additional_taxes);
+} else {
+	$preset_max = $range_max;
+}
+
 if (wc_tax_enabled() && 'incl' === get_option('woocommerce_tax_display_shop') && !wc_prices_include_tax()) {
     $tax_classes = array_merge(array(''), WC_Tax::get_tax_classes());
     $class_max = $preset_max;
@@ -120,15 +130,15 @@ if ($min == $max) {
 if (isset($this->settings['by_price']['show_text_input']) AND $this->settings['by_price']['show_text_input']) {
     ?>
     <div class="woof_price_filter_txt_slider">
-		<label class="woof_wcga_label_hide"  for="<?php esc_attr_e($uniqid) ?>_from"><?php _e('Price from', 'woocommerce-products-filter') ?></label>
-        <input id="<?php esc_attr_e($uniqid) ?>_from" type="number" class="woof_price_filter_txt woof_price_filter_txt_from" placeholder="<?php esc_attr_e($min) ?>" data-value="<?php esc_attr_e($min) ?>" value="<?php esc_attr_e($min_price) ?>" />&nbsp;
-        <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($uniqid) ?>_to"><?php _e('Price to', 'woocommerce-products-filter') ?></label>
-		<input id="<?php esc_attr_e($uniqid) ?>_to" type="number" class="woof_price_filter_txt woof_price_filter_txt_to" placeholder="<?php esc_attr_e($max) ?>" name="max_price" data-value="<?php esc_attr_e($max) ?>" value="<?php esc_attr_e($max_price) ?>" />
+		<label class="woof_wcga_label_hide"  for="<?php echo esc_attr($uniqid) ?>_from"><?php esc_html_e('Price from', 'woocommerce-products-filter') ?></label>
+        <input id="<?php echo esc_attr($uniqid) ?>_from" type="number" class="woof_price_filter_txt woof_price_filter_txt_from" placeholder="<?php echo esc_attr($min) ?>" data-value="<?php echo esc_attr($min) ?>" value="<?php echo esc_attr($min_price) ?>" />&nbsp;
+        <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($uniqid) ?>_to"><?php esc_html_e('Price to', 'woocommerce-products-filter') ?></label>
+		<input id="<?php echo esc_attr($uniqid) ?>_to" type="number" class="woof_price_filter_txt woof_price_filter_txt_to" placeholder="<?php echo esc_attr($max) ?>" name="max_price" data-value="<?php echo esc_attr($max) ?>" value="<?php echo esc_attr($max_price) ?>" />
         <?php if (class_exists('WOOCS')): ?>
-            &nbsp;(<?php echo get_woocommerce_currency_symbol() ?>)
+            &nbsp;(<?php esc_html_e(get_woocommerce_currency_symbol()) ?>)
         <?php endif; ?>
-        <div class="woof_float_none"></div>	
-    </div>	
+        <div class="woof_float_none"></div>
+    </div>
 <?php } ?>
-<label class="woof_wcga_label_hide"  for="<?php esc_attr_e($uniqid) ?>"><?php _e('Price filter', 'woocommerce-products-filter') ?></label>
-<input class="woof_range_slider" id="<?php esc_attr_e($uniqid) ?>" data-skin="<?php esc_attr_e($skin) ?>" data-taxes="<?php esc_attr_e($tax) ?>" data-min="<?php esc_attr_e($min) ?>" data-max="<?php esc_attr_e($max) ?>" data-min-now="<?php esc_attr_e($min_price) ?>" data-max-now="<?php esc_attr_e($max_price) ?>" data-step="<?php esc_attr_e($slider_step) ?>" data-slider-prefix="<?php esc_html_e($slider_prefix) ?>" data-slider-postfix="<?php esc_html_e($slider_postfix) ?>" value="" />
+<label class="woof_wcga_label_hide"  for="<?php echo esc_attr($uniqid) ?>"><?php esc_html_e('Price filter', 'woocommerce-products-filter') ?></label>
+<input class="woof_range_slider" id="<?php echo esc_attr($uniqid) ?>" data-skin="<?php echo esc_attr($skin) ?>" data-taxes="<?php echo esc_attr($tax) ?>" data-min="<?php echo esc_attr($min) ?>" data-max="<?php echo esc_attr($max) ?>" data-min-now="<?php echo esc_attr($min_price) ?>" data-max-now="<?php echo esc_attr($max_price) ?>" data-step="<?php echo esc_attr($slider_step) ?>" data-slider-prefix="<?php echo esc_html($slider_prefix) ?>" data-slider-postfix="<?php echo esc_html($slider_postfix) ?>" value="" />

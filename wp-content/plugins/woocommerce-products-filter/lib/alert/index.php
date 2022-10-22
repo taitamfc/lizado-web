@@ -49,30 +49,30 @@ add_action('init', function() {
             $on = 'WordPress';
         }
         ?>
-        <div class="notice notice-info" id="pn_<?php esc_attr_e($slug) ?>_ask_favour" style="position: relative;">
-            <button onclick="javascript: return pn_<?php esc_attr_e($slug) ?>_dismiss_review(1); void(0);" title="<?php esc_html_e('Later', 'woocommerce-products-filter'); ?>" class="notice-dismiss"></button>
-            <div id="pn_<?php esc_attr_e($slug) ?>_review_suggestion">
+        <div class="notice notice-info" id="pn_<?php echo esc_attr($slug) ?>_ask_favour" style="position: relative;">
+            <button onclick="javascript: return pn_<?php echo esc_attr($slug) ?>_dismiss_review(1); void(0);" title="<?php esc_html_e('Later', 'woocommerce-products-filter'); ?>" class="notice-dismiss"></button>
+            <div id="pn_<?php echo esc_attr($slug) ?>_review_suggestion">
                 <p><?php esc_html_e('Hi! Are you enjoying using WOOF - WooCommerce Products Filter?', 'woocommerce-products-filter'); ?></p>
-                <p><a href="javascript: pn_<?php esc_attr_e($slug) ?>_set_review(1); void(0);"><?php esc_html_e('Yes, I love it', 'woocommerce-products-filter'); ?></a> 🙂 | <a href="javascript: pn_<?php esc_attr_e($slug) ?>_set_review(0); void(0);"><?php esc_html_e('Not really...', 'woocommerce-products-filter'); ?></a></p>
+                <p><a href="javascript: pn_<?php echo esc_attr($slug) ?>_set_review(1); void(0);"><?php esc_html_e('Yes, I love it', 'woocommerce-products-filter'); ?></a> 🙂 | <a href="javascript: pn_<?php echo esc_attr($slug) ?>_set_review(0); void(0);"><?php esc_html_e('Not really...', 'woocommerce-products-filter'); ?></a></p>
             </div>
 
-            <div id="pn_<?php esc_attr_e($slug) ?>_review_yes" style="display: none;">
+            <div id="pn_<?php echo esc_attr($slug) ?>_review_yes" style="display: none;">
                 <p><?php printf(__('That\'s awesome! Could you please do us a BIG favor and give it a 5-star rating on %s to help us spread the word and boost our motivation?', 'woocommerce-products-filter'), $on) ?></p>
                 <p><b>~ PluginUs.NET developers team</b></p>
                 <p>
 
-                    <a href="<?php echo esc_url($link) ?>" onclick="pn_<?php esc_attr_e($slug) ?>_dismiss_review(2)" target="_blank" style="display: inline-block; margin-right: 10px; color: #2eca8b;"><?php esc_html_e('Okay, you deserve it', 'woocommerce-products-filter'); ?></a>
+                    <a href="<?php echo esc_url_raw($link) ?>" onclick="pn_<?php echo esc_attr($slug) ?>_dismiss_review(2)" target="_blank" style="display: inline-block; margin-right: 10px; color: #2eca8b;"><?php esc_html_e('Okay, you deserve it', 'woocommerce-products-filter'); ?></a>
                     <!----------------- inline css as it total for the system ----------------------->
-                    <a href="javascript: pn_<?php esc_attr_e($slug) ?>_dismiss_review(1); void(0);" style="display: inline-block; margin-right: 10px;"><?php esc_html_e('Nope, maybe later', 'woocommerce-products-filter'); ?></a>
-                    <a href="javascript: pn_<?php esc_attr_e($slug) ?>_dismiss_review(2); void(0);"><?php esc_html_e('I already did', 'woocommerce-products-filter'); ?></a>
+                    <a href="javascript: pn_<?php echo esc_attr($slug) ?>_dismiss_review(1); void(0);" style="display: inline-block; margin-right: 10px;"><?php esc_html_e('Nope, maybe later', 'woocommerce-products-filter'); ?></a>
+                    <a href="javascript: pn_<?php echo esc_attr($slug) ?>_dismiss_review(2); void(0);"><?php esc_html_e('I already did', 'woocommerce-products-filter'); ?></a>
                 </p>
             </div>
 
-            <div id="pn_<?php esc_attr_e($slug) ?>_review_no" style="display: none;">
+            <div id="pn_<?php echo esc_attr($slug) ?>_review_no" style="display: none;">
                 <p><?php esc_html_e('We are sorry to hear you aren\'t enjoying WOOF. We would love a chance to improve it. Could you take a minute and let us know what we can do better?', 'woocommerce-products-filter'); ?></p>
                 <p>
-                    <a href="https://pluginus.net/contact-us/" onclick="pn_<?php esc_attr_e($slug) ?>_dismiss_review(2)" target="_blank"><?php esc_html_e('Give Feedback', 'woocommerce-products-filter'); ?></a>&nbsp;
-                    |&nbsp;<a href="javascript: pn_<?php esc_attr_e($slug) ?>_dismiss_review(2); void(0);"><?php esc_html_e('No thanks', 'woocommerce-products-filter'); ?></a>
+                    <a href="https://pluginus.net/contact-us/" onclick="pn_<?php echo esc_attr($slug) ?>_dismiss_review(2)" target="_blank"><?php esc_html_e('Give Feedback', 'woocommerce-products-filter'); ?></a>&nbsp;
+                    |&nbsp;<a href="javascript: pn_<?php echo esc_attr($slug) ?>_dismiss_review(2); void(0);"><?php esc_html_e('No thanks', 'woocommerce-products-filter'); ?></a>
                 </p>
             </div>
 

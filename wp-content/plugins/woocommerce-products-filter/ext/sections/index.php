@@ -61,7 +61,7 @@ final class WOOF_EXT_SECTIONS extends WOOF_EXT {
         
         $data = array();
         $data['ext_sections'] = $this;
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function get_section_html() {
@@ -134,21 +134,21 @@ final class WOOF_EXT_SECTIONS extends WOOF_EXT {
             }
         }
         ?>
-        <li class="woof_section_item" data-key='<?php esc_attr_e($ukey); ?>'>
-            <input type="text" name="woof_settings[sections][<?php esc_attr_e($ukey); ?>][title]" value="<?php esc_html_e($title ? esc_html($title) : esc_html__("New section", 'woocommerce-products-filter')) ?>">
+        <li class="woof_section_item" data-key='<?php echo esc_attr($ukey); ?>'>
+            <input type="text" name="woof_settings[sections][<?php echo esc_attr($ukey); ?>][title]" value="<?php echo esc_html($title ? esc_html($title) : esc_html__("New section", 'woocommerce-products-filter')) ?>">
             <span><?php esc_html_e("from", 'woocommerce-products-filter'); ?></span>
-            <select class="woof_section_from" name="woof_settings[sections][<?php esc_attr_e($ukey); ?>][from]">
+            <select class="woof_section_from" name="woof_settings[sections][<?php echo esc_attr($ukey); ?>][from]">
                 <?php foreach ($options as $type => $title) { ?>
-                    <option <?php selected($type == $from, $type) ?> value="<?php esc_attr_e($type); ?>"><?php esc_html_e($title) ?></option>
+                    <option <?php selected($type == $from, $type) ?> value="<?php echo esc_attr($type); ?>"><?php esc_html_e($title) ?></option>
                 <?php } ?>
             </select>
             <span><?php esc_html_e("to", 'woocommerce-products-filter'); ?></span>
-            <select class="woof_section_to" name="woof_settings[sections][<?php esc_attr_e($ukey); ?>][to]">
+            <select class="woof_section_to" name="woof_settings[sections][<?php echo esc_attr($ukey); ?>][to]">
                 <?php foreach ($options as $type => $title) { ?>
-                    <option <?php selected($type == $to, $type) ?> value="<?php esc_attr_e($type); ?>"><?php esc_html_e($title) ?></option>
+                    <option <?php selected($type == $to, $type) ?> value="<?php echo esc_attr($type); ?>"><?php esc_html_e($title) ?></option>
                 <?php } ?>
             </select>	
-            <input type="button" value="X" class="woof_sections_delete woof-button"data-key='<?php esc_attr_e($ukey); ?>'>
+            <input type="button" value="X" class="woof_sections_delete woof-button"data-key='<?php echo esc_attr($ukey); ?>'>
         </li>
         <?php
     }
@@ -201,9 +201,9 @@ final class WOOF_EXT_SECTIONS extends WOOF_EXT {
                         $data['checked'] = false;
 
                         if (file_exists($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'start.php')) {
-                            echo woof()->render_html($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'start.php', $data);
+                            woof()->render_html_e($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'start.php', $data);
                         }
-                        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'start.php', $data);
+                        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'start.php', $data);
                     }
                 }
                 $count++;
@@ -226,9 +226,9 @@ final class WOOF_EXT_SECTIONS extends WOOF_EXT {
                         $data['title'] = $explode_2[1];
                         $data['type'] = 'tabs';
                         if (file_exists($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'end.php')) {
-                            echo woof()->render_html($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'end.php', $data);
+                            woof()->render_html_e($this->get_ext_override_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'end.php', $data);
                         }
-                        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'end.php', $data);
+                        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'sections' . DIRECTORY_SEPARATOR . 'end.php', $data);
                     }
                 }
             }

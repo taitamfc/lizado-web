@@ -86,7 +86,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
     }
 
     public function add_additional_js() {
-        
+
         $request = woof()->get_request_data();
         $search_text = "";
         if (isset($request['woof_text']) AND $request['woof_text']) {
@@ -96,7 +96,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
     }
 
     public function woof_products_query($query_args) {
-        
+
         $request = woof()->get_request_data();
 
         if (isset($request['woof_text']) AND $request['woof_text']) {
@@ -122,7 +122,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
     }
 
     public function woof_dynamic_count_attr($query_args, $custom_type) {
-        
+
         $request = woof()->get_request_data();
 
         if (isset($request['woof_text']) AND $request['woof_text']) {
@@ -148,7 +148,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
     }
 
     public function woo_product_query($q) {
-        
+
         $request = woof()->get_request_data();
 
         if (isset($request['woof_text']) AND $request['woof_text']) {
@@ -175,7 +175,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
         if (WOOF_REQUEST::get('override_no_products')) {
             return $query_args;
         }
-        
+
         $request = woof()->get_request_data();
 
         if (isset($request['woof_text']) AND $request['woof_text']) {
@@ -208,7 +208,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
     }
 
     public function cache_compatibility($args, $type) {
-        
+
         $request = woof()->get_request_data();
         if (isset($request['woof_text']) AND $request['woof_text']) {
             $args['woof_text'] = $request['woof_text'];
@@ -219,7 +219,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 
     public function wp_head() {
 
-        
+
         //self::$includes['js_code_custom']['woof_' . $this->html_type . '_html_items'] = $this->get_js();
         $request = woof()->get_request_data();
         $search_text = "";
@@ -246,9 +246,9 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 
     //settings page hook
     public function woof_print_html_type_options() {
-        
+
         woof()->control_extension_by_key('by_text_2', false);
-        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
+        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )
@@ -262,7 +262,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 
     private function data_fields($args = []) {
         $data = [];
-        
+
         foreach ($this->data_fields as $field) {
 
             switch ($field) {
@@ -547,9 +547,24 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
         return ob_get_clean();
     }
 
+    private function render_html_e($pagepath, $data = []) {
+        if (isset($data['pagepath'])) {
+            unset($data['pagepath']);
+        }
+        if (is_array($data) AND!empty($data)) {
+            extract($data);
+        }
+        $pagepath = realpath($pagepath);
+        if (!$pagepath) {
+            return;
+        }
+        $pagepath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $pagepath);
+        include($pagepath);
+    }
+
     //shortcode
     public function woof_text_filter($args = array()) {
-        
+
         if (!is_array($args)) {
             $args = array();
         }
@@ -799,8 +814,6 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
         $search_text = str_replace("\(", "\\\(", $search_text);
         $search_text = str_replace("\)", "\\\)", $search_text);
 
-        
-
         if (empty($options)) {
             $options = $this->data_fields();
         }
@@ -899,19 +912,19 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 
     //ajax
     public function ajax_search() {
-
         if (WOOF_REQUEST::isset('link')) {
             $link = parse_url(WOOF_REQUEST::get('link'), PHP_URL_QUERY);
-            parse_str($link, $_GET); //$_GET data init
+            $query_array = WOOF_HELPER::safe_parse_str($link);
+            $_GET = array_merge($query_array, wc_clean($_GET));
             $_GET = apply_filters('woof_draw_products_get_args', WOOF_HELPER::sanitize_array($_GET), WOOF_REQUEST::get('link'));
         }
+
         if (WOOF_REQUEST::isset('cur_tax')) {
             $_GET['really_curr_tax'] = WOOF_REQUEST::get('cur_tax');
         }
+
         $options = [];
-
         $search_text = sanitize_text_field(WOOF_REQUEST::get('value'));
-
         $this->options = array_merge($this->options, $this->data_fields(WOOF_REQUEST::get())); //sanitizing is inside
 
         if (!isset($this->options['page']) || !$this->options['page']) {
@@ -995,7 +1008,7 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
                 'page' => $this->options['page']
             ]
         ];
-        
+
         $result['test'] = WOOF_HELPER::sanitize_array($_GET);
 
         die(json_encode($result));

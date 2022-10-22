@@ -44,10 +44,10 @@ class WOOF_META_FILTER_SELECT extends WOOF_META_FILTER_TYPE {
     }
 
     protected function draw_additional_options() {
-        $data = array();
-        $data['key'] = $this->meta_key;
-        $data['settings'] = $this->woof_settings;
-        return $this->render_html($this->get_meta_filter_path() . '/views/additional_options.php', $data);
+        $this->render_html_e($this->get_meta_filter_path() . '/views/additional_options.php', [
+            'key' => $this->meta_key,
+            'settings' => $this->woof_settings
+        ]);
     }
 
     public function woof_print_html_type_meta() {
@@ -56,18 +56,18 @@ class WOOF_META_FILTER_SELECT extends WOOF_META_FILTER_TYPE {
         $data['options'] = $this->type_options;
         $data['meta_options'] = (isset($this->type_options["options"])) ? $this->type_options["options"] : "";
         $data['meta_settings'] = (isset($this->woof_settings[$this->meta_key])) ? $this->woof_settings[$this->meta_key] : "";
-		$data['options_separator'] = $this->options_separator;
+        $data['options_separator'] = $this->options_separator;
         if (isset($this->woof_settings[$this->meta_key]["show"]) AND $this->woof_settings[$this->meta_key]["show"]) {
             if (file_exists($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php')) {
-                echo $this->render_html($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php', $data);
+                $this->render_html_e($this->get_meta_filter_override_path() . 'views' . DIRECTORY_SEPARATOR . 'woof.php', $data);
             } else {
-                echo $this->render_html($this->get_meta_filter_path() . '/views/woof.php', $data);
+                $this->render_html_e($this->get_meta_filter_path() . '/views/woof.php', $data);
             }
         }
     }
 
     protected function check_current_request() {
-        
+
         $request = woof()->get_request_data();
         if (isset($request[$this->type . "_" . $this->meta_key]) AND $request[$this->type . "_" . $this->meta_key]) {
             return $request[$this->type . "_" . $this->meta_key];
@@ -107,7 +107,7 @@ class WOOF_META_FILTER_SELECT extends WOOF_META_FILTER_TYPE {
 
     public static function get_option_name($value, $key = NULL) {
         $option_txt = "";
-        
+
         if ($key) {
             $meta_key = str_replace("select_", "", $key);
             $options = explode($this->options_separator, (isset(woof()->settings['meta_filter'][$meta_key]["options"])) ? woof()->settings['meta_filter'][$meta_key]["options"] : "");

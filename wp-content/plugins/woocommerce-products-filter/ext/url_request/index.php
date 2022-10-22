@@ -110,7 +110,7 @@ final class WOOF_EXT_URL_REQUEST extends WOOF_EXT {
 
         $data['woof_settings'] = $this->woof_settings;
         $data['seo_rule'] = $this;
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function get_all_langs() {
@@ -135,32 +135,32 @@ final class WOOF_EXT_URL_REQUEST extends WOOF_EXT {
             $ukey = uniqid("section");
         }
         ?>
-        <li class="woof_seo_rules_item  woof_seo_rules_item_<?php esc_attr_e($lang); ?>" data-key='<?php esc_attr_e($ukey); ?>'>
+        <li class="woof_seo_rules_item  woof_seo_rules_item_<?php echo esc_attr($lang); ?>" data-key='<?php echo esc_attr($ukey); ?>'>
             <div class='woof_seo_rule_url' >
                 <label><?php esc_html_e("URL of the page", 'woocommerce-products-filter'); ?></label></br>
-                <input type="text" placeholder="<?php esc_html_e("Example: /color-{any}/", 'woocommerce-products-filter'); ?>" name="woof_settings[woof_url_request][seo_rules][<?php esc_attr_e($lang) ?>][<?php esc_attr_e($ukey); ?>][url]" value="<?php esc_attr_e($url); ?>">
+                <input type="text" placeholder="<?php esc_html_e("Example: /color-{any}/", 'woocommerce-products-filter'); ?>" name="woof_settings[woof_url_request][seo_rules][<?php echo esc_html($lang) ?>][<?php echo esc_attr($ukey); ?>][url]" value="<?php echo esc_attr($url); ?>">
             </div>
             <div class='woof_seo_rule_container' >
                 <div class='woof_seo_rule_item_field woof_seo_rule_title' >
                     <label><?php esc_html_e("Meta title", 'woocommerce-products-filter'); ?></label>
-                    <input type="text" name="woof_settings[woof_url_request][seo_rules][<?php esc_attr_e($lang) ?>][<?php esc_attr_e($ukey); ?>][title]" value="<?php esc_html_e($title); ?>">
+                    <input type="text" name="woof_settings[woof_url_request][seo_rules][<?php echo esc_attr($lang) ?>][<?php echo esc_attr($ukey); ?>][title]" value="<?php echo esc_html($title); ?>">
                 </div>
                 <div class='woof_seo_rule_item_field woof_seo_rule_h1' >
                     <label><?php esc_html_e("H1  title", 'woocommerce-products-filter'); ?></label>
-                    <input type="text" name="woof_settings[woof_url_request][seo_rules][<?php esc_attr_e($lang) ?>][<?php esc_attr_e($ukey); ?>][h1]" value="<?php esc_html_e($h1); ?>">
+                    <input type="text" name="woof_settings[woof_url_request][seo_rules][<?php echo esc_attr($lang) ?>][<?php echo esc_attr($ukey); ?>][h1]" value="<?php echo esc_html($h1); ?>">
                 </div>				
                 <div class='woof_seo_rule_item_field woof_seo_rule_description' >
                     <label><?php esc_html_e("Meta description", 'woocommerce-products-filter'); ?></label>				
-                    <textarea name="woof_settings[woof_url_request][seo_rules][<?php esc_attr_e($lang) ?>][<?php esc_attr_e($ukey); ?>][description]" ><?php esc_html_e($description); ?></textarea>
+                    <textarea name="woof_settings[woof_url_request][seo_rules][<?php echo esc_attr($lang) ?>][<?php echo esc_attr($ukey); ?>][description]" ><?php echo esc_html($description); ?></textarea>
                 </div>
                 <div class='woof_seo_rule_item_field woof_seo_rule_description' >
                     <label><?php esc_html_e("SEO text", 'woocommerce-products-filter'); ?></label>				
-                    <textarea name="woof_settings[woof_url_request][seo_rules][<?php esc_attr_e($lang) ?>][<?php esc_attr_e($ukey); ?>][text]" ><?php echo wp_kses_post(wp_unslash($text)); ?></textarea>
+                    <textarea name="woof_settings[woof_url_request][seo_rules][<?php echo esc_attr($lang) ?>][<?php echo esc_attr($ukey); ?>][text]" ><?php echo wp_kses_post(wp_unslash($text)); ?></textarea>
                 </div>				
 
             </div>
             <div class='woof_seo_rule_delete' >                
-                <a href="#" class="button button-primary woof_seo_rules_delete woof-button" data-key='<?php esc_attr_e($ukey); ?>' title="delete"><span class="dashicons dashicons-trash"></span></a>
+                <a href="#" class="button button-primary woof_seo_rules_delete woof-button" data-key='<?php echo esc_attr($ukey); ?>' title="delete"><span class="dashicons dashicons-trash"></span></a>
             </div>				
         </li>
         <?php

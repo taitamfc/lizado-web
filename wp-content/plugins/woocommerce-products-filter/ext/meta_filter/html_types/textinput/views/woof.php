@@ -1,5 +1,5 @@
 <?php if (!defined('ABSPATH')) die('No direct access allowed'); ?>
-<div data-css-class="woof_textinput_container" class="woof_textinput_container woof_container  woof_container_<?php esc_attr_e("textinput_".$meta_key) ?>">
+<div data-css-class="woof_textinput_container" class="woof_textinput_container woof_container  woof_container_<?php echo esc_attr("textinput_".$meta_key) ?>">
     <div class="woof_container_overlay_item"></div>
     <div class="woof_container_inner">
         <?php
@@ -33,9 +33,9 @@
 
         <div class="woof_show_textinput_container ">
             <img width="36" class="woof_show_text_search_loader" style="display: none;" src="<?php echo esc_url($loader_img) ?>" alt="loader" />
-            <a href="javascript:void(0);" data-uid="<?php esc_attr_e($unique_id) ?>" class="woof_textinput_go <?php esc_attr_e($unique_id) ?>"></a>
-            <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($unique_id)  ?>"><?php esc_html_e(isset($placeholder) ? $placeholder : $p); ?></label>
-			<input type="search" class="woof_meta_filter_textinput <?php esc_attr_e($unique_id) ?>" id="<?php esc_attr_e($unique_id) ?>" data-uid="<?php esc_attr_e($unique_id) ?>" data-auto_res_count="<?php echo intval(isset($auto_res_count) ? $auto_res_count : 0) ?>" data-auto_search_by="<?php esc_html_e(isset($auto_search_by) ? $auto_search_by : "") ?>" placeholder="<?php esc_html_e(isset($placeholder) ? $placeholder : $p) ?>" name="textinput_<?php esc_attr_e($meta_key) ?>" value="<?php esc_attr_e($woof_text) ?>" />
+            <a href="javascript:void(0);" data-uid="<?php echo esc_attr($unique_id) ?>" class="woof_textinput_go <?php echo esc_attr($unique_id) ?>"></a>
+            <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($unique_id)  ?>"><?php esc_html_e(isset($placeholder) ? $placeholder : $p); ?></label>
+			<input type="search" class="woof_meta_filter_textinput <?php echo esc_attr($unique_id) ?>" id="<?php echo esc_attr($unique_id) ?>" data-uid="<?php echo esc_attr($unique_id) ?>" data-auto_res_count="<?php echo intval(isset($auto_res_count) ? $auto_res_count : 0) ?>" data-auto_search_by="<?php echo esc_html(isset($auto_search_by) ? $auto_search_by : "") ?>" placeholder="<?php esc_html_e(isset($placeholder) ? $placeholder : $p) ?>" name="textinput_<?php echo esc_attr($meta_key) ?>" value="<?php echo esc_attr($woof_text) ?>" />
         </div>
 
     </div>

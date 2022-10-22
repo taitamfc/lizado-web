@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+<li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
     <?php
     $show = 0;
@@ -20,14 +20,14 @@ if (!defined('ABSPATH'))
     <span class="icon-question help_tip" data-tip="<?php esc_html_e('Show In stock only checkbox inside woof search form', 'woocommerce-products-filter') ?>"></span>
 
     <div class="select-wrap">
-        <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+        <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
             <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
             <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
         </select>
     </div>
 
 
-    <a href="#" data-key="<?php esc_attr_e($key) ?>" data-name="<?php esc_html_e("Search by InStock", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+    <a href="#" data-key="<?php echo esc_attr($key) ?>" data-name="<?php esc_html_e("Search by InStock", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
 
 
 
@@ -42,10 +42,10 @@ if (!defined('ABSPATH'))
     }
     ?>
 
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][use_for]" value="<?php esc_html_e($woof_settings[$key]['use_for']) ?>" />
-	<input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][new_db]" value="<?php esc_html_e($woof_settings[$key]['new_db']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][use_for]" value="<?php echo esc_html($woof_settings[$key]['use_for']) ?>" />
+	<input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][new_db]" value="<?php echo esc_html($woof_settings[$key]['new_db']) ?>" />
 
-    <div id="woof-modal-content-<?php esc_attr_e($key) ?>" style="display: none;">
+    <div id="woof-modal-content-<?php echo esc_attr($key) ?>" style="display: none;">
 
         <div class="woof-form-element-container">
 
@@ -64,7 +64,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="use_for">
                         <?php foreach ($use_for as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -89,7 +89,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="new_db">
                         <?php foreach ($new_db as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

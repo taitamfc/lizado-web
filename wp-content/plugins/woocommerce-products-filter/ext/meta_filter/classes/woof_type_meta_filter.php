@@ -37,11 +37,11 @@ abstract class WOOF_META_FILTER_TYPE {
     }
 
     protected function draw_additional_options() {
-        return "";
+        esc_html_e("");
     }
 
     public function draw_meta_filter_structure() {
-        ?><li data-key="<?php esc_attr_e($this->meta_key) ?>" class="woof_options_li">
+        ?><li data-key="<?php echo esc_attr($this->meta_key) ?>" class="woof_options_li">
         <?php
         $show = 0;
         if (isset($this->woof_settings[$this->meta_key]['show'])) {
@@ -56,19 +56,33 @@ abstract class WOOF_META_FILTER_TYPE {
             <span class="icon-question help_tip" data-tip="<?php esc_html_e('Meta filter', 'woocommerce-products-filter') ?>"></span>
 
             <div class="select-wrap">
-                <select name="woof_settings[<?php esc_attr_e($this->meta_key) ?>][show]" class="woof_setting_select">
+                <select name="woof_settings[<?php echo esc_attr($this->meta_key) ?>][show]" class="woof_setting_select">
                     <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
                     <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
                 </select>
             </div>
-            <a href="#" data-key="<?php esc_attr_e($this->meta_key) ?>" data-name="<?php esc_html_e($this->woof_settings['meta_filter'][$this->meta_key]['title']) ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($this->meta_key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
-                <?php
-                echo $this->draw_additional_options();
-                ?></li><?php
+            <a href="#" data-key="<?php echo esc_attr($this->meta_key) ?>" data-name="<?php esc_html_e($this->woof_settings['meta_filter'][$this->meta_key]['title']) ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($this->meta_key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+            <?php $this->draw_additional_options() ?></li><?php
     }
 
     public function woof_print_html_type_meta() {
         echo '<h1>' . esc_html($this->meta_key) . '</h1>';
+    }
+
+    public function render_html_e($pagepath, $data = array()) {
+        if (isset($data['pagepath'])) {
+            unset($data['pagepath']);
+        }
+        if (is_array($data) AND!empty($data)) {
+            extract($data);
+        }
+
+        $pagepath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $pagepath);
+        $pagepath = realpath($pagepath);
+        if (!$pagepath) {
+            return;
+        }
+        include($pagepath);
     }
 
     public function render_html($pagepath, $data = array()) {

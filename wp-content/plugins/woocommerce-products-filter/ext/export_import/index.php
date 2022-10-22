@@ -52,7 +52,7 @@ final class WOOF_EXP_IMP extends WOOF_EXT {
 
         
         $data['options'] = $this->get_all_options();
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function get_all_options() {
@@ -80,7 +80,7 @@ final class WOOF_EXP_IMP extends WOOF_EXT {
         }
 
         try {
-            $options = json_decode(stripcslashes($_POST['import_value']));
+            $options = wc_clean(json_decode(stripcslashes($_POST['import_value'])));
 
             foreach ($options as $option_name => $option_data) {
                 if (is_serialized($option_data)) {

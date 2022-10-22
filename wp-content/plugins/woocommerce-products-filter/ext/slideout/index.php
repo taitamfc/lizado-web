@@ -118,7 +118,7 @@ final class WOOF_SLIDEOUT extends WOOF_EXT {
         $data['woof_settings'] = $this->woof_settings;
         wp_enqueue_script('woof_slideout_admin', $this->get_ext_link() . 'js/admin.js', array(), WOOF_VERSION);
         wp_enqueue_style('woof_slideout_admin', $this->get_ext_link() . 'css/admin.css', array(), WOOF_VERSION);
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function woof_slideout($atts, $content) {
@@ -235,8 +235,7 @@ final class WOOF_SLIDEOUT extends WOOF_EXT {
     }
 
     public function generate_shortcode_ajax() {
-
-        $shortcode = $this->generate_shortcode($_POST);
+        $shortcode = $this->generate_shortcode(wc_clean($_POST));
         die($shortcode);
     }
 

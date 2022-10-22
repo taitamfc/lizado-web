@@ -52,9 +52,9 @@ if (WOOF_REQUEST::isset('hide_terms_count_txt_short') AND intval(WOOF_REQUEST::g
                     $unique_id = uniqid('wr_');
                     ?>
                     <li class="woof_list">
-                        <input type="radio" <?php if ($c == 0 AND $show_count): ?>disabled=""<?php endif; ?> class="woof_price_filter_radio"  <?php echo checked($price2_filter_data['selected'], $k); ?>  name="woof_price_radio" id="woof_price_radio_<?php esc_attr_e($unique_id) ?>" value="<?php esc_html_e($k) ?>"  />
-                        <span>&nbsp;&nbsp;</span><label for="woof_price_radio_<?php esc_attr_e($unique_id) ?>"><?php echo wp_kses_post(wp_unslash($value)) ?> <?php esc_html_e($cs) ?>  </label>
-                        <a href="" data-tax="price" style="display: none;" class="woof_radio_price_reset <?php if ($price2_filter_data['selected'] == $k): ?> woof_radio_term_reset_visible <?php endif; ?> woof_radio_term_reset_<?php esc_attr_e($k) ?>"><img src="<?php echo esc_url($this->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Delete", 'woocommerce-products-filter') ?>" /></a>
+                        <input type="radio" <?php if ($c == 0 AND $show_count): ?>disabled=""<?php endif; ?> class="woof_price_filter_radio" <?php checked($price2_filter_data['selected'], $k) ?>  name="woof_price_radio" id="woof_price_radio_<?php echo esc_attr($unique_id) ?>" value="<?php echo esc_html($k) ?>"  />
+                        <span>&nbsp;&nbsp;</span><label for="woof_price_radio_<?php echo esc_attr($unique_id) ?>"><?php echo wp_kses_post(wp_unslash($value)) ?> <?php esc_html_e($cs) ?>  </label>
+                        <a href="" data-tax="price" style="display: none;" class="woof_radio_price_reset <?php if ($price2_filter_data['selected'] == $k): ?> woof_radio_term_reset_visible <?php endif; ?> woof_radio_term_reset_<?php echo esc_attr($k) ?>"><img src="<?php echo esc_url($this->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Delete", 'woocommerce-products-filter') ?>" /></a>
                     </li>
                     <?php
                 endforeach;

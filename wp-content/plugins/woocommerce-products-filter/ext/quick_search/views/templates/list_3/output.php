@@ -2,13 +2,13 @@
 <?php
 $structure = WOOF_EXT_QUICK_TEXT::parse_template_structure($template_structure);
 ?>
-<div class="woof_qs_result  woof_qs_list_<?php esc_attr_e($template_result) ?>  text_res_page_0 ">
-    <div class=" woof_qs_table_<?php esc_attr_e($template_result) ?>_header"><?php echo wp_kses_post(wp_unslash($header_text)) ?></div>
+<div class="woof_qs_result  woof_qs_list_<?php echo esc_attr($template_result) ?>  text_res_page_0 ">
+    <div class=" woof_qs_table_<?php echo esc_attr($template_result) ?>_header"><?php echo wp_kses_post(wp_unslash($header_text)) ?></div>
     <?php echo WOOF_EXT_QUICK_TEXT::show_sort_html_select(); ?>
     __PAGINATION__
     <div class="woof_qs_container">
         <div class="woof_qs_item blog-card">
-            <div class="woof_qs_<?php esc_attr_e($template_result) ?>_img photo"> 
+            <div class="woof_qs_<?php echo esc_attr($template_result) ?>_img photo"> 
                 <a href="__URL__" target="__TARGET__"><img __SRC__ alt="__TITLE__" /></a>
             </div>
             <ul class="details"></ul>
@@ -19,14 +19,14 @@ $structure = WOOF_EXT_QUICK_TEXT::parse_template_structure($template_structure);
                         continue;
                     } elseif ($item['key'] == 'title') {
                         ?>
-                        <div class="woof_qs_<?php esc_attr_e($template_result) ?>_<?php esc_attr_e($item['key']) ?>">
+                        <div class="woof_qs_<?php echo esc_attr($template_result) ?>_<?php echo esc_attr($item['key']) ?>">
                             <a href="__URL__" target="__TARGET__">__TITLE__</a>
                         </div>
                         <?php
                     } else {
                         ?>
-                        <div class="woof_qs_<?php esc_attr_e($template_result) ?>_<?php esc_attr_e($item['key']) ?>">
-                            <?php esc_attr_e(($item['key'] == "price") ? "" : $item['title'] . ":") ?><?php esc_html_e($item['alias']) ?>
+                        <div class="woof_qs_<?php echo esc_attr($template_result) ?>_<?php echo esc_attr($item['key']) ?>">
+                            <?php echo esc_attr(($item['key'] == "price") ? "" : $item['title'] . ":") ?><?php echo esc_html($item['alias']) ?>
                         </div>
                         <?php
                     }
@@ -36,7 +36,7 @@ $structure = WOOF_EXT_QUICK_TEXT::parse_template_structure($template_structure);
             </div>
         </div>
         <div class="woof_qs_no_products_item">
-            <div class='woof_qs_no_products woof_qt_no_products_<?php esc_attr_e($template_result) ?>'>
+            <div class='woof_qs_no_products woof_qt_no_products_<?php echo esc_attr($template_result) ?>'>
                 <?php esc_html_e('Product not found', 'woocommerce-products-filter') ?>
             </div>
         </div>

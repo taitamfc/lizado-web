@@ -3,18 +3,18 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<div class="woof-slide-out-div <?php esc_attr_e($class) ?>" style="position: absolute; right: 10000px;" data-key="<?php esc_attr_e($key) ?>"  data-image="<?php esc_attr_e($image) ?>"
-     data-image_h="<?php esc_attr_e($image_h) ?>" data-image_w="<?php esc_attr_e($image_w) ?>"
-     data-mobile="<?php esc_attr_e($mobile_behavior) ?>"  data-action="<?php esc_attr_e($action) ?>" data-location="<?php esc_attr_e($location) ?>"
-     data-speed="<?php esc_attr_e($speed) ?>" data-toppos="<?php esc_attr_e($offset) ?>"  data-onloadslideout="<?php esc_attr_e($onloadslideout) ?>"
-     data-height="<?php esc_attr_e($height) ?>" data-width="<?php esc_attr_e($width) ?>">
-    <span class="woof-handle <?php esc_attr_e($key) ?>" style="" ><?php
+<div class="woof-slide-out-div <?php echo esc_attr($class) ?>" style="position: absolute; right: 10000px;" data-key="<?php echo esc_attr($key) ?>"  data-image="<?php echo esc_attr($image) ?>"
+     data-image_h="<?php echo esc_attr($image_h) ?>" data-image_w="<?php echo esc_attr($image_w) ?>"
+     data-mobile="<?php echo esc_attr($mobile_behavior) ?>"  data-action="<?php echo esc_attr($action) ?>" data-location="<?php echo esc_attr($location) ?>"
+     data-speed="<?php echo esc_attr($speed) ?>" data-toppos="<?php echo esc_attr($offset) ?>"  data-onloadslideout="<?php echo esc_attr($onloadslideout) ?>"
+     data-height="<?php echo esc_attr($height) ?>" data-width="<?php echo esc_attr($width) ?>">
+    <span class="woof-handle <?php echo esc_attr($key) ?>" style="" ><?php
         if ($image == "null") {
             esc_html_e($text);
         }
         ?></span>
-    <div class="woof-slide-content woof-slide-<?php esc_attr_e($key) ?>">
-        <?php echo do_shortcode($content) ?>
+    <div class="woof-slide-content woof-slide-<?php echo esc_attr($key) ?>">
+        <?php echo do_shortcode(esc_attr($content)) ?>
     </div>
 </div>
 

@@ -10,7 +10,7 @@ class WOOF_ADV {
 
         //fix to avoid disabling of 'Upload Theme' button action on /wp-admin/theme-install.php
         if (isset($_SERVER['REQUEST_URI'])) {
-            if (substr_count($_SERVER['REQUEST_URI'], 'theme-install.php')) {
+            if (substr_count(WOOF_HELPER::get_server_var('REQUEST_URI'), 'theme-install.php')) {
                 return;
             }
         } else {
@@ -70,7 +70,7 @@ class WOOF_ADV {
 
     public function woof_dismiss_alert() {
         $alert = (array) get_option('woof_alert', array());
-        $alert[$_POST['alert']] = 1;
+        $alert[sanitize_key($_POST['alert'])] = 1;
 
         add_option('woof_alert', $alert, '', 'no');
         update_option('woof_alert', $alert);
@@ -89,7 +89,7 @@ class WOOF_ADV {
         $screen = get_current_screen();
         ?>
         <div class="notice notice-info is-dismissible" id="woof_alert_woocs" style="display: none;">
-            <p class="plugin-card-woocommerce-currency-switcher"<?php if ($screen->id != 'plugin-install') echo ' id="plugin-filter"' ?>>
+            <p class="plugin-card-woocommerce-currency-switcher" <?php if ($screen->id != 'plugin-install'): ?>id="plugin-filter"<?php endif; ?>>
                 <?php esc_html_e('For more marketing attraction of your woocommerce shop WOOF team recommends you to install', 'woocommerce-products-filter') ?> <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=woocommerce-currency-switcher&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal" aria-label="WOOF team recommends" data-title="WOOCS">WOOCS - WooCommerce Currency Switcher </a>.
                 <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=woocommerce-currency-switcher&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal button" aria-label="More information about WOOCS" data-title="WOOCS" id="woof_alert_install_button"><?php esc_html_e('Install', 'woocommerce-products-filter') ?></a>
                 <a class="install-now button" data-slug="woocommerce-currency-switcher" href="<?php echo network_admin_url('update.php?action=install-plugin') ?>&amp;plugin=woocommerce-currency-switcher&amp;_wpnonce=<?php echo wp_create_nonce('install-plugin-woocommerce-currency-switcher') ?>" aria-label="Install woocommerce currency switcher now" data-name="WOOCS - Woocommerce currency switcher" style="display:none"><?php esc_html_e('Install Now', 'woocommerce-products-filter') ?></a>
@@ -133,7 +133,7 @@ class WOOF_ADV {
         $screen = get_current_screen();
         ?>
         <div class="notice notice-info is-dismissible" id="woof_alert_woobe" style="display: none;">
-            <p class="plugin-card-woo-bulk-editor"<?php if ($screen->id != 'plugin-install') echo ' id="plugin-woobe"' ?>>
+            <p class="plugin-card-woo-bulk-editor" <?php if ($screen->id != 'plugin-install'): ?>id="plugin-woobe"<?php endif; ?>>
                 <?php esc_html_e('Try plugin for managing and BULK edit WooCommerce Products data in robust and flexible way', 'woocommerce-products-filter') ?>: <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=woo-bulk-editor&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal" aria-label="WOOF team recommends" data-title="BEAR">BEAR - WooCommerce Bulk Editor Professional</a>.
                 <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=woo-bulk-editor&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal button" aria-label="More information about BEAR" data-title="BEAR" id="woof_alert_install_button_woobe"><?php esc_html_e('Install', 'woocommerce-products-filter') ?></a>
                 <a class="install-now button" data-slug="woo-bulk-editor" href="<?php echo network_admin_url('update.php?action=install-plugin') ?>&amp;plugin=woo-bulk-editor&amp;_wpnonce=<?php echo wp_create_nonce('install-plugin-woo-bulk-editor') ?>" aria-label="Install woocommerce bulk editor now" data-name="Woocommerce bulk editor" style="display:none"><?php esc_html_e('Install Now', 'woocommerce-products-filter') ?></a>
@@ -178,7 +178,7 @@ class WOOF_ADV {
         $screen = get_current_screen();
         ?>
         <div class="notice notice-info is-dismissible" id="woof_alert_woot" style="display: none;">
-            <p class="plugin-card-profit-products-tables-for-woocommerce"<?php if ($screen->id != 'plugin-install') echo ' id="plugin-woot"' ?>>
+            <p class="plugin-card-profit-products-tables-for-woocommerce" <?php if ($screen->id != 'plugin-install'): ?>id="plugin-woot"<?php endif; ?>>
                 <?php esc_html_e('Try WOOF compatible plugin for displaying your WooCommerce shop products in table format', 'woocommerce-products-filter') ?>: <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=profit-products-tables-for-woocommerce&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal" aria-label="WOOF team recommends" data-title="WOOT">WOOT - Active Products Tables for WooCommerce</a>.
                 <a href="<?php echo network_admin_url('plugin-install.php?tab=plugin-information') ?>&amp;plugin=profit-products-tables-for-woocommerce&amp;TB_iframe=true&amp;width=600&amp;height=550" class="thickbox open-plugin-details-modal button" aria-label="More information about WOOT" data-title="WOOT" id="woof_alert_install_button_woot"><?php esc_html_e('Install', 'woocommerce-products-filter') ?></a>
                 <a class="install-now button" data-slug="woot-products-tables" href="<?php echo network_admin_url('update.php?action=install-plugin') ?>&amp;plugin=profit-products-tables-for-woocommerce&amp;_wpnonce=<?php echo wp_create_nonce('install-plugin-woot-products-tables') ?>" aria-label="Install woot now" data-name="Woocommerce woot" style="display:none"><?php esc_html_e('Install Now', 'woocommerce-products-filter') ?></a>

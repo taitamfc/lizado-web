@@ -53,7 +53,7 @@ if (!function_exists('woof_draw_radio_childs')) {
         $childs = apply_filters('woof_sort_terms_before_out', $childs, 'radio');
         ?>
         <?php if (!empty($childs)): ?>
-            <ul class="woof_childs_list woof_childs_list_<?php esc_attr_e($term_id) ?>" <?php if ($hide_childs == 1 AND!$parent_is_selected): ?>style="display: none;"<?php endif; ?>>
+            <ul class="woof_childs_list woof_childs_list_<?php echo esc_attr($term_id) ?>" <?php if ($hide_childs == 1 AND!$parent_is_selected): ?>style="display: none;"<?php endif; ?>>
             <?php foreach ($childs as $term) : $inique_id = uniqid(); ?>
                 <?php
                 $count_string = "";
@@ -89,13 +89,13 @@ if (!function_exists('woof_draw_radio_childs')) {
                 ?>
 
                     <li <?php if (woof()->settings['dispay_in_row'][$tax_slug] AND empty($term['childs'])): ?>style="display: inline-block !important;"<?php endif; ?>>
-                        <input type="radio" <?php if (!$count AND!in_array($term['slug'], $current_request) AND $show_count): ?>disabled=""<?php endif; ?> id="<?php esc_attr_e('woof_' . $term['term_id'] . '_' . $inique_id) ?>" class="woof_radio_term woof_radio_term_<?php esc_attr_e($term['term_id']) ?>" data-slug="<?php esc_attr_e($term['slug']) ?>" data-term-id="<?php esc_attr_e($term['term_id']) ?>" name="<?php esc_attr_e(woof()->check_slug($tax_slug)) ?>" value="<?php esc_attr_e($term['term_id']) ?>" <?php echo checked(in_array($term['slug'], $current_request)) ?> /><label class="woof_radio_label woof_radio_label_<?php esc_attr_e($term['slug']) ?> <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_label_selected<?php endif; ?>" for="<?php esc_attr_e('woof_' . $term['term_id'] . '_' . $inique_id) ?>"><?php
+                        <input type="radio" <?php if (!$count AND!in_array($term['slug'], $current_request) AND $show_count): ?>disabled=""<?php endif; ?> id="<?php echo esc_attr('woof_' . $term['term_id'] . '_' . $inique_id) ?>" class="woof_radio_term woof_radio_term_<?php echo esc_attr($term['term_id']) ?>" data-slug="<?php echo esc_attr($term['slug']) ?>" data-term-id="<?php echo esc_attr($term['term_id']) ?>" name="<?php echo esc_attr(woof()->check_slug($tax_slug)) ?>" value="<?php echo esc_attr($term['term_id']) ?>" <?php checked(in_array($term['slug'], $current_request)) ?> /><label class="woof_radio_label woof_radio_label_<?php echo esc_attr($term['slug']) ?> <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_label_selected<?php endif; ?>" for="<?php echo esc_attr('woof_' . $term['term_id'] . '_' . $inique_id) ?>"><?php
                     if (has_filter('woof_before_term_name'))
                         esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
                     else
                         esc_html_e($term['name']);
                     ?><?php echo wp_kses_post(wp_unslash($count_string)) ?></label>
-                        <a href="#" data-name="<?php esc_attr_e(woof()->check_slug($tax_slug)) ?>" data-term-id="<?php esc_attr_e($term['term_id']) ?>" style="<?php if (!in_array($term['slug'], $current_request)): ?>display: none;<?php endif; ?>" class="woof_radio_term_reset <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_term_reset_visible<?php endif; ?> woof_radio_term_reset_<?php esc_attr_e($term['term_id']) ?>">
+                        <a href="#" data-name="<?php echo esc_attr(woof()->check_slug($tax_slug)) ?>" data-term-id="<?php echo esc_attr($term['term_id']) ?>" style="<?php if (!in_array($term['slug'], $current_request)): ?>display: none;<?php endif; ?>" class="woof_radio_term_reset <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_term_reset_visible<?php endif; ?> woof_radio_term_reset_<?php echo esc_attr($term['term_id']) ?>">
                             <img src="<?php echo esc_url(woof()->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Delete", 'woocommerce-products-filter') ?>" />
                         </a>
                     <?php
@@ -103,7 +103,7 @@ if (!function_exists('woof_draw_radio_childs')) {
                         woof_draw_radio_childs($taxonomy_info, $tax_slug, $term['term_id'], $term['childs'], $show_count, $show_count_dynamic, $hide_dynamic_empty_pos, in_array($term['slug'], $current_request));
                     }
                     ?>
-                        <input type="hidden" value="<?php esc_attr_e($term['name']) ?>" data-anchor="woof_n_<?php esc_attr_e(woof()->check_slug($tax_slug)) ?>_<?php esc_attr_e($term['slug']) ?>" />
+                        <input type="hidden" value="<?php echo esc_attr($term['name']) ?>" data-anchor="woof_n_<?php echo esc_attr(woof()->check_slug($tax_slug)) ?>_<?php echo esc_attr($term['slug']) ?>" />
 
                     </li>
                         <?php endforeach; ?>
@@ -187,16 +187,16 @@ if (!function_exists('woof_draw_radio_childs')) {
                 $hide_next_term_li = true;
             }
             ?>
-            <li class="woof_term_<?php esc_attr_e($term['term_id']) ?> <?php if ($hide_next_term_li): ?>woof_hidden_term<?php endif; ?>">
-                <input type="radio" <?php if (!$count AND!in_array($term['slug'], $current_request) AND $show_count): ?>disabled=""<?php endif; ?> id="<?php esc_attr_e('woof_' . $term['term_id'] . '_' . $inique_id) ?>" class="woof_radio_term woof_radio_term_<?php esc_attr_e($term['term_id']) ?>" data-slug="<?php esc_attr_e($term['slug']) ?>" data-term-id="<?php esc_attr_e($term['term_id']) ?>" name="<?php esc_attr_e($this->check_slug($tax_slug)) ?>" value="<?php esc_attr_e($term['term_id']) ?>" <?php echo checked(in_array($term['slug'], $current_request)) ?> />
-                <label class="woof_radio_label <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_label_selected<?php endif; ?>" for="<?php esc_attr_e('woof_' . $term['term_id'] . '_' . $inique_id) ?>"><?php
+            <li class="woof_term_<?php echo esc_attr($term['term_id']) ?> <?php if ($hide_next_term_li): ?>woof_hidden_term<?php endif; ?>">
+                <input type="radio" <?php if (!$count AND!in_array($term['slug'], $current_request) AND $show_count): ?>disabled=""<?php endif; ?> id="<?php echo esc_attr('woof_' . $term['term_id'] . '_' . $inique_id) ?>" class="woof_radio_term woof_radio_term_<?php echo esc_attr($term['term_id']) ?>" data-slug="<?php echo esc_attr($term['slug']) ?>" data-term-id="<?php echo esc_attr($term['term_id']) ?>" name="<?php echo esc_attr($this->check_slug($tax_slug)) ?>" value="<?php echo esc_attr($term['term_id']) ?>" <?php checked(in_array($term['slug'], $current_request)) ?> />
+                <label class="woof_radio_label <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_label_selected<?php endif; ?>" for="<?php echo esc_attr('woof_' . $term['term_id'] . '_' . $inique_id) ?>"><?php
             if (has_filter('woof_before_term_name'))
                 esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
             else
                 esc_html_e($term['name']);
             ?><?php echo wp_kses_post(wp_unslash($count_string)) ?></label>
 
-                <a href="#" data-name="<?php esc_attr_e($this->check_slug($tax_slug)) ?>" data-term-id="<?php esc_attr_e($term['term_id']) ?>" style="<?php if (!in_array($term['slug'], $current_request)): ?>display: none;<?php endif; ?>" class="woof_radio_term_reset  <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_term_reset_visible<?php endif; ?> woof_radio_term_reset_<?php esc_attr_e($term['term_id']) ?>">
+                <a href="#" data-name="<?php echo esc_attr($this->check_slug($tax_slug)) ?>" data-term-id="<?php echo esc_attr($term['term_id']) ?>" style="<?php if (!in_array($term['slug'], $current_request)): ?>display: none;<?php endif; ?>" class="woof_radio_term_reset  <?php if (in_array($term['slug'], $current_request)): ?>woof_radio_term_reset_visible<?php endif; ?> woof_radio_term_reset_<?php echo esc_attr($term['term_id']) ?>">
                     <img src="<?php echo esc_url($this->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Delete", 'woocommerce-products-filter') ?>" />
                 </a>
 
@@ -205,7 +205,7 @@ if (!function_exists('woof_draw_radio_childs')) {
                 woof_draw_radio_childs($taxonomy_info, $tax_slug, $term['term_id'], $term['childs'], $show_count, $show_count_dynamic, $hide_dynamic_empty_pos, in_array($term['slug'], $current_request));
             }
             ?>
-                <input type="hidden" value="<?php esc_attr_e($term['name']) ?>" data-anchor="woof_n_<?php esc_attr_e($this->check_slug($tax_slug)) ?>_<?php esc_attr_e($term['slug']) ?>" />
+                <input type="hidden" value="<?php echo esc_attr($term['name']) ?>" data-anchor="woof_n_<?php echo esc_attr($this->check_slug($tax_slug)) ?>_<?php echo esc_attr($term['slug']) ?>" />
 
             </li>
             <?php

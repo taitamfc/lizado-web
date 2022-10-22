@@ -204,9 +204,7 @@ final class WOOF_EXT_QUICK_TEXT extends WOOF_EXT {
 
         
         $data = array();
-
         $data['woof_settings'] = $this->woof_settings;
-
         echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 

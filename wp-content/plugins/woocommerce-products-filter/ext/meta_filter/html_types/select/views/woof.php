@@ -109,30 +109,30 @@ if (!count($all_options)) {
     return "";
 }
 ?>
-<div data-css-class="woof_meta_select_container" class="woof_meta_select_container woof_container woof_container_<?php esc_attr_e($meta_key) ?>  woof_container_<?php esc_attr_e("select_" . $meta_key) ?>">
+<div data-css-class="woof_meta_select_container" class="woof_meta_select_container woof_container woof_container_<?php echo esc_attr($meta_key) ?>  woof_container_<?php echo esc_attr("select_" . $meta_key) ?>">
     <div class="woof_container_inner">
         <div class="woof_container_inner woof_container_inner_meta_select">
             <?php if ($show_title_label) {
                 ?>
                 <<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
-                <?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
-                <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
+                <?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
+                <?php WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
                 <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?>
                 </<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
             <?php }
             ?>
-            <div class="<?php esc_attr_e($css_classes) ?>">
+            <div class="<?php echo esc_attr($css_classes) ?>">
                 <?php $meta_id = 'woof_meta_select_' . $meta_key ?>
-                <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($meta_id) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>				
-                <select id="<?php esc_attr_e($meta_id) ?>" class="woof_meta_select woof_meta_select_<?php esc_attr_e($meta_key) ?>" name="<?php echo "select_" . esc_attr($meta_key) ?>">
-                    <option value="0"><?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></option>
+                <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($meta_id) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>				
+                <select id="<?php echo esc_attr($meta_id) ?>" class="woof_meta_select woof_meta_select_<?php echo esc_attr($meta_key) ?>" name="<?php echo esc_attr("select_" . $meta_key) ?>">
+                    <option value="0"><?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></option>
 
                     <?php if (!empty($all_options)): ?>
                         <?php foreach ($all_options as $key => $option) : ?>
 
-                            <option <?php if ($show_count AND $option['count'] == 0 AND $key != $woof_value): ?>disabled=""<?php endif; ?> value="<?php esc_attr_e($key) ?>" <?php selected($key == intval($woof_value)) ?>>
+                            <option <?php if ($show_count AND $option['count'] == 0 AND $key != $woof_value): ?>disabled=""<?php endif; ?> value="<?php echo esc_attr($key) ?>" <?php selected($key == intval($woof_value)) ?>>
                                 <?php
-                                esc_html_e($option['name']);
+                                echo esc_html($option['name']);
                                 ?>
                             </option>
                         <?php endforeach; ?>
@@ -150,7 +150,7 @@ if (!count($all_options)) {
                     }
                 }
                 ?>   
-                <input type="hidden" value="<?php esc_html_e(WOOF_HELPER::wpml_translate(null, $curr_title)); ?>" data-anchor="woof_n_<?php esc_attr_e("select_" . $meta_key) ?>_<?php esc_attr_e($woof_value) ?>" />
+                <input type="hidden" value="<?php echo esc_html(WOOF_HELPER::wpml_translate(null, $curr_title)); ?>" data-anchor="woof_n_<?php echo esc_attr("select_" . $meta_key) ?>_<?php echo esc_attr($woof_value) ?>" />
 
             </div>    
         </div>        

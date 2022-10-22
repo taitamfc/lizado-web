@@ -179,7 +179,7 @@ final class WOOF_EXT_TURBO_MODE extends WOOF_EXT {
 
         $data['woof_settings'] = $this->woof_settings;
 
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function create_data_search_files() {

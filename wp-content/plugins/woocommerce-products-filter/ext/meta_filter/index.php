@@ -146,7 +146,7 @@ final class WOOF_META_FILTER extends WOOF_EXT {
         $data['meta_types'] = $this->meta_filter_types;
         $data['metas'] = (isset($data['woof_settings']['meta_filter'])) ? $data['woof_settings']['meta_filter'] : array();
 
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     // +++
@@ -161,9 +161,13 @@ final class WOOF_META_FILTER extends WOOF_EXT {
         }
         
         $product_id = intval(WOOF_REQUEST::get('product_id'));//data from AJAX request
-        
+
         if ($product_id > 0) {
-            $a1 = array_keys(get_post_meta($product_id, '', true));
+			$meta = get_post_meta($product_id, '');
+			if(!is_array($meta)){
+				$meta = array();
+			}
+            $a1 = array_keys($meta);
             $res = array_diff($a1, $this->excluded_meta);
         }
 
@@ -182,7 +186,7 @@ final class WOOF_META_FILTER extends WOOF_EXT {
         $key = str_replace('woof_print_html_type_options_', "", current_filter());
         
         ?>
-        <li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+        <li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
             <?php
             $show = 0;
@@ -193,23 +197,23 @@ final class WOOF_META_FILTER extends WOOF_EXT {
 
             <span class="icon-arrow-combo help_tip woof_drag_and_drope" data-tip="<?php esc_html_e("drag and drop", 'woocommerce-products-filter'); ?>"></span>
 
-            <strong class="woof_fix1"><?php esc_html_e($this->woof_settings['meta_filter'][$key]['title']) ?>:</strong>
+            <strong class="woof_fix1"><?php echo esc_html($this->woof_settings['meta_filter'][$key]['title']) ?>:</strong>
 
 
             <span class="icon-question help_tip" data-tip="<?php esc_html_e('Meta filter', 'woocommerce-products-filter') ?>"></span>
 
             <div class="select-wrap">
-                <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+                <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
                     <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
                     <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
                 </select>
             </div>
-            <a href="#" data-key="<?php esc_attr_e($key) ?>" data-name="<?php esc_html_e($this->woof_settings['meta_filter'][$key]['title']) ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+            <a href="#" data-key="<?php echo esc_attr($key) ?>" data-name="<?php echo esc_html($this->woof_settings['meta_filter'][$key]['title']) ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
                 <?php
                 $data = array();
                 $data['key'] = $key;
                 $data['settings'] = $this->woof_settings;
-                echo woof()->render_html($this->get_ext_path() . 'html_types/' . $this->woof_settings['meta_filter'][$key]['search_view'] . '/views/additional_options.php', $data);
+                woof()->render_html_e($this->get_ext_path() . 'html_types/' . $this->woof_settings['meta_filter'][$key]['search_view'] . '/views/additional_options.php', $data);
                 ?>      
         </li>
         <?php

@@ -83,7 +83,7 @@ if (!function_exists('woof_draw_select_childs')) {
                     continue;
                 }
                 ?>
-                <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php esc_attr_e($term['slug']) ?>" <?php echo selected(in_array($term['slug'], $current_request)) ?> class="woof-padding-<?php esc_attr_e($level) ?>"><?php echo str_repeat(' ', esc_attr($level)) ?><?php
+                <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php echo esc_attr($term['slug']) ?>" <?php selected(in_array($term['slug'], $current_request)) ?> class="woof-padding-<?php echo esc_attr($level) ?>"><?php echo str_repeat(' ', esc_attr($level)) ?><?php
                     if (has_filter('woof_before_term_name'))
                         esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
                     else
@@ -110,9 +110,9 @@ if (!function_exists('woof_draw_select_childs')) {
 }
 $select_id = "woof_tax_select_" . $tax_slug;
 ?>
-<label class="woof_wcga_label_hide"  for="<?php esc_attr_e($select_id) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)); ?></label>
-<select id='<?php esc_attr_e($select_id) ?>' class="woof_select woof_select_<?php esc_attr_e($tax_slug) ?>" name="<?php esc_attr_e($this->check_slug($tax_slug)) ?>">
-    <option value="0"><?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)) ?></option>
+<label class="woof_wcga_label_hide"  for="<?php echo esc_attr($select_id) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)); ?></label>
+<select id='<?php echo esc_attr($select_id) ?>' class="woof_select woof_select_<?php echo esc_attr($tax_slug) ?>" name="<?php echo esc_attr($this->check_slug($tax_slug)) ?>">
+    <option value="0"><?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)) ?></option>
     <?php
     $woof_tax_values = array();
     $current_request = array();
@@ -167,7 +167,7 @@ $select_id = "woof_tax_select_" . $tax_slug;
                 continue;
             }
             ?>
-            <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php esc_attr_e($term['slug']) ?>" <?php echo selected(in_array($term['slug'], $current_request)) ?>><?php
+            <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php echo esc_attr($term['slug']) ?>" <?php selected(in_array($term['slug'], $current_request)) ?>><?php
                 if (has_filter('woof_before_term_name'))
                     esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
                 else
@@ -191,7 +191,7 @@ $select_id = "woof_tax_select_" . $tax_slug;
     <?php endif; ?>
 </select>
 <?php if ($shown_options_tags == 0): ?>
-    <input type="hidden" class="woof_hide_empty_container" value=".woof_container_<?php esc_attr_e($tax_slug) ?>">			
+    <input type="hidden" class="woof_hide_empty_container" value=".woof_container_<?php echo esc_attr($tax_slug) ?>">			
 <?php endif; ?>            
 
 <?php
@@ -201,7 +201,7 @@ if (!empty($collector)) {
         if (!empty($values)) {
             foreach ($values as $value) {
                 ?>
-                <input type="hidden" value="<?php esc_html_e($value['name']) ?>" data-anchor="woof_n_<?php esc_attr_e($this->check_slug($ts)) ?>_<?php esc_attr_e($value['slug']) ?>" />
+                <input type="hidden" value="<?php echo esc_html($value['name']) ?>" data-anchor="woof_n_<?php echo esc_attr($this->check_slug($ts)) ?>_<?php echo esc_attr($value['slug']) ?>" />
                 <?php
             }
         }

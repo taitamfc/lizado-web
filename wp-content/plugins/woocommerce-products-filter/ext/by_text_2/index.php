@@ -100,7 +100,7 @@ final class WOOF_EXT_BY_TEXT_2 extends WOOF_EXT {
         var woof_text_autocomplete_items = 10;
         <?php if (isset(woof()->settings['by_text_2']['autocomplete'])): ?>
             woof_text_autocomplete =<?php echo intval(woof()->settings['by_text_2']['autocomplete']) ?>;
-            woof_text_autocomplete_items =<?php esc_html_e(apply_filters('woof_text_autocomplete_items', 10)) ?>;
+            woof_text_autocomplete_items =<?php echo esc_html(apply_filters('woof_text_autocomplete_items', 10)) ?>;
         <?php endif; ?>
 
         var woof_post_links_in_autocomplete = 0;
@@ -149,7 +149,7 @@ final class WOOF_EXT_BY_TEXT_2 extends WOOF_EXT {
     //settings page hook
     public function woof_print_html_type_options() {
         
-        echo woof()->render_html($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
+        woof()->render_html_e($this->get_ext_path() . 'views' . DIRECTORY_SEPARATOR . 'options.php', array(
             'key' => $this->html_type,
             "woof_settings" => get_option('woof_settings', array())
                 )
@@ -411,9 +411,9 @@ final class WOOF_EXT_BY_TEXT_2 extends WOOF_EXT {
                                 $condtion_string .= " OR ";
                             }
                             if (woof()->settings['by_sku']['logic'] == '=') {
-                                $condtion_string .= "postmeta.meta_value {woof()->settings['by_sku']['logic']} '$sku'";
+                                $condtion_string .= "postmeta.meta_value " . woof()->settings['by_sku']['logic']. " '$sku'";
                             } else {
-                                $condtion_string .= "postmeta.meta_value {woof()->settings['by_sku']['logic']} '%$sku%'";
+                                $condtion_string .= "postmeta.meta_value " . woof()->settings['by_sku']['logic']. " '%$sku%'";
                             }
                         }
                     }

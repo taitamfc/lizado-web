@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 ?>
 
-<li data-key="<?php esc_attr_e($key) ?>" class="woof_options_li">
+<li data-key="<?php echo esc_attr($key) ?>" class="woof_options_li">
 
     <?php
     $show = 0;
@@ -20,14 +20,14 @@ if (!defined('ABSPATH'))
     <span class="icon-question help_tip" data-tip="<?php esc_html_e('Show product mesenger box inside woof search form', 'woocommerce-products-filter') ?>"></span>
 
     <div class="select-wrap">
-        <select name="woof_settings[<?php esc_attr_e($key) ?>][show]" class="woof_setting_select">
+        <select name="woof_settings[<?php echo esc_attr($key) ?>][show]" class="woof_setting_select">
             <option value="0" <?php selected($show, 0) ?>><?php esc_html_e('No', 'woocommerce-products-filter') ?></option>
             <option value="1" <?php selected($show, 1) ?>><?php esc_html_e('Yes', 'woocommerce-products-filter') ?></option>
         </select>
     </div>
 
 
-    <a href="#" data-key="<?php esc_attr_e($key) ?>" data-name="<?php esc_html_e("Products Messenger", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php esc_attr_e($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
+    <a href="#" data-key="<?php echo esc_attr($key) ?>" data-name="<?php esc_html_e("Products Messenger", 'woocommerce-products-filter'); ?>" class="woof-button js_woof_options js_woof_options_<?php echo esc_attr($key) ?> help_tip" data-tip="<?php esc_html_e('additional options', 'woocommerce-products-filter') ?>"><span class="icon-cog-outline"></span></a>
 
 
 
@@ -75,20 +75,20 @@ if (!defined('ABSPATH'))
     ?>
 
     <?php $cron_key = $woof_settings[$key]['use_external_cron'] ?>
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_label]" value="<?php echo intval($woof_settings[$key]['show_label']) ?>" /> 
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][label]" value="<?php esc_html_e($woof_settings[$key]['label']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][notes_for_customer]" value="<?php echo stripcslashes(wp_kses_post(wp_unslash($woof_settings[$key]['notes_for_customer']))); ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][show_btn_subscr]" value="<?php echo intval($woof_settings[$key]['show_btn_subscr']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][wp_cron_period]" value="<?php esc_html_e($woof_settings[$key]['wp_cron_period']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][use_external_cron]" value="<?php esc_html_e($woof_settings[$key]['use_external_cron']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][subscr_count]" value="<?php echo intval($woof_settings[$key]['subscr_count']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][header_email]" value="<?php esc_html_e($woof_settings[$key]['header_email']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][subject_email]" value="<?php esc_html_e($woof_settings[$key]['subject_email']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][text_email]" value="<?php echo wp_kses_post(wp_unslash($woof_settings[$key]['text_email'])) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][date_expire]" value="<?php esc_html_e($woof_settings[$key]['date_expire']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][count_message]" value="<?php echo intval($woof_settings[$key]['count_message']) ?>" />
-    <input type="hidden" name="woof_settings[<?php esc_attr_e($key) ?>][priority_limit]" value="<?php esc_html_e($woof_settings[$key]['priority_limit']) ?>" />
-    <div id="woof-modal-content-<?php esc_attr_e($key) ?>" style="display: none;">
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_label]" value="<?php echo intval($woof_settings[$key]['show_label']) ?>" /> 
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][label]" value="<?php echo esc_html($woof_settings[$key]['label']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][notes_for_customer]" value="<?php echo stripcslashes(wp_kses_post(wp_unslash($woof_settings[$key]['notes_for_customer']))); ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][show_btn_subscr]" value="<?php echo intval($woof_settings[$key]['show_btn_subscr']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][wp_cron_period]" value="<?php echo esc_html($woof_settings[$key]['wp_cron_period']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][use_external_cron]" value="<?php echo esc_html($woof_settings[$key]['use_external_cron']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][subscr_count]" value="<?php echo intval($woof_settings[$key]['subscr_count']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][header_email]" value="<?php echo esc_html($woof_settings[$key]['header_email']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][subject_email]" value="<?php echo esc_html($woof_settings[$key]['subject_email']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][text_email]" value="<?php echo wp_kses_post(wp_unslash($woof_settings[$key]['text_email'])) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][date_expire]" value="<?php echo esc_html($woof_settings[$key]['date_expire']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][count_message]" value="<?php echo intval($woof_settings[$key]['count_message']) ?>" />
+    <input type="hidden" name="woof_settings[<?php echo esc_attr($key) ?>][priority_limit]" value="<?php echo esc_html($woof_settings[$key]['priority_limit']) ?>" />
+    <div id="woof-modal-content-<?php echo esc_attr($key) ?>" style="display: none;">
 
         <div class="woof-form-element-container">
 
@@ -121,7 +121,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="show_btn_subscr">
                         <?php foreach ($autocomplete as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -151,7 +151,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="wp_cron_period">
                         <?php foreach ($wp_cron_periods as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -163,7 +163,7 @@ if (!defined('ABSPATH'))
 
             <div class="woof-name-description">
                 <strong><?php esc_html_e('External cron key (is recommended as flexible for timetable)', 'woocommerce-products-filter') ?></strong>
-                <span><?php esc_html_e('For external cron use the next link', 'woocommerce-products-filter'); ?>: <i class="woof_cron_link" ><b><?php echo get_home_url() . "?woof_pm_cron_key=" . $cron_key; ?></b></i><br />
+                <span><?php esc_html_e('For external cron use the next link', 'woocommerce-products-filter'); ?>: <i class="woof_cron_link" ><b><?php echo get_home_url() . "?woof_pm_cron_key=" . esc_html($cron_key); ?></b></i><br />
                     <?php esc_html_e('To update the key, just delete it and save the plugin settings. Key should be min 16 symbols.', 'woocommerce-products-filter'); ?> 
                 </span>
             </div>
@@ -242,7 +242,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="date_expire">
                         <?php foreach ($expire_periods as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -280,7 +280,7 @@ if (!defined('ABSPATH'))
                 <div class="select-wrap">
                     <select class="woof_popup_option" data-option="priority_limit">
                         <?php foreach ($priority_limit as $key => $value) : ?>
-                            <option value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                            <option value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

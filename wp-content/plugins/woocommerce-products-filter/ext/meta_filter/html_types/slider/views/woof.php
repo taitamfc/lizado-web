@@ -98,35 +98,35 @@ if ($show):
     $top_panel_txt .= sprintf(":%s %s %s", $meta_settings['prefix'], str_replace("^", "-", $current_request_txt), $meta_settings['postfix']);
     $slider_id = "woof_meta_slider_" . $meta_key;
     ?>
-    <div data-css-class="woof_meta_slider_container" class="woof_meta_slider_container woof_container woof_container_<?php esc_attr_e("slider_" . $meta_key) ?>">
+    <div data-css-class="woof_meta_slider_container" class="woof_meta_slider_container woof_container woof_container_<?php echo esc_attr("slider_" . $meta_key) ?>">
         <div class="woof_container_inner">
             <div class="woof_container_inner woof_container_inner_meta_slider">
                 <?php if ($show_title_label) {
                     ?>
                     <<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
-                    <?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
-                    <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
+                    <?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
+                    <?php WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
                     <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?>
                     </<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
                 <?php }
                 ?>
-                <div class="<?php esc_attr_e($css_classes) ?>">
+                <div class="<?php echo esc_attr($css_classes) ?>">
                     <?php
                     if (isset($meta_settings['show_inputs']) AND $meta_settings['show_inputs']) {
                         ?>
                         <div class="woof_metarange_slider_inputs">
-                            <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($slider_id) ?>_from"><?php _e('From', 'woocommerce-products-filter') ?></label>
-                            <input id="<?php esc_attr_e($slider_id) ?>_from" type="number" data-name="<?php esc_attr_e("slider_" . $meta_key) ?>" class="woof_metarange_slider_input_<?php esc_attr_e($meta_key) ?> woof_metarange_slider_from" placeholder="<?php esc_html_e($min) ?>" min="<?php esc_html_e($min) ?>" max="<?php esc_html_e($max) ?>"  value="<?php esc_html_e($min_value) ?>" />&nbsp;
-                            <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($slider_id) ?>_to"><?php _e('To', 'woocommerce-products-filter') ?></label>
-                            <input id="<?php esc_attr_e($slider_id) ?>_to" type="number" data-name="<?php esc_attr_e("slider_" . $meta_key) ?>" class="woof_metarange_slider_input_<?php esc_attr_e($meta_key) ?> woof_metarange_slider_to" placeholder="<?php esc_html_e($max) ?>" min="<?php esc_html_e($min) ?>" max="<?php esc_html_e($max) ?>"  value="<?php esc_html_e($max_value) ?>" />
+                            <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($slider_id) ?>_from"><?php esc_html_e('From', 'woocommerce-products-filter') ?></label>
+                            <input id="<?php echo esc_attr($slider_id) ?>_from" type="number" data-name="<?php echo esc_attr("slider_" . $meta_key) ?>" class="woof_metarange_slider_input_<?php echo esc_attr($meta_key) ?> woof_metarange_slider_from" placeholder="<?php echo esc_html($min) ?>" min="<?php echo esc_html($min) ?>" max="<?php echo esc_html($max) ?>"  value="<?php echo esc_html($min_value) ?>" />&nbsp;
+                            <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($slider_id) ?>_to"><?php esc_html_e('To', 'woocommerce-products-filter') ?></label>
+                            <input id="<?php echo esc_attr($slider_id) ?>_to" type="number" data-name="<?php echo esc_attr("slider_" . $meta_key) ?>" class="woof_metarange_slider_input_<?php echo esc_attr($meta_key) ?> woof_metarange_slider_to" placeholder="<?php echo esc_html($max) ?>" min="<?php echo esc_html($min) ?>" max="<?php echo esc_html($max) ?>"  value="<?php echo esc_html($max_value) ?>" />
                             <div class="woof_float_none"></div>
                         </div>
                     <?php } ?>
 
-                    <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($slider_id) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>
-                    <input id="<?php esc_attr_e($slider_id) ?>" class="woof_metarange_slider" name="<?php esc_attr_e('slider_' . $meta_key) ?>" data-skin="<?php esc_attr_e($skin) ?>" data-min="<?php esc_html_e($min) ?>" data-max="<?php esc_html_e($max) ?>" data-min-now="<?php esc_html_e($min_value) ?>" data-max-now="<?php esc_html_e($max_value) ?>" data-step="<?php echo intval($meta_settings['step']) ?>" data-slider-prefix="<?php esc_html_e($meta_settings['prefix']) ?>" data-slider-postfix="<?php esc_html_e($meta_settings['postfix']) ?>" value="" />
+                    <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($slider_id) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>
+                    <input id="<?php echo esc_attr($slider_id) ?>" class="woof_metarange_slider" name="<?php echo esc_attr('slider_' . $meta_key) ?>" data-skin="<?php echo esc_attr($skin) ?>" data-min="<?php echo esc_html($min) ?>" data-max="<?php echo esc_html($max) ?>" data-min-now="<?php echo esc_html($min_value) ?>" data-max-now="<?php echo esc_html($max_value) ?>" data-step="<?php echo intval($meta_settings['step']) ?>" data-slider-prefix="<?php echo esc_html($meta_settings['prefix']) ?>" data-slider-postfix="<?php echo esc_html($meta_settings['postfix']) ?>" value="" />
                 </div>
-                <input type="hidden" value="<?php esc_html_e($top_panel_txt) ?>" data-anchor="woof_n_<?php esc_attr_e('slider_' . $meta_key) ?>_<?php esc_attr_e($current_request_txt) ?>" />
+                <input type="hidden" value="<?php echo esc_html($top_panel_txt) ?>" data-anchor="woof_n_<?php echo esc_attr('slider_' . $meta_key) ?>_<?php echo esc_attr($current_request_txt) ?>" />
             </div>
         </div>
     </div>

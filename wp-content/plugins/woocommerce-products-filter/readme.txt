@@ -3,9 +3,11 @@ Contributors: RealMag777
 Donate link: https://pluginus.net/affiliate/woocommerce-products-filter
 Tags: filter, products filter, product filter, woocommerce, products, ajax filter, category filter, woocommerce products filter, woocommerce price filter, attributes filter, advanced product filters, woof
 Requires at least: 4.9.0
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 1.2.9.3
+Stable tag: 1.3.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 WooCommerce Products Filter – flexible, easy and robust professional filter for products in the WooCommerce store
 
@@ -84,7 +86,9 @@ Demo site 3: [turbo.products-filter.com](https://turbo.products-filter.com/)
 
 &#9989;&nbsp;Compatible with [WooCommerce Products Per Page](https://wordpress.org/plugins/woocommerce-products-per-page/)
 
-&#9989;&nbsp;PHP 5.6.x - 8.x full compatibility
+&#9989;&nbsp;Compatible with [DIVI WordPress Theme](https://demo-divi.products-filter.com/)
+
+&#9989;&nbsp;PHP 7.0.x - 8.x full compatibility
 
 &#9989;&nbsp;Simple, robust AND rich options panel
 
@@ -132,6 +136,8 @@ Q: Where can I see demo?
 R: [Demo main](https://demo.products-filter.com/)
 R: [Demo 10 000 products](https://demo10k.products-filter.com/)
 R: [Demo Turbo 23 000 products](https://turbo.products-filter.com/)
+R: [Demo Divi wp theme](https://demo-divi.products-filter.com/)
+R: [Demo Avada wp theme](https://demo-avada.products-filter.com/)
 
 Q: Where can I see video tutorials?
 R: [Video Tutorials](https://products-filter.com/video/)
@@ -154,6 +160,17 @@ R: [Codex](https://products-filter.com/codex/)
 
 
 == Changelog ==
+
+= 1.3.0 =
+* code sanitizing
+* code refactoring
+
+= 1.2.9.5 =
+* more code sanitizing
+
+= 1.2.9.4 =
+* more code sanitizing
+* woo 6.9 ready tests
 
 = 1.2.9.3 =
 * code sanitizing

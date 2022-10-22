@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
 //keeps current user data
 final class WOOF_STORAGE {
 
-    public $type = 'session'; //session, transient, cookie
+    public $type = 'session'; //session, transient
     private $user_ip = null;
     private $transient_key = null;
 
@@ -26,7 +26,7 @@ final class WOOF_STORAGE {
         }
 
         if (isset($_SERVER['REMOTE_ADDR'])) {
-            $this->user_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
+            $this->user_ip = filter_var(WOOF_HELPER::get_server_var('REMOTE_ADDR'), FILTER_VALIDATE_IP);
             $this->transient_key = md5($this->user_ip . 'woof_salt');
         }
     }
@@ -43,9 +43,6 @@ final class WOOF_STORAGE {
                 }
                 $data[$key] = $value;
                 set_transient($this->transient_key, $data, 1 * 24 * 3600); //1 day
-                break;
-            case 'cookie':
-                setcookie($key, $value, time() + 1 * 24 * 3600); //1 day
                 break;
 
             default:
@@ -70,11 +67,6 @@ final class WOOF_STORAGE {
                     $value = $data[$key];
                 }
                 break;
-            case 'cookie':
-                if ($this->is_isset($key)) {
-                    $value = $_COOKIE[$key];
-                }
-                break;
 
             default:
                 break;
@@ -96,14 +88,8 @@ final class WOOF_STORAGE {
                 if (isset($data[$key])) {
                     unset($data[$key]);
                 }
-                set_transient($this->transient_key, $data, 1 * 24 * 3600); //1 day 
-                //delete_transient($this->transient_key); 
-                break;
-            case 'cookie':
-                if ($this->is_isset($key)) {
-                    unset($_COOKIE[$key]);
-                    setcookie($key, '', time() - 3600, '/');
-                }
+                set_transient($this->transient_key, $data, 1 * 24 * 3600); //1 day
+                //delete_transient($this->transient_key);
                 break;
 
             default:
@@ -121,9 +107,6 @@ final class WOOF_STORAGE {
                 break;
             case 'transient':
                 $isset = (bool) $this->get_val($key);
-                break;
-            case 'cookie':
-                $isset = isset($_COOKIE[$key]);
                 break;
 
             default:

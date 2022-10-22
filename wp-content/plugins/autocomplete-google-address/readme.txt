@@ -3,7 +3,7 @@ Contributors: nishathbd31
 Donate link: https://www.facebook.com/nishat.rafi.60
 Tags: Autocomplete,Google Address Autocomplete,Autocomplete Google Address,Address Autocomplete
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 6.0.2
 Stable tag: trunk
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -51,6 +51,9 @@ No, It's totally free. No paid version is available.
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif).
 2. This is the second screen shot
 
+== Upgrade Notice ==
+= 1.9.3=
+version compatablity 
 == Changelog ==
 = 1.9.2=
 multiple autocomplete issue solved.

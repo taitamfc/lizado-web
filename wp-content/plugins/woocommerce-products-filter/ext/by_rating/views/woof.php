@@ -16,9 +16,9 @@ if (isset(woof()->settings['by_rating']) AND woof()->settings['by_rating']['show
         $selected = woof()->is_isset_in_request_data('min_rating') ? $request['min_rating'] : 0;
         $select_id = "woof_select_range";
         ?>
-        <div class="woof_container_inner <?php esc_attr_e($as_star ? "woof_star_selected" : "") ?>">
-            <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($select_id) ?>"><?php esc_html_e('Filter by rating', 'woocommerce-products-filter') ?></label>
-            <select id="<?php esc_attr_e($select_id) ?>" class="woof_by_rating_dropdown woof_select" name="min_rating">
+        <div class="woof_container_inner <?php echo esc_attr($as_star ? "woof_star_selected" : "") ?>">
+            <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($select_id) ?>"><?php esc_html_e('Filter by rating', 'woocommerce-products-filter') ?></label>
+            <select id="<?php echo esc_attr($select_id) ?>" class="woof_by_rating_dropdown woof_select" name="min_rating">
                 <?php
                 $vals = array(
                     0 => esc_html__('Filter by rating', 'woocommerce-products-filter'),
@@ -38,10 +38,10 @@ if (isset(woof()->settings['by_rating']) AND woof()->settings['by_rating']['show
                 }
                 ?>
                 <?php foreach ($vals as $key => $value): ?>
-                    <option <?php selected($selected, $key); ?> <?php esc_attr_e(($key !== 0 AND $as_star) ? "class='woof_star_font'" : "") ?> value="<?php esc_attr_e($key) ?>"><?php esc_html_e($value) ?></option>
+                    <option <?php selected($selected, $key); ?> <?php echo esc_attr(($key !== 0 AND $as_star) ? "class='woof_star_font'" : "") ?> value="<?php echo esc_attr($key) ?>"><?php esc_html_e($value) ?></option>
                 <?php endforeach; ?>
             </select>
-            <input type="hidden" value="<?php echo esc_html('Min rating: ', 'woocommerce-products-filter'), $selected ?>" data-anchor="woof_n_<?php esc_attr_e("min_rating") ?>_<?php esc_attr_e($selected) ?>" />
+            <input type="hidden" value="<?php esc_html_e('Min rating: ', 'woocommerce-products-filter') ?><?php echo esc_html($selected) ?>" data-anchor="woof_n_<?php echo esc_attr("min_rating") ?>_<?php echo esc_attr($selected) ?>" />
         </div>
     </div>
     <?php

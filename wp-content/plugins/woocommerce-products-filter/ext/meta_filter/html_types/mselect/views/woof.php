@@ -55,22 +55,22 @@ if (WOOF_REQUEST::isset('hide_terms_count_txt_short') AND intval(WOOF_REQUEST::i
 }
 //***
 ?>
-<div data-css-class="woof_meta_mselect_container" class="woof_meta_mselect_container woof_container woof_container_<?php esc_attr_e($meta_key) ?> woof_container woof_container_<?php esc_attr_e($meta_key) ?>  woof_container_<?php esc_attr_e("mselect_" . $meta_key) ?>" >
+<div data-css-class="woof_meta_mselect_container" class="woof_meta_mselect_container woof_container woof_container_<?php echo esc_attr($meta_key) ?> woof_container woof_container_<?php echo esc_attr($meta_key) ?>  woof_container_<?php echo esc_attr("mselect_" . $meta_key) ?>" >
     <div class="woof_container_inner">
         <div class="woof_container_inner woof_container_inner_meta_mselect">
             <?php if ($show_title_label) {
                 ?>
                 <<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
-                <?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
-                <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
+                <?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
+                <?php WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, $options['title']), $tooltip_text) ?>
                 <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?>
                 </<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
             <?php }
             ?>
-            <div class="<?php esc_attr_e($css_classes) ?>">
+            <div class="<?php echo esc_attr($css_classes) ?>">
                 <?php $meta_id = 'woof_meta_mselect_' . $meta_key ?>
-                <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($meta_id) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>					
-                <select id="<?php esc_attr_e($meta_id) ?>" class="woof_meta_mselect woof_meta_mselect_<?php esc_attr_e($meta_key) ?>" name="<?php esc_attr_e("mselect_" . $meta_key) ?>"multiple="multiple" data-placeholder="<?php esc_html_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>" data-options_separator="<?php esc_html_e($options_separator); ?>">
+                <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($meta_id) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?></label>					
+                <select id="<?php echo esc_attr($meta_id) ?>" class="woof_meta_mselect woof_meta_mselect_<?php echo esc_attr($meta_key) ?>" name="<?php echo esc_attr("mselect_" . $meta_key) ?>"multiple="multiple" data-placeholder="<?php echo esc_html(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>" data-options_separator="<?php echo esc_html($options_separator); ?>">
                     <?php if (count($meta_options) < 1): ?>
                         <option value="0"><?php esc_html_e('Notice! Add options in the plugin settings->Meta filter', 'woocommerce-products-filter') ?></option>
                     <?php endif; ?>
@@ -117,9 +117,9 @@ if (WOOF_REQUEST::isset('hide_terms_count_txt_short') AND intval(WOOF_REQUEST::i
                                 $count_string = "";
                             }
                             ?>
-                        <option <?php if ($show_count AND $count == 0 AND!in_array($key + 1, $woof_value)): ?>disabled=""<?php endif; ?> value="<?php echo intval($key + 1) ?>" <?php echo selected(in_array($key + 1, $woof_value)) ?>>
+                        <option <?php if ($show_count AND $count == 0 AND!in_array($key + 1, $woof_value)): ?>disabled=""<?php endif; ?> value="<?php echo intval($key + 1) ?>" <?php selected(in_array($key + 1, $woof_value)) ?>>
                                 <?php
-                                esc_html_e(WOOF_HELPER::wpml_translate(null, $option_title));
+                                echo esc_html(WOOF_HELPER::wpml_translate(null, $option_title));
                                 echo wp_kses_post(wp_unslash($count_string));
                                 ?>
                             </option>
@@ -139,7 +139,7 @@ if (WOOF_REQUEST::isset('hide_terms_count_txt_short') AND intval(WOOF_REQUEST::i
                         }
                     }
                     ?>   
-                    <input type="hidden" value="<?php esc_html_e(WOOF_HELPER::wpml_translate(null, $curr_title)); ?>" data-anchor="woof_n_<?php esc_attr_e("mselect_" . $meta_key) ?>_<?php esc_attr_e($key_val) ?>" />
+                    <input type="hidden" value="<?php echo esc_html(WOOF_HELPER::wpml_translate(null, $curr_title)); ?>" data-anchor="woof_n_<?php echo esc_attr("mselect_" . $meta_key) ?>_<?php echo esc_attr($key_val) ?>" />
                 <?php } ?>
 
             </div>    

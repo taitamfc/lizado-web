@@ -82,7 +82,7 @@ if (!function_exists('woof_draw_mselect_childs')) {
                     continue;
                 }
                 ?>
-                <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php esc_attr_e($term['slug']) ?>" <?php echo selected(in_array($term['slug'], $current_request)) ?> class="woof-padding-<?php esc_attr_e($level) ?>"><?php /* echo str_repeat('&nbsp;&nbsp;&nbsp;', $level) */ ?><?php
+                <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php echo esc_attr($term['slug']) ?>" <?php selected(in_array($term['slug'], $current_request)) ?> class="woof-padding-<?php echo esc_attr($level) ?>"><?php /* echo str_repeat('&nbsp;&nbsp;&nbsp;', esc_attr($level)) */ ?><?php
                 if (has_filter('woof_before_term_name'))
                     esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
                 else
@@ -106,8 +106,8 @@ if (!function_exists('woof_draw_mselect_childs')) {
     }
     $select_id = "woof_tax_mselect_" . $tax_slug;
     ?>
-<label class="woof_wcga_label_hide"  for="<?php esc_attr_e($select_id) ?>"><?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)); ?></label>
-<select id="<?php esc_attr_e($select_id) ?>" class="woof_mselect woof_mselect_<?php esc_attr_e($tax_slug) ?>" data-placeholder="<?php esc_html_e(WOOF_HELPER::wpml_translate($taxonomy_info)) ?>" multiple="" size="<?php esc_attr_e('chosen' == $this->get_select_type() ? 1 : '') ?>" name="<?php esc_attr_e($this->check_slug($tax_slug)) ?>">
+<label class="woof_wcga_label_hide"  for="<?php echo esc_attr($select_id) ?>"><?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)); ?></label>
+<select id="<?php echo esc_attr($select_id) ?>" class="woof_mselect woof_mselect_<?php echo esc_attr($tax_slug) ?>" data-placeholder="<?php echo esc_html(WOOF_HELPER::wpml_translate($taxonomy_info)) ?>" multiple="" size="<?php echo esc_attr('chosen' == $this->get_select_type() ? 1 : '') ?>" name="<?php echo esc_attr($this->check_slug($tax_slug)) ?>">
     <option value="0"></option>
 <?php
 $woof_tax_values = array();
@@ -164,7 +164,7 @@ $terms = apply_filters('woof_sort_terms_before_out', $terms, 'mselect');
                 continue;
             }
             ?>
-            <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php esc_attr_e($term['slug']) ?>" <?php echo selected(in_array($term['slug'], $current_request)) ?>><?php
+            <option <?php if ($show_count AND $count == 0 AND!in_array($term['slug'], $current_request)): ?>disabled=""<?php endif; ?> value="<?php echo esc_attr($term['slug']) ?>" <?php selected(in_array($term['slug'], $current_request)) ?>><?php
             if (has_filter('woof_before_term_name'))
                 esc_html_e(apply_filters('woof_before_term_name', $term, $taxonomy_info));
             else
@@ -189,7 +189,7 @@ $terms = apply_filters('woof_sort_terms_before_out', $terms, 'mselect');
     <?php endif; ?>
 </select>
     <?php if ($shown_options_tags == 0): ?>
-    <input type="hidden" class="woof_hide_empty_container_ms" value=".woof_container_<?php esc_attr_e($tax_slug) ?>">
+    <input type="hidden" class="woof_hide_empty_container_ms" value=".woof_container_<?php echo esc_attr($tax_slug) ?>">
 
     <?php endif; ?>
 
@@ -200,7 +200,7 @@ $terms = apply_filters('woof_sort_terms_before_out', $terms, 'mselect');
                 if (!empty($values)) {
                     foreach ($values as $value) {
                         ?>
-                <input type="hidden" value="<?php esc_html_e($value['name']) ?>" data-anchor="woof_n_<?php esc_attr_e($this->check_slug($ts)) ?>_<?php esc_attr_e($value['slug']) ?>" />
+                <input type="hidden" value="<?php echo esc_html($value['name']) ?>" data-anchor="woof_n_<?php echo esc_attr($this->check_slug($ts)) ?>_<?php echo esc_attr($value['slug']) ?>" />
                     <?php
                 }
             }

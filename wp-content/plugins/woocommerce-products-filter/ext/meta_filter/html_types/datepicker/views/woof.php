@@ -95,41 +95,41 @@ if ($show):
         $top_panel_txt .= sprintf(esc_html__("to: %s", 'woocommerce-products-filter'), date($format_, $to));
     }
     ?>
-    <div data-css-class="woof_meta_datepicker_container" class="woof_meta_datepicker_container woof_container woof_container_<?php esc_attr_e("datepicker_" . $meta_key) ?>">
+    <div data-css-class="woof_meta_datepicker_container" class="woof_meta_datepicker_container woof_container woof_container_<?php echo esc_attr("datepicker_" . $meta_key) ?>">
         <div class="woof_container_inner">
             <div class="woof_container_inner woof_container_inner_datepicker_slider">
                 <?php if ($show_title_label) :
                     ?>
-                    <<?php esc_attr_e(apply_filters('woof_title_tag', 'h4')) ?>>
-                    <?php esc_attr_e(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
-                    <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, esc_attr($options['title'])), esc_attr($tooltip_text)) ?>    
-                    <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php esc_attr_e(apply_filters('woof_title_tag', 'h4')) ?>>
+                    <<?php echo esc_attr(apply_filters('woof_title_tag', 'h4')) ?>>
+                    <?php echo esc_attr(WOOF_HELPER::wpml_translate(null, $options['title'])) ?>
+                    <?php WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null, esc_attr($options['title'])), esc_attr($tooltip_text)) ?>    
+                    <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo esc_attr(apply_filters('woof_title_tag', 'h4')) ?>>
                     <?php
                 endif;
                 ?>
                 <?php $date_id = 'woof_meta_date_' . $meta_key; ?>
-                <div class="<?php esc_attr_e($css_classes) ?>">
+                <div class="<?php echo esc_attr($css_classes) ?>">
                     <div class="woof_meta_datepicker_container">
-                        <input class="woof_meta_datepicker_data" type="hidden" name="<?php esc_attr_e($meta_key) ?>_from" value="<?php esc_html_e($from) ?>" />
+                        <input class="woof_meta_datepicker_data" type="hidden" name="<?php echo esc_attr($meta_key) ?>_from" value="<?php echo esc_html($from) ?>" />
 
-                        <input id="<?php esc_attr_e($date_id) ?>_from" data-format="<?php esc_html_e($format) ?>" type="text" readonly="readonly" data-meta-key="<?php esc_attr_e($meta_key) ?>" class="woof_calendar woof_calendar_from" placeholder="<?php esc_html_e('from', 'woocommerce-products-filter') ?>" />
-                        <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($date_id) ?>_from"><?php esc_html_e("From", 'woocommerce-products-filter') ?></label>
-                        <a href="#" data-meta-key="<?php esc_attr_e($meta_key) ?>" data-name="<?php esc_attr_e($meta_key) ?>_from"  class="woof_meta_datepicker_reset">
+                        <input id="<?php echo esc_attr($date_id) ?>_from" data-format="<?php echo esc_html($format) ?>" type="text" readonly="readonly" data-meta-key="<?php echo esc_attr($meta_key) ?>" class="woof_calendar woof_calendar_from" placeholder="<?php esc_html_e('from', 'woocommerce-products-filter') ?>" />
+                        <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($date_id) ?>_from"><?php esc_html_e("From", 'woocommerce-products-filter') ?></label>
+                        <a href="#" data-meta-key="<?php echo esc_attr($meta_key) ?>" data-name="<?php echo esc_attr($meta_key) ?>_from"  class="woof_meta_datepicker_reset">
                             <img src="<?php echo esc_url(woof()->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Сlear", 'woocommerce-products-filter') ?>" />
                         </a>
                     </div>
                     <div class="woof_meta_datepicker_container">
-                        <input class="woof_meta_datepicker_data" type="hidden" name="<?php esc_attr_e($meta_key) ?>_to" value="<?php esc_html_e($to) ?>" />
+                        <input class="woof_meta_datepicker_data" type="hidden" name="<?php echo esc_attr($meta_key) ?>_to" value="<?php echo esc_html($to) ?>" />
 
-                        <input id="<?php esc_attr_e($date_id) ?>_to" data-format="<?php esc_html_e($format) ?>" type="text" readonly="readonly" data-meta-key="<?php esc_attr_e($meta_key) ?>" class="woof_calendar woof_calendar_to" placeholder="<?php esc_html_e('to', 'woocommerce-products-filter') ?>" />
-                        <label class="woof_wcga_label_hide"  for="<?php esc_attr_e($date_id) ?>_to"><?php esc_html_e("To", 'woocommerce-products-filter') ?></label>
-                        <a href="#" data-meta-key="<?php esc_attr_e($meta_key) ?>"  data-name="<?php esc_attr_e($meta_key) ?>_to" class="woof_meta_datepicker_reset">
+                        <input id="<?php echo esc_attr($date_id) ?>_to" data-format="<?php esc_html_e($format) ?>" type="text" readonly="readonly" data-meta-key="<?php echo esc_attr($meta_key) ?>" class="woof_calendar woof_calendar_to" placeholder="<?php esc_html_e('to', 'woocommerce-products-filter') ?>" />
+                        <label class="woof_wcga_label_hide"  for="<?php echo esc_attr($date_id) ?>_to"><?php esc_html_e("To", 'woocommerce-products-filter') ?></label>
+                        <a href="#" data-meta-key="<?php echo esc_attr($meta_key) ?>"  data-name="<?php echo esc_attr($meta_key) ?>_to" class="woof_meta_datepicker_reset">
                             <img src="<?php echo esc_url(woof()->settings['delete_image']) ?>" height="12" width="12" alt="<?php esc_html_e("Clear", 'woocommerce-products-filter') ?>" />
                         </a>
                     </div>
 
                 </div>
-                <input type="hidden" value="<?php esc_html_e($top_panel_txt) ?>" data-anchor="woof_n_<?php echo "datepicker_" . esc_attr($meta_key) ?>_<?php esc_attr_e($current_request_txt) ?>" />
+                <input type="hidden" value="<?php echo esc_html($top_panel_txt) ?>" data-anchor="woof_n_<?php echo esc_attr("datepicker_" . $meta_key) ?>_<?php echo esc_attr($current_request_txt) ?>" />
             </div>
         </div>
     </div>

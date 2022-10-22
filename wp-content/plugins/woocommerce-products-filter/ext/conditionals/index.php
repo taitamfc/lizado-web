@@ -112,7 +112,7 @@ final class WOOF_CONDITIONALS extends WOOF_EXT {
         $data['woof_settings'] = $this->woof_settings;
         $data['search_key'] = $this->search_key;
 
-        echo woof()->render_html($this->get_ext_path() . 'views/tabs_content.php', $data);
+        woof()->render_html_e($this->get_ext_path() . 'views/tabs_content.php', $data);
     }
 
     public function generate_conditional_attr($string) {

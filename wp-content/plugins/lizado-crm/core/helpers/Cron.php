@@ -36,9 +36,13 @@ add_filter('cron_schedules','my_cron_schedules');
 
 function app_scheduleTriggered1min() {
     $cron = get_field('cron','option');
-    if( $cron['product_call_interval'] == 'everyminutes' ){
+    if( $cron['product_call_interval'] == 'hourly' ){
         craw_products();
+    }
+    if( $cron['product_detail_call_interval'] == 'everyminutes' ){
         craw_product_detail();
+    }
+    if( $cron['import_to_wp_interval'] == 'everyminutes' ){
         import_product_to_wp();
     }
 	app_write_to_log( "=======> Start triggered 1min!" );
@@ -49,13 +53,25 @@ function app_scheduleTriggered60min() {
     if( $cron['product_call_interval'] == 'hourly' ){
         craw_products();
     }
+    if( $cron['product_detail_call_interval'] == 'hourly' ){
+        craw_product_detail();
+    }
+    if( $cron['import_to_wp_interval'] == 'hourly' ){
+        import_product_to_wp();
+    }
 }
 function app_scheduleTriggered24h() {
     app_write_to_log( "=======> Scheduler triggered 24h!" );
     $cron = get_field('cron','option');
     if( $cron['product_call_interval'] == 'daily' ){
         craw_products();
-    } 
+    }
+    if( $cron['product_detail_call_interval'] == 'daily' ){
+        craw_product_detail();
+    }
+    if( $cron['import_to_wp_interval'] == 'daily' ){
+        import_product_to_wp();
+    }
 }
 
 function app_write_to_log($txt){

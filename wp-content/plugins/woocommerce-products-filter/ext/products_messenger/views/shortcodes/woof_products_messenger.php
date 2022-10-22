@@ -24,12 +24,12 @@ if (is_user_logged_in() AND isset(woof()->settings['products_messenger'])) {
     $user_data_mess = get_user_meta($cur_user_id, 'woof_user_messenger', true);
 	//var_dump($user_data_mess);
     ?>
-    <div data-css-class="woof_products_messenger_container" class="woof_products_messenger_container woof_container <?php esc_attr_e($adding_class) ?>">
+    <div data-css-class="woof_products_messenger_container" class="woof_products_messenger_container woof_container <?php echo esc_attr($adding_class) ?>">
         <div class="woof_container_overlay_item"></div>
         <div class="woof_container_inner">
             <<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
             <?php
-            esc_html_e(WOOF_HELPER::wpml_translate(null, $p));
+            echo esc_html(WOOF_HELPER::wpml_translate(null, $p));
             ?> 
             </<?php esc_html_e(apply_filters('woof_title_tag', 'h4')); ?>>
             <?php
@@ -44,7 +44,7 @@ if (is_user_logged_in() AND isset(woof()->settings['products_messenger'])) {
                     foreach ($user_data_mess as $data) {
 
                         $data['counter'] = $counter;
-                        echo $this->render_html(WOOF_EXT_PATH . 'products_messenger/views/item_list_subscr.php', $data);
+                        $this->render_html_e(WOOF_EXT_PATH . 'products_messenger/views/item_list_subscr.php', $data);
                         $counter++;
                     }
                     ?>
@@ -59,8 +59,8 @@ if (is_user_logged_in() AND isset(woof()->settings['products_messenger'])) {
                     $visible = 'block';
                 }
                 ?>
-                <div class="woof_add_subscr_cont" style="display: <?php esc_attr_e($visible) ?>" >
-                    <input name="add_subscr_messenger" data-count="<?php esc_attr_e($subscr_count) ?>" type="button" id="woof_add_subscr" data-user="<?php esc_attr_e($cur_user_id) ?>" value="<?php esc_html_e('Subscribe on the current search request', 'woocommerce-products-filter') ?>"  >
+                <div class="woof_add_subscr_cont" style="display: <?php echo esc_attr($visible) ?>" >
+                    <input name="add_subscr_messenger" data-count="<?php echo esc_attr($subscr_count) ?>" type="button" id="woof_add_subscr" data-user="<?php echo esc_attr($cur_user_id) ?>" value="<?php esc_html_e('Subscribe on the current search request', 'woocommerce-products-filter') ?>"  >
                 </div>
 
             <?php } ?>
